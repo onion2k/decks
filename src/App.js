@@ -16,8 +16,8 @@ class App extends Component {
         this.state = {
             playing: false,
             playlistPos: 0,
-            playlist: ['nt-C3eMo5WA','3eYSUxoRc0U','_7qhdcaX8Q0','WEi9ZQrEjr8','qLrnkK2YEcE','MV_3Dpw-BRY','rDBbaGCCIhk'],
-            videoId: 'nt-C3eMo5WA',
+            playlist: ['_7qhdcaX8Q0','WEi9ZQrEjr8','3eYSUxoRc0U','qLrnkK2YEcE','MV_3Dpw-BRY','rDBbaGCCIhk'],
+            videoId: '_7qhdcaX8Q0',
             autoplay: 0
         }
 
@@ -88,6 +88,7 @@ class App extends Component {
         return (
             <div className="App">
                 <h1>YT1200</h1>
+                <Record vData={ this.state.vData } playing={ this.state.playing } />
                 <YouTube
                     videoId={ this.state.videoId }
                     opts={ opts }
@@ -99,7 +100,6 @@ class App extends Component {
                 <div className='button' onClick={this.onPauseVideo}>Pause</div>
                 <div className='button' onClick={this.onStopVideo}>Stop</div>
                 <div className='button' onClick={this.onChangeVideo}>Next</div>
-                <Record vData={ this.state.vData } playing={ this.state.playing } />
             </div>
         );
     }
