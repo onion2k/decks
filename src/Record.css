@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
+.Record {
+    font-family: 'Roboto Condensed', sans-serif;
+    position: absolute;
+    top: 0;
+    width: 950px;
+    height: 950px;
+    right: -20%;
+    transform: translate3d(0, 0, 0);
+}
+
+.title {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 280px;
+    height: 120px;
+    padding: 20px 100px;
+    margin-left: -240px;
+    text-align: center;
+    background-color: #FFA500;
+    color: #484848;
+}
+
+.label {
+    position: absolute;
+    width: 480px;
+    height: 480px;
+    top: 50%;
+    left: 50%;
+    margin-left: -240px;
+    margin-top: -240px;
+    clip-path: circle(200px at center);
+}
+
+.spinning {
+    animation: spin 12s infinite linear;
+}
+
+@keyframes spin {
+    from { transform:rotate(0deg); }
+    to { transform:rotate(360deg); }
+}

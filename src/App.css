@@ -1,3 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Audiowide');
+
 .App {
+    font-family: 'Audiowide', sans-serif;
+    padding: 30px 50px;
     overflow: hidden;
+    color: #DDD;
+}
+
+h1 {
+    font-size: 4.0em;
+    margin: 0;
+    padding: 0;
+}
+
+.button {
+    width: 80px;
+    height: 80px;
+    padding: 20px;
+    margin: 10px;
+    background-color: #000;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+}
+
+.button:hover {
+    background-color: #444;
+    cursor: pointer;
 }
