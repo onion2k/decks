@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import record from './img/record.png';
+import tonearm from './img/tonearm.png';
 import './Record.css';
 
 class Record extends Component {
@@ -18,10 +19,15 @@ class Record extends Component {
 
     render() {
         return (
-            <div className={'Record'+(this.props.playing===true?' spinning':'')} style={{ backgroundImage: 'url('+record+')' }} >
-                <div className="label">
-                    <img src={ this.state.label } alt='title' />
-                    <span className="title">{ this.state.title }</span>
+            <div className="Deck">
+                <div className={'Record'+(this.props.playing===true?' playing':'')} style={{ backgroundImage: 'url('+record+')' }} >
+                    <div className="label">
+                        <img src={ this.state.label } alt='Record' />
+                        <span className="title">{ this.state.title }</span>
+                    </div>
+                </div>
+                <div className={'Tonearm'+(this.props.playing===true?' playing':'')}>
+                    <img src={ tonearm } alt='Tonearm' />
                 </div>
             </div>
         );

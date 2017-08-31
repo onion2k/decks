@@ -36,7 +36,9 @@ class App extends Component {
     onReady(event) {
         event.target.setVolume(100);
         let data = event.target.getVideoData();
+        let duration = event.target.getDuration();
         data.found = true;
+        data.duration = duration;
         let tl = Object.assign({}, this.state.trackData);
         tl[this.state.videoId] = data;
         this.setState({
@@ -48,7 +50,6 @@ class App extends Component {
 
     onChangeVideo(videoId) {
         var p = this.state.playlistPos;
-        console.log(videoId)
         if (videoId!==undefined) { p = this.state.playlist.indexOf(videoId)-1; }
         if (p===this.state.playlist.length-1) { p = 0; } else { p++; }
         if (!this.crackle.playing()) { this.crackle.play() };
@@ -62,8 +63,10 @@ class App extends Component {
 
     onPlay(event){
         let data = this.state.player.getVideoData();
+        let duration = this.state.player.getDuration();
         if (data.title!=='') {
             let tl = Object.assign({}, this.state.trackData);
+            data.duration = duration;
             data.found = true;
             tl[this.state.videoId] = data;
             this.setState({ vData: data, playing: true, trackData: tl });    

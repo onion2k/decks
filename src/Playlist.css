@@ -4,11 +4,16 @@
     border: 2px solid #ddd;
     border-radius: 8px;
     background-color: rgba(40,40,40,0.8);
+    min-height: 480px;
 }
 
 .track {
     cursor: pointer;
     color: #666;
+}
+
+.track > span {
+    float: right;
 }
 
 .track:hover {

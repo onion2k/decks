@@ -1,12 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 
+.Deck {
+    position: absolute;
+    top: 0;
+    width: 950px;
+    height: 950px;
+    right: -400px;
+}
+
 .Record {
     font-family: 'Roboto Condensed', sans-serif;
     position: absolute;
     top: 0;
     width: 950px;
     height: 950px;
-    right: -20%;
+    right: 0;
     transform: translate3d(0, 0, 0);
     z-index: -1;
 }
@@ -36,11 +44,36 @@
     transition: opacity 2s ease-in;
 }
 
-.spinning {
+.Record.playing {
     animation: spin 8.33s infinite linear;
 }
 
 @keyframes spin {
     from { transform:rotate(0deg); }
     to { transform:rotate(360deg); }
+}
+
+.Tonearm {
+    position: absolute;
+    top: 0px;
+    left: -500px;
+    width: 950px;
+    height: 950px;
+    z-index: 1;
+    transform: scaleX(-1) scaleY(-1);
+}
+
+.Tonearm > img {
+    transform-origin: 372px 77px;
+    transform:rotate(-49deg);
+}
+
+.Tonearm.playing > img {
+    animation: swing 1080s infinite linear;
+}
+
+@keyframes swing {
+    0% { transform:rotate(-49deg); }
+    99% { transform:rotate(-20deg); }
+    100% { transform:rotate(-49deg); }
 }
