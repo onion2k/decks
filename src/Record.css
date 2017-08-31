@@ -33,10 +33,11 @@
     margin-left: -240px;
     margin-top: -240px;
     clip-path: circle(200px at center);
+    transition: opacity 2s ease-in;
 }
 
 .spinning {
-    animation: spin 12s infinite linear;
+    animation: spin 8.33s infinite linear;
 }
 
 @keyframes spin {

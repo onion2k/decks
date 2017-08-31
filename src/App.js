@@ -87,19 +87,21 @@ class App extends Component {
 
         return (
             <div className="App">
-                <h1>YT1200</h1>
+                <h1>YT1210</h1>
                 <Record vData={ this.state.vData } playing={ this.state.playing } />
-                <YouTube
-                    videoId={ this.state.videoId }
-                    opts={ opts }
-                    onReady={ this.onReady }
-                    onPlay={ this.onPlay }
-                    onEnd={ this.onEnd }
-                /><br/>
                 <div className='button' onClick={this.onPlayVideo}>Play</div>
                 <div className='button' onClick={this.onPauseVideo}>Pause</div>
                 <div className='button' onClick={this.onStopVideo}>Stop</div>
                 <div className='button' onClick={this.onChangeVideo}>Next</div>
+                <div className='video'>
+                    <YouTube
+                        videoId={ this.state.videoId }
+                        opts={ opts }
+                        onReady={ this.onReady }
+                        onPlay={ this.onPlay }
+                        onEnd={ this.onEnd }
+                    />
+                </div>
             </div>
         );
     }

@@ -18,7 +18,7 @@ class Record extends Component {
 
     render() {
         return (
-            <div className={'Record '+(this.props.playing===true?'spinning':'')} style={{ backgroundImage: 'url('+record+')' }} >
+            <div className={'Record'+(this.props.playing===true?' spinning':'')} style={{ backgroundImage: 'url('+record+')' }} >
                 <div className="label">
                     <img src={ this.state.label } alt='title' />
                     <span className="title">{ this.state.title }</span>
