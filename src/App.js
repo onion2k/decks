@@ -4,6 +4,7 @@ import './App.css';
 import { Howl } from 'howler';
 import YouTube from 'react-youtube';
 
+import Playlist from './Playlist.js';
 import Record from './Record.js';
 
 class App extends Component {
@@ -16,6 +17,7 @@ class App extends Component {
         this.state = {
             playing: false,
             playlistPos: 0,
+            trackData: {},
             playlist: ['_7qhdcaX8Q0','WEi9ZQrEjr8','3eYSUxoRc0U','qLrnkK2YEcE','MV_3Dpw-BRY','rDBbaGCCIhk'],
             videoId: '_7qhdcaX8Q0',
             autoplay: 0
@@ -33,16 +35,23 @@ class App extends Component {
 
     onReady(event) {
         event.target.setVolume(100);
+        let data = event.target.getVideoData();
+        data.found = true;
+        let tl = Object.assign({}, this.state.trackData);
+        tl[this.state.videoId] = data;
         this.setState({
             player: event.target,
-            vData: event.target.getVideoData()
+            vData: data,
+            trackData: tl
         });
     }
 
-    onChangeVideo() {
-        if (!this.crackle.playing()) { this.crackle.play() };
+    onChangeVideo(videoId) {
         var p = this.state.playlistPos;
+        console.log(videoId)
+        if (videoId!==undefined) { p = this.state.playlist.indexOf(videoId)-1; }
         if (p===this.state.playlist.length-1) { p = 0; } else { p++; }
+        if (!this.crackle.playing()) { this.crackle.play() };
         this.setState({
             playlistPos: p,
             videoId: this.state.playlist[p],
@@ -52,7 +61,13 @@ class App extends Component {
     }
 
     onPlay(event){
-        this.setState({ vData: this.state.player.getVideoData(), playing: true })
+        let data = this.state.player.getVideoData();
+        if (data.title!=='') {
+            let tl = Object.assign({}, this.state.trackData);
+            data.found = true;
+            tl[this.state.videoId] = data;
+            this.setState({ vData: data, playing: true, trackData: tl });    
+        }
     }
 
     onEnd(event){
@@ -87,12 +102,17 @@ class App extends Component {
 
         return (
             <div className="App">
-                <h1>YT1210</h1>
                 <Record vData={ this.state.vData } playing={ this.state.playing } />
-                <div className='button' onClick={this.onPlayVideo}>Play</div>
-                <div className='button' onClick={this.onPauseVideo}>Pause</div>
-                <div className='button' onClick={this.onStopVideo}>Stop</div>
-                <div className='button' onClick={this.onChangeVideo}>Next</div>
+                <div className="controls">
+                    <h1>YT1210</h1>
+                    <Playlist playlist={ this.state.playlist } trackData={ this.state.trackData } playing={ this.state.videoId } onClick={ (i)=>{ this.onChangeVideo(i); } }></Playlist>
+                    <div className="buttons">
+                        <div className='button' onClick={this.onPlayVideo}>Play</div>
+                        <div className='button' onClick={this.onPauseVideo}>Pause</div>
+                        <div className='button' onClick={this.onStopVideo}>Stop</div>
+                        <div className='button' onClick={ ()=>{ this.onChangeVideo(); } }>Next</div>
+                    </div>
+                </div>
                 <div className='video'>
                     <YouTube
                         videoId={ this.state.videoId }

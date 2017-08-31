@@ -1,0 +1,24 @@
+
+.Playlist {
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: rgba(40,40,40,0.8);
+}
+
+.track {
+    cursor: pointer;
+    color: #666;
+}
+
+.track:hover {
+    color: #fff;
+}
+
+.found {
+    color: #aaa;
+}
+
+.playing {
+    color: #0f0;
+}
