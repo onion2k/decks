@@ -2,11 +2,19 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 @import url('https://fonts.googleapis.com/css?family=Audiowide');
 
+html {
+    background-color: #444;
+    background: url('https://source.unsplash.com/collection/1134634') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   overflow: hidden;
   width: 100vw;
-  background-color: #444;
 }
