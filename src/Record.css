@@ -61,6 +61,7 @@
     height: 950px;
     z-index: 1;
     transform: scaleX(-1) scaleY(-1);
+    pointer-events: none;
 }
 
 .Tonearm > img {
