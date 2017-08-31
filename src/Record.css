@@ -66,7 +66,7 @@
 
 .Tonearm > img {
     transform-origin: 372px 77px;
-    transform:rotate(-49deg);
+    transform:rotate(-54deg);
 }
 
 .Tonearm.playing > img {

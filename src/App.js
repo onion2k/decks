@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import crackle from './sounds/crackle.ogg';
+import stylus from './sounds/stylus2.ogg';
+
 import { Howl } from 'howler';
 import YouTube from 'react-youtube';
 
@@ -13,7 +16,8 @@ class App extends Component {
 
         super();
 
-        this.crackle = new Howl({ src: ['./crackle.ogg'], loop: true, autoplay: false, autoload: true});
+        this.stylus = new Howl({ src: [stylus], loop: false, autoplay: false, autoload: true});
+        this.crackle = new Howl({ src: [crackle], loop: true, autoplay: false, autoload: true});
         this.state = {
             playing: false,
             playlistPos: 0,
@@ -78,6 +82,7 @@ class App extends Component {
     }
 
     onPlayVideo() {
+        this.stylus.play();
         this.crackle.play();
         this.state.player.playVideo();
     }
