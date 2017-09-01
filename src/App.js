@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import crackle from './sounds/crackle.ogg';
-import stylus from './sounds/stylus2.ogg';
+import ogg_crackle from './sounds/crackle.ogg';
+import ogg_stylus from './sounds/stylus2.ogg';
+import ogg_drag from './sounds/drag.ogg';
 
 import { Howl } from 'howler';
 import YouTube from 'react-youtube';
@@ -16,13 +17,15 @@ class App extends Component {
 
         super();
 
-        this.stylus = new Howl({ src: [stylus], loop: false, autoplay: false, autoload: true});
-        this.crackle = new Howl({ src: [crackle], loop: true, autoplay: false, autoload: true});
+        this.ogg_stylus = new Howl({ src: [ogg_stylus], loop: false, autoplay: false, autoload: true});
+        this.ogg_crackle = new Howl({ src: [ogg_crackle], loop: true, autoplay: false, autoload: true});
+        this.ogg_drag = new Howl({ src: [ogg_drag], loop: false, autoplay: false, autoload: true});
+        
         this.state = {
             playing: false,
             playlistPos: 0,
             trackData: {},
-            playlist: ['_7qhdcaX8Q0','WEi9ZQrEjr8','3eYSUxoRc0U','qLrnkK2YEcE','MV_3Dpw-BRY','rDBbaGCCIhk'],
+            playlist: ['_7qhdcaX8Q0','WEi9ZQrEjr8','3eYSUxoRc0U','qLrnkK2YEcE','MV_3Dpw-BRY','rDBbaGCCIhk','4qQyUi4zfDs','U4E60Ffa9yQ','KODWcrncnUU','5Yv51XuFqPY','9Z5NMHKY5PE'],
             videoId: '_7qhdcaX8Q0',
             autoplay: 0
         }
@@ -56,7 +59,8 @@ class App extends Component {
         var p = this.state.playlistPos;
         if (videoId!==undefined) { p = this.state.playlist.indexOf(videoId)-1; }
         if (p===this.state.playlist.length-1) { p = 0; } else { p++; }
-        if (!this.crackle.playing()) { this.crackle.play() };
+        if (!this.ogg_crackle.playing()) { this.ogg_crackle.play() };
+        this.ogg_drag.play();
         this.setState({
             playlistPos: p,
             videoId: this.state.playlist[p],
@@ -82,8 +86,8 @@ class App extends Component {
     }
 
     onPlayVideo() {
-        this.stylus.play();
-        this.crackle.play();
+        this.ogg_stylus.play();
+        this.ogg_crackle.play();
         this.state.player.playVideo();
     }
 
@@ -92,7 +96,7 @@ class App extends Component {
     }
 
     onStopVideo() {
-        this.crackle.pause();
+        this.ogg_crackle.pause();
         this.setState({ playing: false });
         this.state.player.stopVideo();
     }
