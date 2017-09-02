@@ -3,6 +3,15 @@ import './Playlist.css';
 
 class Playlist extends Component {
 
+    constructor() {
+        super();
+        this.state = { newtrack: 'UxUb9Yzr1sE' };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+
+    }
+
     timeFormat(time){
 
         if (!time) { return ''; }
@@ -23,19 +32,35 @@ class Playlist extends Component {
 
     }
 
+    handleChange(event) {
+        this.setState({newtrack: event.target.value});
+    }
+
+    onSubmit(e){
+        e.preventDefault();
+        this.props.addTrack(this.state);
+    }
+
     render() {
         const tracklist = this.props.playlist.map((track)=>{
-            var t = this.props.trackData[track] || { title: track, found: false };
+            //var t = this.props.trackData[track] || { title: track, found: false };
             return <div 
-                key={ track } 
-                className={ 'track'+(track===this.props.playing?' playing':'')+(t.found?' found':'') }
-                onClick={ (e)=>this.props.onClick(track) }
-            >{ t.title || track } <span>{ this.timeFormat(t.duration) }</span></div>;
+                key={ track.videoId } 
+                className={ 'track'+(track.videoId===this.props.playing?' playing':'')+(track.found?' found':'') }
+                onClick={ (e)=>this.props.onClick(track.videoId) }
+            >{ track.title || track.videoId } <span>{ this.timeFormat(track.duration) }</span></div>;
         });
 
         return (
             <div className='Playlist'>
                 { tracklist }
+                <form onSubmit={ this.onSubmit }>
+                    <label>
+                        Code:
+                        <input type="text" value={this.state.newtrack} onChange={this.handleChange} />
+                    </label>
+                    <input type="submit" value="Submit" />
+                </form>
             </div>
         );
     }
