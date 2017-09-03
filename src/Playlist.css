@@ -1,4 +1,8 @@
 
+.PlaylistWrapper {
+    grid-column: 1 / 2;
+}
+
 .Playlist {
     padding: 15px;
     border: 1px solid #ddd;
@@ -34,4 +38,9 @@
     padding: 15px;
     border: 1px solid #ddd;
     background-color: rgba(40,40,40,0.8);
+}
+
+.NewTrack input, .NewTrack button {
+    margin-left: 15px;
+    font-family: 'Audiowide';
 }

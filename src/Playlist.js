@@ -5,7 +5,7 @@ class Playlist extends Component {
 
     constructor() {
         super();
-        this.state = { newtrack: 'UxUb9Yzr1sE' };
+        this.state = { newtrack: 'https://www.youtube.com/watch?v=AkY-sEkWc-I&list=PLzxA_Q_hCNpcTiNkANkR_rm6nywQmi4WX&index=55' };
 
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -56,12 +56,12 @@ class Playlist extends Component {
                 <div className='Playlist'>
                     { tracklist }
                 </div>
-                <form className="NewTrack" onSubmit={ this.onSubmit }>
+                <form className="NewTrack">
                     <label>
-                        Code:
-                        <input type="text" value={this.state.newtrack} onChange={this.handleChange} />
+                        YouTube Link:
+                        <input type="text" value={ this.state.newtrack } onChange={ this.handleChange } />
                     </label>
-                    <input type="submit" value="Submit" />
+                    <button onClick={ this.onSubmit }>Add Track</button>
                 </form>
             </div>
         );

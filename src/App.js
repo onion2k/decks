@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import queryString from 'query-string';
 import './App.css';
 
 import ogg_crackle from './sounds/crackle.ogg';
@@ -50,7 +51,7 @@ class App extends Component {
             var lsPlDetails = localStorage.getItem('yt1210-'+track.videoId);
             if (lsPlDetails){
                 let lsPlDetailsJson = JSON.parse(lsPlDetails);
-                track.title = lsPlDetailsJson.title;
+                track.title = lsPlDetailsJson.title.substr(0, 50);
                 track.duration = lsPlDetailsJson.duration;
                 track.found = true;
             }
@@ -62,7 +63,8 @@ class App extends Component {
             trackData: {},
             playlist: pl,
             videoId: '_7qhdcaX8Q0',
-            autoplay: 0
+            autoplay: 0,
+            crackle: true
         }
 
         this.onReady       = this.onReady.bind(this);
@@ -72,7 +74,9 @@ class App extends Component {
         this.onPlayVideo   = this.onPlayVideo.bind(this);
         this.onPauseVideo  = this.onPauseVideo.bind(this);
         this.onStopVideo   = this.onStopVideo.bind(this);
-        this.addTrack   = this.addTrack.bind(this);
+        this.addTrack      = this.addTrack.bind(this);
+        this.updateCrackle = this.updateCrackle.bind(this);
+        
         
     }
 
@@ -108,8 +112,7 @@ class App extends Component {
         var p = this.state.playlistPos;
         if (videoId!==undefined) { p = this.state.playlist.findIndex((track)=>{ return track.videoId===videoId })-1; }
         if (p===this.state.playlist.length-1) { p = 0; } else { p++; }
-        if (!this.ogg_crackle.playing()) { this.ogg_crackle.play() };
-        //this.ogg_drag.play();
+        if (!this.ogg_crackle.playing() && this.state.crackle===true) { this.ogg_crackle.play() };
         this.setState({
             playlistPos: p,
             videoId: this.state.playlist[p].videoId,
@@ -150,7 +153,7 @@ class App extends Component {
 
     onPlayVideo() {
         this.ogg_stylus.play();
-        this.ogg_crackle.play();
+        if (this.state.crackle===true) { this.ogg_crackle.play(); }
         this.state.player.playVideo();
     }
 
@@ -165,9 +168,21 @@ class App extends Component {
     }
 
     addTrack(state){
+
+        const newtrack = queryString.parse(state.newtrack.substr(state.newtrack.indexOf('?')));
+
         let pl = this.state.playlist;
-        pl.push({ videoId: state.newtrack, title: '', playing: false, duration: 0, found: false });
+        pl.push({ videoId: newtrack.v, title: '', playing: false, duration: 0, found: false });
+
         this.setState({ playlist: pl });
+        this.onChangeVideo(newtrack.v);
+
+    }
+
+    updateCrackle() {
+        let c = this.state.crackle;        
+        if (c===true) { this.ogg_crackle.stop(); } else { this.ogg_crackle.play(); }
+        this.setState({ crackle: !c });
     }
 
     render() {
@@ -185,7 +200,12 @@ class App extends Component {
             <div className="App">
                 <Record vData={ this.state.vData } playing={ this.state.playing } />
                 <div className="controls">
-                    <h1>YT1210</h1>
+                    <div className="titleControls">
+                        <h1>YT1210</h1>
+                        <div className="yt1210Controls">
+                            <label>Crackle <input type="checkbox" checked={ this.state.crackle } onChange={ this.updateCrackle } /></label>
+                        </div>
+                    </div>
                     <div className="buttons">
                         <div className='button' onClick={this.onPlayVideo}>Play</div>
                         <div className='button' onClick={this.onPauseVideo}>Pause</div>
