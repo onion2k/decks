@@ -4,6 +4,9 @@
 }
 
 .Playlist {
+    font-family: 'Metrophobic';
+    font-size: 12px;
+    user-select: none;
     padding: 15px;
     border: 1px solid #ddd;
     background-color: rgba(40,40,40,0.8);

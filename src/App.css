@@ -29,6 +29,12 @@ h1 {
 
 .yt1210Controls {
     justify-self: flex-end;
+    text-align: right;
+}
+
+.yt1210Controls label {
+    display: block;
+    margin-bottom: 8px;
 }
 
 .buttons {
