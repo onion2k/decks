@@ -181,7 +181,7 @@ class App extends Component {
 
     updateCrackle() {
         let c = this.state.crackle;        
-        if (c===true) { this.ogg_crackle.stop(); } else { this.ogg_crackle.play(); }
+        if (c===true) { this.ogg_crackle.stop(); } else if (this.state.playing===true) { this.ogg_crackle.play(); }
         this.setState({ crackle: !c });
     }
 
