@@ -1,12 +1,12 @@
 
 .Playlist {
     padding: 15px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
+    border: 1px solid #ddd;
     background-color: rgba(40,40,40,0.8);
     min-height: 30vh;
     max-height: 50vh;
     overflow-y: scroll;
+    margin-bottom: 15px;
 }
 
 .track {
@@ -32,7 +32,6 @@
 
 .NewTrack {
     padding: 15px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
+    border: 1px solid #ddd;
     background-color: rgba(40,40,40,0.8);
 }
