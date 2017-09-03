@@ -48,13 +48,15 @@ class Playlist extends Component {
                 key={ track.videoId } 
                 className={ 'track'+(track.videoId===this.props.playing?' playing':'')+(track.found?' found':'') }
                 onClick={ (e)=>this.props.onClick(track.videoId) }
-            >{ track.title || track.videoId } <span>{ this.timeFormat(track.duration) }</span></div>;
+            >{ track.title || track.videoId }<span>{ this.timeFormat(track.duration) }</span></div>;
         });
 
         return (
-            <div className='Playlist'>
-                { tracklist }
-                <form onSubmit={ this.onSubmit }>
+            <div className="PlaylistWrapper">
+                <div className='Playlist'>
+                    { tracklist }
+                </div>
+                <form className="NewTrack" onSubmit={ this.onSubmit }>
                     <label>
                         Code:
                         <input type="text" value={this.state.newtrack} onChange={this.handleChange} />

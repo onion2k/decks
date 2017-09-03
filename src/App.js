@@ -21,35 +21,46 @@ class App extends Component {
         this.ogg_crackle = new Howl({ src: [ogg_crackle], loop: true, autoplay: false, autoload: true});
         this.ogg_drag = new Howl({ src: [ogg_drag], loop: false, autoplay: false, autoload: true});
         
+        const pl = [
+            { videoId: '_7qhdcaX8Q0', title: '', playing: false, duration: 0, found: false },
+            { videoId: 'WEi9ZQrEjr8', title: '', playing: false, duration: 0, found: false },
+            { videoId: '3eYSUxoRc0U', title: '', playing: false, duration: 0, found: false },
+            { videoId: 'qLrnkK2YEcE', title: '', playing: false, duration: 0, found: false },
+            { videoId: 'MV_3Dpw-BRY', title: '', playing: false, duration: 0, found: false },
+            { videoId: 'rDBbaGCCIhk', title: '', playing: false, duration: 0, found: false },
+            { videoId: '4qQyUi4zfDs', title: '', playing: false, duration: 0, found: false },
+            { videoId: 'U4E60Ffa9yQ', title: '', playing: false, duration: 0, found: false },
+            { videoId: 'KODWcrncnUU', title: '', playing: false, duration: 0, found: false },
+            { videoId: '5Yv51XuFqPY', title: '', playing: false, duration: 0, found: false },
+            { videoId: '9Z5NMHKY5PE', title: '', playing: false, duration: 0, found: false },
+
+            { videoId: 'fczPlmz-Vug', title: '', playing: false, duration: 0, found: false },
+            { videoId: 'cAe1lVDbLf0', title: '', playing: false, duration: 0, found: false },
+            { videoId: 'u7K72X4eo_s', title: '', playing: false, duration: 0, found: false },
+            { videoId: 'luM6oeCM7Yw', title: '', playing: false, duration: 0, found: false },
+            { videoId: 'aqsL0QQaSP4', title: '', playing: false, duration: 0, found: false },
+            { videoId: '-gj4_qp4a28', title: '', playing: false, duration: 0, found: false },
+            { videoId: 'MMEpaVL_WsU', title: '', playing: false, duration: 0, found: false },
+            { videoId: 'B9FzVhw8_bY', title: '', playing: false, duration: 0, found: false },
+            { videoId: 'y-4ImbmZZp4', title: '', playing: false, duration: 0, found: false },
+            { videoId: 'txBfhpm1jI0', title: '', playing: false, duration: 0, found: false }
+        ];
+
+        pl.forEach((track)=>{
+            var lsPlDetails = localStorage.getItem('yt1210-'+track.videoId);
+            if (lsPlDetails){
+                let lsPlDetailsJson = JSON.parse(lsPlDetails);
+                track.title = lsPlDetailsJson.title;
+                track.duration = lsPlDetailsJson.duration;
+                track.found = true;
+            }
+        });
+
         this.state = {
             playing: false,
             playlistPos: 0,
             trackData: {},
-            playlist: [
-                { videoId: '_7qhdcaX8Q0', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'WEi9ZQrEjr8', title: '', playing: false, duration: 0, found: false },
-                { videoId: '3eYSUxoRc0U', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'qLrnkK2YEcE', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'MV_3Dpw-BRY', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'rDBbaGCCIhk', title: '', playing: false, duration: 0, found: false },
-                { videoId: '4qQyUi4zfDs', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'U4E60Ffa9yQ', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'KODWcrncnUU', title: '', playing: false, duration: 0, found: false },
-                { videoId: '5Yv51XuFqPY', title: '', playing: false, duration: 0, found: false },
-                { videoId: '9Z5NMHKY5PE', title: '', playing: false, duration: 0, found: false },
-
-                { videoId: 'fczPlmz-Vug', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'cAe1lVDbLf0', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'u7K72X4eo_s', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'luM6oeCM7Yw', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'aqsL0QQaSP4', title: '', playing: false, duration: 0, found: false },
-                { videoId: '-gj4_qp4a28', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'MMEpaVL_WsU', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'B9FzVhw8_bY', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'y-4ImbmZZp4', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'txBfhpm1jI0', title: '', playing: false, duration: 0, found: false }
-                
-            ],
+            playlist: pl,
             videoId: '_7qhdcaX8Q0',
             autoplay: 0
         }
@@ -69,17 +80,25 @@ class App extends Component {
 
         event.target.setVolume(100);
 
-        let data = event.target.getVideoData();
-        let duration = event.target.getDuration();
         let pl = this.state.playlist;
         let t = pl.findIndex((track)=>{ return track.videoId===this.state.videoId });
-        pl[t].title = data.title;
-        pl[t].duration = duration;
-        pl[t].found = true;
+
+        if (pl[t].found===false) {
+
+            let data = event.target.getVideoData();
+            let duration = event.target.getDuration();
+
+            pl[t].title = data.title.substr(0, 50);
+            pl[t].duration = duration;
+            pl[t].found = true;
+    
+            localStorage.setItem('yt1210-'+pl[t].videoId, JSON.stringify({ title: data.title, duration: duration }));
+
+        }
 
         this.setState({
             player: event.target,
-            vData: data,
+            vData: pl[t],
             playlist: pl,
         });
 
@@ -100,19 +119,29 @@ class App extends Component {
     }
 
     onPlay(event){
-        let data = this.state.player.getVideoData();
-        let duration = this.state.player.getDuration();
-        if (data.title!=='') {
 
-            let pl = this.state.playlist;
-            let t = pl.findIndex((track)=>{ return track.videoId===this.state.videoId });
-            pl[t].title = data.title;
-            pl[t].duration = duration;
-            pl[t].found = true;
-    
-            this.setState({ vData: data, playing: true, playlist: pl });
+        let pl = this.state.playlist;
+        let t = pl.findIndex((track)=>{ return track.videoId===this.state.videoId });
 
+        if (pl[t].found===false) {
+
+            let data = this.state.player.getVideoData();
+            let duration = this.state.player.getDuration();
+
+            if (data.title!=='') {
+                
+                pl[t].title = data.title.substr(0, 50);
+                pl[t].duration = duration;
+                pl[t].found = true;
+        
+                localStorage.setItem('yt1210-'+pl[t].videoId, JSON.stringify({ title: data.title, duration: duration }));
+            
+            }
+            
         }
+
+        this.setState({ vData: pl[t], playing: true, playlist: pl });
+        
     }
 
     onEnd(event){
@@ -157,13 +186,13 @@ class App extends Component {
                 <Record vData={ this.state.vData } playing={ this.state.playing } />
                 <div className="controls">
                     <h1>YT1210</h1>
-                    <Playlist playlist={ this.state.playlist } trackData={ this.state.trackData } playing={ this.state.videoId } onClick={ (i)=>{ this.onChangeVideo(i); } } addTrack={ (videoId)=>{ this.addTrack(videoId); } }></Playlist>
                     <div className="buttons">
                         <div className='button' onClick={this.onPlayVideo}>Play</div>
                         <div className='button' onClick={this.onPauseVideo}>Pause</div>
                         <div className='button' onClick={this.onStopVideo}>Stop</div>
                         <div className='button' onClick={ ()=>{ this.onChangeVideo(); } }>Next</div>
                     </div>
+                    <Playlist playlist={ this.state.playlist } trackData={ this.state.trackData } playing={ this.state.videoId } onClick={ (i)=>{ this.onChangeVideo(i); } } addTrack={ (videoId)=>{ this.addTrack(videoId); } }></Playlist>
                 </div>
                 <div className='video'>
                     <YouTube

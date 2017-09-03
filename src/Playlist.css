@@ -29,3 +29,10 @@
 .playing {
     color: #0f0;
 }
+
+.NewTrack {
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: rgba(40,40,40,0.8);
+}

@@ -12,7 +12,7 @@ class Record extends Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            label: 'https://img.youtube.com/vi/'+nextProps.vData.video_id+'/0.jpg',
+            label: 'https://img.youtube.com/vi/'+nextProps.vData.videoId+'/0.jpg',
             title: nextProps.vData.title
         })
     }
