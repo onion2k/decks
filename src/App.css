@@ -13,11 +13,13 @@ h1 {
 }
 
 .controls {
-    width: 40vw;
-    padding: 0;
+    width: 50vw;
+    padding: 30px;
     display: grid;
-    grid-gap: 0;
+    grid-gap: 15px;
     grid-template-columns: 1fr;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 15px;
 }
 
 .titleControls {
@@ -37,23 +39,20 @@ h1 {
     margin-bottom: 8px;
 }
 
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 0;
-}
-    
 .video {
     display: block;
     clear: both;
 }
 
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+}
+    
 .button {
-    float: left;
-    width: 80px;
-    height: 80px;
+    height: 40px;
     padding: 20px;
-    margin: 10px;
     background-color: #000;
     border: 1px solid #ddd;
 }
