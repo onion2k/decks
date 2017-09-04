@@ -18,10 +18,13 @@
 .track {
     cursor: pointer;
     color: #666;
-    padding:  3px 13px 0;
+    background-color: #eee;
+    border-bottom: 1px dotted #B0B0FB;
+    padding:  3px 13px 2px;
 }
+
 .track:nth-of-type(1) {
-    margin-top: 10px;
+    padding-top: 10px;
 }
 
 .track > span {
@@ -29,15 +32,15 @@
 }
 
 .track:hover {
-    color: #fff;
+    color: #3E3EAF;
 }
 
 .found {
-    color: #aaa;
+    color: #7E7E7E;
 }
 
 .playing {
-    color: #0f0;
+    color: #3EAF3E;
 }
 
 .NewTrack {
