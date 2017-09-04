@@ -61,7 +61,7 @@ class App extends Component {
             playlistPos: 0,
             trackData: {},
             playlist: pl,
-            videoId: '_7qhdcaX8Q0',
+            videoId: pl[0].videoId,
             autoplay: 0,
             crackle: true,
             repeat: false
