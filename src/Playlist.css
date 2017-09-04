@@ -4,10 +4,9 @@
 }
 
 .Playlist {
-    font-family: 'Metrophobic';
-    font-size: 12px;
+    font-family: 'Architects Daughter';
+    font-size: 17px;
     user-select: none;
-    padding: 15px;
     border: 1px solid #ddd;
     background-color: rgba(40,40,40,0.8);
     min-height: 30vh;
@@ -19,6 +18,10 @@
 .track {
     cursor: pointer;
     color: #666;
+    padding:  3px 13px 0;
+}
+.track:nth-of-type(1) {
+    margin-top: 10px;
 }
 
 .track > span {

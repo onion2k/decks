@@ -34,7 +34,6 @@ class App extends Component {
             { videoId: 'KODWcrncnUU', title: '', playing: false, duration: 0, found: false },
             { videoId: '5Yv51XuFqPY', title: '', playing: false, duration: 0, found: false },
             { videoId: '9Z5NMHKY5PE', title: '', playing: false, duration: 0, found: false },
-
             { videoId: 'fczPlmz-Vug', title: '', playing: false, duration: 0, found: false },
             { videoId: 'cAe1lVDbLf0', title: '', playing: false, duration: 0, found: false },
             { videoId: 'u7K72X4eo_s', title: '', playing: false, duration: 0, found: false },
@@ -64,7 +63,8 @@ class App extends Component {
             playlist: pl,
             videoId: '_7qhdcaX8Q0',
             autoplay: 0,
-            crackle: true
+            crackle: true,
+            repeat: true
         }
 
         this.onReady       = this.onReady.bind(this);
@@ -76,7 +76,7 @@ class App extends Component {
         this.onStopVideo   = this.onStopVideo.bind(this);
         this.addTrack      = this.addTrack.bind(this);
         this.updateCrackle = this.updateCrackle.bind(this);
-        
+        this.updateRepeat  = this.updateRepeat.bind(this);
         
     }
 
@@ -111,14 +111,25 @@ class App extends Component {
     onChangeVideo(videoId) {
         var p = this.state.playlistPos;
         if (videoId!==undefined) { p = this.state.playlist.findIndex((track)=>{ return track.videoId===videoId })-1; }
-        if (p===this.state.playlist.length-1) { p = 0; } else { p++; }
         if (!this.ogg_crackle.playing() && this.state.crackle===true) { this.ogg_crackle.play() };
-        this.setState({
-            playlistPos: p,
-            videoId: this.state.playlist[p].videoId,
-            playing: true,
-            autoplay: 1
-        });
+        
+        if (this.state.repeat===true && videoId===undefined) {
+
+            //do nothing.
+            this.state.player.playVideo();
+
+        } else {
+
+            if (p===this.state.playlist.length-1) { p = 0; } else { p++; }
+            this.setState({
+                playlistPos: p,
+                videoId: this.state.playlist[p].videoId,
+                playing: true,
+                autoplay: 1
+            });
+    
+        }
+
     }
 
     onPlay(event){
@@ -185,6 +196,11 @@ class App extends Component {
         this.setState({ crackle: !c });
     }
 
+    updateRepeat() {
+        let r = this.state.repeat;
+        this.setState({ repeat: !r });
+    }
+
     render() {
 
         const opts = {
@@ -213,6 +229,9 @@ class App extends Component {
                         <div className='button' onClick={ ()=>{ this.onChangeVideo(); } }>Next</div>
                     </div>
                     <Playlist playlist={ this.state.playlist } trackData={ this.state.trackData } playing={ this.state.videoId } onClick={ (i)=>{ this.onChangeVideo(i); } } addTrack={ (videoId)=>{ this.addTrack(videoId); } }></Playlist>
+                    <div className="repeat">
+                        <label>Repeat <input type="checkbox" checked={ this.state.repeat } onChange={ this.updateRepeat } /></label>
+                    </div>
                 </div>
                 <div className='video'>
                     <YouTube
