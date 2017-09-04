@@ -48,7 +48,7 @@ class Playlist extends Component {
                 key={ track.videoId } 
                 className={ 'track'+(track.videoId===this.props.playing?' playing':'')+(track.found?' found':'') }
                 onClick={ (e)=>this.props.onClick(track.videoId) }
-            >{ track.title || track.videoId }<span>{ this.timeFormat(track.duration) }</span></div>;
+            ><i className="fa fa-bars" aria-hidden="true"></i> { track.title || track.videoId } <span>{ this.timeFormat(track.duration) }</span></div>;
         });
 
         return (

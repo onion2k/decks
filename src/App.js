@@ -64,7 +64,7 @@ class App extends Component {
             videoId: '_7qhdcaX8Q0',
             autoplay: 0,
             crackle: true,
-            repeat: true
+            repeat: false
         }
 
         this.onReady       = this.onReady.bind(this);
@@ -204,8 +204,7 @@ class App extends Component {
     render() {
 
         const opts = {
-            height: '0',
-            width: '0',
+            width: '100%',
             playerVars: {
                 controls: 0,
                 autoplay: this.state.autoplay
@@ -228,19 +227,19 @@ class App extends Component {
                         <div className='button' onClick={this.onStopVideo}>Stop</div>
                         <div className='button' onClick={ ()=>{ this.onChangeVideo(); } }>Next</div>
                     </div>
+                    <div className='video'>
+                        <YouTube
+                            videoId={ this.state.videoId }
+                            opts={ opts }
+                            onReady={ this.onReady }
+                            onPlay={ this.onPlay }
+                            onEnd={ this.onEnd }
+                        />
+                    </div>
                     <Playlist playlist={ this.state.playlist } trackData={ this.state.trackData } playing={ this.state.videoId } onClick={ (i)=>{ this.onChangeVideo(i); } } addTrack={ (videoId)=>{ this.addTrack(videoId); } }></Playlist>
                     <div className="repeat">
                         <label>Repeat <input type="checkbox" checked={ this.state.repeat } onChange={ this.updateRepeat } /></label>
                     </div>
-                </div>
-                <div className='video'>
-                    <YouTube
-                        videoId={ this.state.videoId }
-                        opts={ opts }
-                        onReady={ this.onReady }
-                        onPlay={ this.onPlay }
-                        onEnd={ this.onEnd }
-                    />
                 </div>
             </div>
         );
