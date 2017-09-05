@@ -180,13 +180,20 @@ class App extends Component {
 
     addTrack(state){
 
-        const newtrack = queryString.parse(state.newtrack.substr(state.newtrack.indexOf('?')));
+        var newtrack;
+
+        if (state.newtrack.length === 11) {
+            newtrack = state.newtrack;
+        } else {
+            const url = queryString.parse(state.newtrack.substr(state.newtrack.indexOf('?')));
+            newtrack = url.v;
+        }
 
         let pl = this.state.playlist;
-        pl.push({ videoId: newtrack.v, title: '', playing: false, duration: 0, found: false });
+        pl.push({ videoId: newtrack, title: '', playing: false, duration: 0, found: false });
 
         this.setState({ playlist: pl });
-        this.onChangeVideo(newtrack.v);
+        this.onChangeVideo(newtrack);
 
     }
 
