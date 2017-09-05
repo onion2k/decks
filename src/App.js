@@ -24,35 +24,31 @@ class App extends Component {
 
         let pl = localStorage.getItem('yt1210-playlist');
 
-        console.log(pl);
-
         if (!pl) {
 
-            pl = [];
-
-            // pl = [
-            //     { videoId: '_7qhdcaX8Q0', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: 'WEi9ZQrEjr8', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: '3eYSUxoRc0U', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: 'qLrnkK2YEcE', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: 'MV_3Dpw-BRY', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: 'rDBbaGCCIhk', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: '4qQyUi4zfDs', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: 'U4E60Ffa9yQ', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: 'KODWcrncnUU', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: '5Yv51XuFqPY', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: '9Z5NMHKY5PE', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: 'fczPlmz-Vug', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: 'cAe1lVDbLf0', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: 'u7K72X4eo_s', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: 'luM6oeCM7Yw', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: 'aqsL0QQaSP4', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: '-gj4_qp4a28', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: 'MMEpaVL_WsU', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: 'B9FzVhw8_bY', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: 'y-4ImbmZZp4', title: '', playing: false, duration: 0, found: false },
-            //     { videoId: 'txBfhpm1jI0', title: '', playing: false, duration: 0, found: false }
-            // ];
+            pl = [
+                { videoId: '_7qhdcaX8Q0', title: '', playing: false, duration: 0, found: false },
+                { videoId: 'WEi9ZQrEjr8', title: '', playing: false, duration: 0, found: false },
+                { videoId: '3eYSUxoRc0U', title: '', playing: false, duration: 0, found: false },
+                { videoId: 'qLrnkK2YEcE', title: '', playing: false, duration: 0, found: false },
+                { videoId: 'MV_3Dpw-BRY', title: '', playing: false, duration: 0, found: false },
+                { videoId: 'rDBbaGCCIhk', title: '', playing: false, duration: 0, found: false },
+                { videoId: '4qQyUi4zfDs', title: '', playing: false, duration: 0, found: false },
+                { videoId: 'U4E60Ffa9yQ', title: '', playing: false, duration: 0, found: false },
+                { videoId: 'KODWcrncnUU', title: '', playing: false, duration: 0, found: false },
+                { videoId: '5Yv51XuFqPY', title: '', playing: false, duration: 0, found: false },
+                { videoId: '9Z5NMHKY5PE', title: '', playing: false, duration: 0, found: false },
+                { videoId: 'fczPlmz-Vug', title: '', playing: false, duration: 0, found: false },
+                { videoId: 'cAe1lVDbLf0', title: '', playing: false, duration: 0, found: false },
+                { videoId: 'u7K72X4eo_s', title: '', playing: false, duration: 0, found: false },
+                { videoId: 'luM6oeCM7Yw', title: '', playing: false, duration: 0, found: false },
+                { videoId: 'aqsL0QQaSP4', title: '', playing: false, duration: 0, found: false },
+                { videoId: '-gj4_qp4a28', title: '', playing: false, duration: 0, found: false },
+                { videoId: 'MMEpaVL_WsU', title: '', playing: false, duration: 0, found: false },
+                { videoId: 'B9FzVhw8_bY', title: '', playing: false, duration: 0, found: false },
+                { videoId: 'y-4ImbmZZp4', title: '', playing: false, duration: 0, found: false },
+                { videoId: 'txBfhpm1jI0', title: '', playing: false, duration: 0, found: false }
+            ];
     
         }
 
@@ -134,7 +130,6 @@ class App extends Component {
         
         if (this.state.repeat===true && videoId===undefined) {
 
-            //do nothing.
             this.state.player.playVideo();
 
         } else {
