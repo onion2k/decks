@@ -7,7 +7,9 @@ class Record extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { title: 'Unknown', label: '' }
+        this.state = { title: 'Unknown', label: '', dragtone: false }
+        this.mouseMove = this.mouseMove.bind(this);
+        this.toneangle = -49;
     }
 
     componentWillReceiveProps(nextProps) {
@@ -15,6 +17,13 @@ class Record extends Component {
             label: 'https://img.youtube.com/vi/'+nextProps.vData.videoId+'/0.jpg',
             title: nextProps.vData.title
         })
+    }
+
+    mouseMove(e){
+        if (this.state.dragtone) {
+            console.log(e.pageX, e.pageY)
+            this.toneangle = 'rotate(-40deg)';
+        }
     }
 
     render() {
@@ -27,7 +36,7 @@ class Record extends Component {
                     </div>
                 </div>
                 <div className={'Tonearm'+(this.props.playing===true?' playing':'')}>
-                    <img src={ tonearm } alt='Tonearm' />
+                    <img src={ tonearm } alt='Tonearm' style={{ transform: this.toneangle }} onMouseDown={ ()=>{ console.log('d'); this.setState({ dragtone: true })} } onMouseUp={ ()=>{ console.log('u'); this.setState({ dragtone: false }); } } onMouseMove={ (e)=>{ this.mouseMove(e); } } />
                 </div>
             </div>
         );
