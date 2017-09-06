@@ -18,39 +18,56 @@ class App extends Component {
 
         super();
 
+        this.onReady       = this.onReady.bind(this);
+        this.onChangeVideo = this.onChangeVideo.bind(this);
+        this.onPlay        = this.onPlay.bind(this);
+        this.onEnd         = this.onEnd.bind(this);
+        this.onPlayVideo   = this.onPlayVideo.bind(this);
+        this.onPauseVideo  = this.onPauseVideo.bind(this);
+        this.onStopVideo   = this.onStopVideo.bind(this);
+        this.addTrack      = this.addTrack.bind(this);
+        this.updateCrackle = this.updateCrackle.bind(this);
+        this.updateRepeat  = this.updateRepeat.bind(this);
+        this.updatePlaylist = this.updatePlaylist.bind(this);
+
         this.ogg_stylus = new Howl({ src: [ogg_stylus], loop: false, autoplay: false, autoload: true});
         this.ogg_crackle = new Howl({ src: [ogg_crackle], loop: true, autoplay: false, autoload: true});
         this.ogg_drag = new Howl({ src: [ogg_drag], loop: false, autoplay: false, autoload: true});
 
-        let pl = localStorage.getItem('yt1210-playlist');
+        let pl = this.updatePlaylist();
 
-        if (!pl) {
+        // if (!pl) {
 
-            pl = [
-                { videoId: '_7qhdcaX8Q0', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'WEi9ZQrEjr8', title: '', playing: false, duration: 0, found: false },
-                { videoId: '3eYSUxoRc0U', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'qLrnkK2YEcE', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'MV_3Dpw-BRY', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'rDBbaGCCIhk', title: '', playing: false, duration: 0, found: false },
-                { videoId: '4qQyUi4zfDs', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'U4E60Ffa9yQ', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'KODWcrncnUU', title: '', playing: false, duration: 0, found: false },
-                { videoId: '5Yv51XuFqPY', title: '', playing: false, duration: 0, found: false },
-                { videoId: '9Z5NMHKY5PE', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'fczPlmz-Vug', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'cAe1lVDbLf0', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'u7K72X4eo_s', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'luM6oeCM7Yw', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'aqsL0QQaSP4', title: '', playing: false, duration: 0, found: false },
-                { videoId: '-gj4_qp4a28', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'MMEpaVL_WsU', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'B9FzVhw8_bY', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'y-4ImbmZZp4', title: '', playing: false, duration: 0, found: false },
-                { videoId: 'txBfhpm1jI0', title: '', playing: false, duration: 0, found: false }
-            ];
+        //     pl = [];
+
+        //     updatePlaylist();
+        //     localStorage.setItem('yt1210-playlist', JSON.stringify(pl));
+            
+        //     // pl = [
+        //     //     { videoId: '_7qhdcaX8Q0', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: 'WEi9ZQrEjr8', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: '3eYSUxoRc0U', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: 'qLrnkK2YEcE', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: 'MV_3Dpw-BRY', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: 'rDBbaGCCIhk', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: '4qQyUi4zfDs', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: 'U4E60Ffa9yQ', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: 'KODWcrncnUU', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: '5Yv51XuFqPY', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: '9Z5NMHKY5PE', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: 'fczPlmz-Vug', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: 'cAe1lVDbLf0', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: 'u7K72X4eo_s', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: 'luM6oeCM7Yw', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: 'aqsL0QQaSP4', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: '-gj4_qp4a28', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: 'MMEpaVL_WsU', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: 'B9FzVhw8_bY', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: 'y-4ImbmZZp4', title: '', playing: false, duration: 0, found: false },
+        //     //     { videoId: 'txBfhpm1jI0', title: '', playing: false, duration: 0, found: false }
+        //     // ];
     
-        }
+        // }
 
         pl.forEach((track)=>{
             var lsPlDetails = localStorage.getItem('yt1210-'+track.videoId);
@@ -75,17 +92,6 @@ class App extends Component {
             repeat: false
         }
 
-        this.onReady       = this.onReady.bind(this);
-        this.onChangeVideo = this.onChangeVideo.bind(this);
-        this.onPlay        = this.onPlay.bind(this);
-        this.onEnd         = this.onEnd.bind(this);
-        this.onPlayVideo   = this.onPlayVideo.bind(this);
-        this.onPauseVideo  = this.onPauseVideo.bind(this);
-        this.onStopVideo   = this.onStopVideo.bind(this);
-        this.addTrack      = this.addTrack.bind(this);
-        this.updateCrackle = this.updateCrackle.bind(this);
-        this.updateRepeat  = this.updateRepeat.bind(this);
-        
     }
 
     onReady(event) {
@@ -96,7 +102,11 @@ class App extends Component {
         let pl = this.state.playlist;
         let t = pl.findIndex((track)=>{ return track.videoId===this.state.videoId });
 
-        if (pl[t] && pl[t].found===false) {
+        if (pl[t] && pl[t].found===true) {
+
+            vData = { videoId: pl[t].videoId, title: pl[t].title };
+            
+        } else if (pl[t] && pl[t].found===false) {
 
             let data = event.target.getVideoData();
             let duration = event.target.getDuration();
@@ -124,7 +134,9 @@ class App extends Component {
     }
 
     onChangeVideo(videoId) {
+
         var p = this.state.playlistPos;
+
         if (videoId!==undefined) { p = this.state.playlist.findIndex((track)=>{ return track.videoId===videoId })-1; }
         if (!this.ogg_crackle.playing() && this.state.crackle===true) { this.ogg_crackle.play() };
         
@@ -153,7 +165,11 @@ class App extends Component {
         let pl = this.state.playlist;
         let t = pl.findIndex((track)=>{ return track.videoId===this.state.videoId });
 
-        if (pl[t] && pl[t].found===false) {
+        if (pl[t] && pl[t].found===true) {
+
+            vData = { videoId: pl[t].videoId, title: pl[t].title };
+
+        } else if (pl[t] && pl[t].found===false) {
 
             let data = this.state.player.getVideoData();
             let duration = this.state.player.getDuration();
@@ -211,11 +227,9 @@ class App extends Component {
             newtrack = url.v;
         }
 
-        let pl = this.state.playlist;
-        pl.push({ videoId: newtrack, title: '', playing: false, duration: 0, found: false });
+        let pl = this.updatePlaylist(newtrack);
 
-        this.setState({ playlist: pl });
-        this.onChangeVideo(newtrack);
+        this.setState({ playlist: pl }, ()=>{this.onChangeVideo(newtrack)});
 
     }
 
@@ -229,6 +243,38 @@ class App extends Component {
         let r = this.state.repeat;
         this.setState({ repeat: !r });
     }
+
+
+    updatePlaylist(videoId) {
+
+        let pl;
+        let plJson = localStorage.getItem('yt1210-playlist');
+
+        if (!plJson) {
+            pl = [];            
+        } else {
+            pl = JSON.parse(plJson);
+        }
+
+        if (videoId) {
+            pl.push({ videoId: videoId, title: '', playing: false, duration: 0, found: false });
+        }
+
+        localStorage.setItem('yt1210-playlist', JSON.stringify(pl));
+
+        pl.forEach((track)=>{
+            var lsPlDetails = localStorage.getItem('yt1210-'+track.videoId);
+            if (lsPlDetails){
+                let lsPlDetailsJson = JSON.parse(lsPlDetails);
+                track.title = lsPlDetailsJson.title.substr(0, 50);
+                track.duration = lsPlDetailsJson.duration;
+                track.found = true;
+            }
+        });
+
+        return pl;
+
+    }    
 
     render() {
 
