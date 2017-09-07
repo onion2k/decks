@@ -25,6 +25,7 @@ class App extends Component {
         this.onPlayVideo   = this.onPlayVideo.bind(this);
         this.onPauseVideo  = this.onPauseVideo.bind(this);
         this.onStopVideo   = this.onStopVideo.bind(this);
+        this.onTrack       = this.onTrack.bind(this);
         this.addTrack      = this.addTrack.bind(this);
         this.updatePlaylist = this.updatePlaylist.bind(this);
         this.updateCrackle = this.updateCrackle.bind(this);
@@ -172,6 +173,17 @@ class App extends Component {
         this.state.player.stopVideo();
     }
 
+    onTrack(tracknumber) {
+
+        this.setState({
+            playlistPos: tracknumber,
+            videoId: this.state.playlist[tracknumber].videoId,
+            playing: true,
+            autoplay: 1
+        });
+
+    }
+
     addTrack(state){
 
         var newtrack;
@@ -244,7 +256,7 @@ class App extends Component {
 
         return (
             <div className="App">
-                <Record vData={ this.state.vData } playing={ this.state.playing } />
+                <Record onTrack={this.onTrack} vData={ this.state.vData } playing={ this.state.playing } />
                 <div className="controls">
                     <div className="titleControls">
                         <h1>YT1210</h1>

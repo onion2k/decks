@@ -6,6 +6,7 @@ import './Record.css';
 class Record extends Component {
 
     constructor(props) {
+
         super(props);
         this.mouseMove = this.mouseMove.bind(this);
         this.lastX = 0;
@@ -29,12 +30,31 @@ class Record extends Component {
     }
 
     mouseMove(e){
+
         if (this.state.dragtone) {
             let toneangle = this.state.tonestart + ((e.pageX - this.lastX) / 10);
+            if (toneangle < -54) { toneangle = -54; }
+            if (toneangle > -19) { toneangle = -19; }
+
+            if (toneangle > -25.6) {
+                this.props.onTrack(5);
+            } else if (toneangle > -28.5) {
+                this.props.onTrack(4);
+            } else if (toneangle > -34.2) {
+                this.props.onTrack(3);
+            } else if (toneangle > -39.7) {
+                this.props.onTrack(2);
+            } else if (toneangle > -43.4) {
+                this.props.onTrack(1);
+            } else if (toneangle > -48) {
+                this.props.onTrack(0);
+            }
+
             this.setState({
                 toneangle: toneangle,
                 tonestyle: 'rotate('+toneangle+'deg)'
             });
+
         }
     }
 
