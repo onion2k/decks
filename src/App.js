@@ -98,20 +98,15 @@ class App extends Component {
         if (!this.ogg_crackle.playing() && this.state.crackle===true) { this.ogg_crackle.play() };
         
         if (this.state.repeat===true && videoId===undefined) {
-
             this.state.player.playVideo();
-
         } else {
-
             if (p===this.state.playlist.length-1) { p = 0; } else { p++; }
-
             this.setState({
                 playlistPos: p,
                 videoId: this.state.playlist[p].videoId,
                 playing: true,
                 autoplay: 1
             });
-    
         }
 
     }
@@ -149,7 +144,11 @@ class App extends Component {
 
         }
 
-        this.setState({ vData: vData, playing: true, playlist: pl });
+        if (this.state.seekTo) {
+            this.state.player.seekTo( (pl[t].duration/100)*this.state.seekTo, true );
+        }
+
+        this.setState({ vData: vData, playing: true, playlist: pl, seekTo: false });
         
     }
 
@@ -158,9 +157,17 @@ class App extends Component {
     }
 
     onPlayVideo() {
+
+        let pl = this.state.playlist;
+        let t = pl.findIndex((track)=>{ return track.videoId===this.state.videoId });
+
         this.ogg_stylus.play();
-        if (this.state.crackle===true) { this.ogg_crackle.play(); }
         this.state.player.playVideo();
+        if (!this.ogg_crackle.playing() && this.state.crackle===true) { this.ogg_crackle.play() };
+        if (this.state.seekTo) {
+            this.state.player.seekTo( (pl[t].duration/100)*this.state.seekTo, true );
+        }
+        this.setState({ seekTo: false });
     }
 
     onPauseVideo() {
@@ -173,15 +180,32 @@ class App extends Component {
         this.state.player.stopVideo();
     }
 
-    onTrack(tracknumber) {
+    onTrack(tracknumber, percentage) {
 
-        this.setState({
-            playlistPos: tracknumber,
-            videoId: this.state.playlist[tracknumber].videoId,
-            playing: true,
-            autoplay: 1
-        });
+        var next = this.state.playlist[tracknumber].videoId;
 
+        if (this.state.videoId === next) {
+
+            this.setState({
+                playing: true,
+                autoplay: 1,
+                seekTo: percentage
+            }, ()=>{
+                this.onPlayVideo();
+            });
+
+        } else {
+
+            this.setState({
+                playlistPos: tracknumber,
+                videoId: this.state.playlist[tracknumber].videoId,
+                playing: true,
+                autoplay: 1,
+                seekTo: percentage
+            });
+
+        }
+        
     }
 
     addTrack(state){

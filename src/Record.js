@@ -8,7 +8,8 @@ class Record extends Component {
     constructor(props) {
 
         super(props);
-        this.mouseMove = this.mouseMove.bind(this);
+        this.armMove = this.armMove.bind(this);
+        this.armUp = this.armUp.bind(this);
         this.lastX = 0;
 
         this.state = { 
@@ -29,38 +30,62 @@ class Record extends Component {
         })
     }
 
-    mouseMove(e){
+    armMove(e){
 
         if (this.state.dragtone) {
             let toneangle = this.state.tonestart + ((e.pageX - this.lastX) / 10);
             if (toneangle < -54) { toneangle = -54; }
             if (toneangle > -19) { toneangle = -19; }
-
-            if (toneangle > -25.6) {
-                this.props.onTrack(5);
-            } else if (toneangle > -28.5) {
-                this.props.onTrack(4);
-            } else if (toneangle > -34.2) {
-                this.props.onTrack(3);
-            } else if (toneangle > -39.7) {
-                this.props.onTrack(2);
-            } else if (toneangle > -43.4) {
-                this.props.onTrack(1);
-            } else if (toneangle > -48) {
-                this.props.onTrack(0);
-            }
-
             this.setState({
                 toneangle: toneangle,
                 tonestyle: 'rotate('+toneangle+'deg)'
             });
-
         }
+    }
+
+    armUp(e) {
+
+        let perCal = function(s,e,p){
+            let tl = Math.abs(s) - Math.abs(e);
+            let per = p + Math.abs(s);
+            return (per / tl) * 100;
+        }
+
+        this.setState({ dragtone: false, tonestart: this.state.toneangle });
+
+        var toneangle, per;
+
+        toneangle = this.state.toneangle;
+
+        if (toneangle > -20) {
+            //off
+        } else if (toneangle > -25.6) {
+            per = perCal(-25.6,-20,toneangle);
+            this.props.onTrack(5, per);
+        } else if (toneangle > -28.5) {
+            per = perCal(-28.5,-25.6,toneangle);
+            this.props.onTrack(4, per);
+        } else if (toneangle > -34.2) {
+            per = perCal(-34.2,-28.5,toneangle);
+            this.props.onTrack(3, per);
+        } else if (toneangle > -39.7) {
+            per = perCal(-39.7,-34.2,toneangle);
+            this.props.onTrack(2, per);
+        } else if (toneangle > -43.4) {
+            per = perCal(-43.4,-39.7,toneangle);
+            this.props.onTrack(1, per);
+        } else if (toneangle > -47.6) {
+            per = perCal(-47.6,-43.4,toneangle);
+            this.props.onTrack(0, per);
+        } else {
+            //off
+        }
+
     }
 
     render() {
         return (
-            <div className="Deck" onMouseDown={ (e)=>{ this.lastX = e.pageX; this.setState({ dragtone: true })} } onMouseUp={ ()=>{ this.setState({ dragtone: false, tonestart: this.state.toneangle }); } } onMouseMove={ (e)=>{ this.mouseMove(e); } }>
+            <div className="Deck" onMouseDown={ (e)=>{ this.lastX = e.pageX; this.setState({ dragtone: true })} } onMouseUp={ (e)=>{ this.armUp(e); } } onMouseMove={ (e)=>{ this.armMove(e); } }>
                 <div className={'Record'+(this.props.playing===true?' playing':'')} style={{ backgroundImage: 'url('+record+')' }} >
                     <div className="label">
                         <img src={ this.state.label } alt='Record' />
