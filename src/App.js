@@ -182,6 +182,8 @@ class App extends Component {
 
     onTrack(tracknumber, percentage) {
 
+        if (tracknumber > this.state.playlist.length-1) { return; }
+
         var next = this.state.playlist[tracknumber].videoId;
 
         if (this.state.videoId === next) {
@@ -223,6 +225,9 @@ class App extends Component {
 
         this.setState({ playlist: pl }, ()=>{this.onChangeVideo(newtrack)});
 
+        let playlistHash = pl.map((track)=>{ return track.videoId}).join(',');
+        window.location.hash = playlistHash;
+
     }
 
     updateCrackle() {
@@ -240,12 +245,18 @@ class App extends Component {
     updatePlaylist(videoId) {
 
         let pl;
-        let plJson = localStorage.getItem('yt1210-playlist');
-
-        if (!plJson) {
-            pl = [];            
+        if (window.location.hash) {
+            let plHashList = window.location.hash.substr(1).split(',');
+            pl = plHashList.map((videoId)=>{
+                return { videoId: videoId, title: '', playing: false, duration: 0, found: false } 
+            });
         } else {
-            pl = JSON.parse(plJson);
+            let plJson = localStorage.getItem('yt1210-playlist');
+            if (!plJson) {
+                pl = [];            
+            } else {
+                pl = JSON.parse(plJson);
+            }    
         }
 
         if (videoId) {

@@ -10,6 +10,7 @@ class Record extends Component {
         super(props);
         this.armMove = this.armMove.bind(this);
         this.armUp = this.armUp.bind(this);
+        this.tick = this.tick.bind(this);
         this.lastX = 0;
 
         this.state = { 
@@ -19,24 +20,46 @@ class Record extends Component {
             tonestart: -54,
             toneangle: -54,
             tonestyle: 'rotate(-54deg)',
+            millis: Date.now(),
         }
 
     }
 
-    componentWillReceiveProps(nextProps) {
+    tick() {
+        var toneangle = this.state.toneangle+0.001;
         this.setState({
+           millis: Date.now(),
+           request: requestAnimationFrame(this.tick),
+           toneangle: toneangle,
+           tonestyle: 'rotate('+toneangle+'deg)'
+        });
+     }
+
+     componentWillReceiveProps(nextProps) {
+        let request = false;
+        if (nextProps.playing===true) {
+            if (!this.state.request) {
+                request = requestAnimationFrame(this.tick);
+            }
+        } else {
+            cancelAnimationFrame(this.state.request);
+        }
+        this.setState({
+            request: request,
             label: 'https://img.youtube.com/vi/'+nextProps.vData.videoId+'/0.jpg',
             title: nextProps.vData.title
         })
     }
 
     armMove(e){
-
+        
         if (this.state.dragtone) {
+            if (this.state.request) { cancelAnimationFrame(this.state.request); }
             let toneangle = this.state.tonestart + ((e.pageX - this.lastX) / 10);
             if (toneangle < -54) { toneangle = -54; }
             if (toneangle > -19) { toneangle = -19; }
             this.setState({
+                request: false,
                 toneangle: toneangle,
                 tonestyle: 'rotate('+toneangle+'deg)'
             });
@@ -45,6 +68,8 @@ class Record extends Component {
 
     armUp(e) {
 
+        var toneangle, per;
+
         let perCal = function(s,e,p){
             let tl = Math.abs(s) - Math.abs(e);
             let per = p + Math.abs(s);
@@ -52,8 +77,6 @@ class Record extends Component {
         }
 
         this.setState({ dragtone: false, tonestart: this.state.toneangle });
-
-        var toneangle, per;
 
         toneangle = this.state.toneangle;
 
