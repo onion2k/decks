@@ -26,59 +26,15 @@ class App extends Component {
         this.onPauseVideo  = this.onPauseVideo.bind(this);
         this.onStopVideo   = this.onStopVideo.bind(this);
         this.addTrack      = this.addTrack.bind(this);
+        this.updatePlaylist = this.updatePlaylist.bind(this);
         this.updateCrackle = this.updateCrackle.bind(this);
         this.updateRepeat  = this.updateRepeat.bind(this);
-        this.updatePlaylist = this.updatePlaylist.bind(this);
-
+        
         this.ogg_stylus = new Howl({ src: [ogg_stylus], loop: false, autoplay: false, autoload: true});
         this.ogg_crackle = new Howl({ src: [ogg_crackle], loop: true, autoplay: false, autoload: true});
         this.ogg_drag = new Howl({ src: [ogg_drag], loop: false, autoplay: false, autoload: true});
 
         let pl = this.updatePlaylist();
-
-        // if (!pl) {
-
-        //     pl = [];
-
-        //     updatePlaylist();
-        //     localStorage.setItem('yt1210-playlist', JSON.stringify(pl));
-            
-        //     // pl = [
-        //     //     { videoId: '_7qhdcaX8Q0', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: 'WEi9ZQrEjr8', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: '3eYSUxoRc0U', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: 'qLrnkK2YEcE', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: 'MV_3Dpw-BRY', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: 'rDBbaGCCIhk', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: '4qQyUi4zfDs', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: 'U4E60Ffa9yQ', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: 'KODWcrncnUU', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: '5Yv51XuFqPY', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: '9Z5NMHKY5PE', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: 'fczPlmz-Vug', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: 'cAe1lVDbLf0', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: 'u7K72X4eo_s', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: 'luM6oeCM7Yw', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: 'aqsL0QQaSP4', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: '-gj4_qp4a28', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: 'MMEpaVL_WsU', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: 'B9FzVhw8_bY', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: 'y-4ImbmZZp4', title: '', playing: false, duration: 0, found: false },
-        //     //     { videoId: 'txBfhpm1jI0', title: '', playing: false, duration: 0, found: false }
-        //     // ];
-    
-        // }
-
-        pl.forEach((track)=>{
-            var lsPlDetails = localStorage.getItem('yt1210-'+track.videoId);
-            if (lsPlDetails){
-                let lsPlDetailsJson = JSON.parse(lsPlDetails);
-                track.title = lsPlDetailsJson.title.substr(0, 50);
-                track.duration = lsPlDetailsJson.duration;
-                track.found = true;
-            }
-        });
-
         const videoId = pl.length > 0 ? pl[0].videoId : null;
 
         this.state = {

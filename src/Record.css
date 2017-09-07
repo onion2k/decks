@@ -5,7 +5,7 @@
     width: 950px;
     height: 950px;
     right: -400px;
-    z-index: -1;
+    z-index: 0;
 }
 
 .Record {
@@ -60,7 +60,12 @@
     height: 950px;
     z-index: 1;
     transform: scaleX(-1) scaleY(-1);
-    pointer-events: none;
+    user-drag: none; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .Tonearm > img {
