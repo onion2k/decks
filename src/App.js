@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 import queryString from 'query-string';
 import './App.css';
 
@@ -12,7 +12,11 @@ import YouTube from 'react-youtube';
 
 import Playlist from './Playlist.js';
 import Record from './Record.js';
+
 import Settings from './Settings.js';
+import Callback from './Callback.js';
+
+import * as auth0 from 'auth0-js';
 
 class App extends Component {
 
@@ -30,8 +34,6 @@ class App extends Component {
         this.onTrack       = this.onTrack.bind(this);
         this.addTrack      = this.addTrack.bind(this);
         this.updatePlaylist = this.updatePlaylist.bind(this);
-        this.updateCrackle = this.updateCrackle.bind(this);
-        this.updateRepeat  = this.updateRepeat.bind(this);
         
         this.ogg_stylus = new Howl({ src: [ogg_stylus], loop: false, autoplay: false, autoload: true});
         this.ogg_crackle = new Howl({ src: [ogg_crackle], loop: true, autoplay: false, autoload: true});
@@ -39,6 +41,11 @@ class App extends Component {
 
         let pl = this.updatePlaylist();
         const videoId = pl.length > 0 ? pl[0].videoId : null;
+
+        let webAuth = new auth0.WebAuth({
+            domain:       'ooer.eu.auth0.com',
+            clientID:     'DG-lhPij_tdpYJhd2MkL8lpOa3iDn9Y5'
+        });
 
         this.state = {
             playing: false,
@@ -48,7 +55,8 @@ class App extends Component {
             videoId: videoId,
             autoplay: 0,
             crackle: true,
-            repeat: false
+            repeat: false,
+            webAuth: webAuth
         }
 
     }
@@ -232,18 +240,6 @@ class App extends Component {
 
     }
 
-    updateCrackle() {
-        let c = this.state.crackle;        
-        if (c===true) { this.ogg_crackle.stop(); } else if (this.state.playing===true) { this.ogg_crackle.play(); }
-        this.setState({ crackle: !c });
-    }
-
-    updateRepeat() {
-        let r = this.state.repeat;
-        this.setState({ repeat: !r });
-    }
-
-
     updatePlaylist(videoId) {
 
         let pl;
@@ -298,7 +294,13 @@ class App extends Component {
                     <div className="titleControls">
                         <h1>YT1210</h1>
                         <div className="yt1210Controls">
-                            <label>Crackle <input type="checkbox" checked={ this.state.crackle } onChange={ this.updateCrackle } /></label>
+                            <Link to='/'>Home</Link>
+                            <Link to='/settings'>Settings</Link>
+                            <a onClick={ ()=> { this.state.webAuth.authorize({
+                                responseType: 'token',
+                                scope: 'https://www.googleapis.com/auth/youtube',
+                                redirectUri: 'http://localhost:3000/callback' 
+                            }) } }>Auth</a>
                         </div>
                     </div>
                     <div className="buttons">
@@ -317,14 +319,10 @@ class App extends Component {
                         />
                     </div>
                     <Switch>
-
                         <Route path='/settings' component={ Settings } />
+                        <Route path='/callback' component={ Callback } />
                         <Route component={ ()=>{ return <Playlist playlist={ this.state.playlist } trackData={ this.state.trackData } playing={ this.state.videoId } onClick={ (i)=>{ this.onChangeVideo(i); } } addTrack={ (videoId)=>{ this.addTrack(videoId); } }></Playlist> } } />
-
                     </Switch>
-                    <div className="repeat">
-                        <label>Repeat <input type="checkbox" checked={ this.state.repeat } onChange={ this.updateRepeat } /></label>
-                    </div>
                 </div>
             </div>
         );
