@@ -37,7 +37,7 @@ class Callback extends Component {
                 token: authResult.accessToken
             });
 
-            fetch('https://www.googleapis.com/youtube/v3/channels?access_token='+authResult.accessToken+'&part=snippet&mine=true', { mode: 'cors'}).then((result)=>{
+            fetch('https://www.googleapis.com/youtube/v3/search', { mode: 'cors' }).then((result)=>{
                 console.log(result);
             })
             
