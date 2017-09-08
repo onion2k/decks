@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import queryString from 'query-string';
 import './App.css';
 
@@ -11,6 +12,7 @@ import YouTube from 'react-youtube';
 
 import Playlist from './Playlist.js';
 import Record from './Record.js';
+import Settings from './Settings.js';
 
 class App extends Component {
 
@@ -314,7 +316,12 @@ class App extends Component {
                             onEnd={ this.onEnd }
                         />
                     </div>
-                    <Playlist playlist={ this.state.playlist } trackData={ this.state.trackData } playing={ this.state.videoId } onClick={ (i)=>{ this.onChangeVideo(i); } } addTrack={ (videoId)=>{ this.addTrack(videoId); } }></Playlist>
+                    <Switch>
+
+                        <Route path='/settings' component={ Settings } />
+                        <Route component={ ()=>{ return <Playlist playlist={ this.state.playlist } trackData={ this.state.trackData } playing={ this.state.videoId } onClick={ (i)=>{ this.onChangeVideo(i); } } addTrack={ (videoId)=>{ this.addTrack(videoId); } }></Playlist> } } />
+
+                    </Switch>
                     <div className="repeat">
                         <label>Repeat <input type="checkbox" checked={ this.state.repeat } onChange={ this.updateRepeat } /></label>
                     </div>
