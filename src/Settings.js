@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Settings.css';
 
 class Settings extends Component {
 
@@ -18,7 +19,7 @@ class Settings extends Component {
 
     updateCrackle() {
         let c = this.state.crackle;        
-        if (c===true) { this.ogg_crackle.stop(); } else if (this.state.playing===true) { this.ogg_crackle.play(); }
+        //if (c===true) { this.ogg_crackle.stop(); } else if (this.state.playing===true) { this.ogg_crackle.play(); }
         this.setState({ crackle: !c });
     }
 
@@ -30,8 +31,12 @@ class Settings extends Component {
     render() {
         return (
             <div className="Settings">
-                <label>Crackle <input type="checkbox" checked={ this.state.crackle } onChange={ this.updateCrackle } /></label>
-                <label>Repeat <input type="checkbox" checked={ this.state.repeat } onChange={ this.updateRepeat } /></label>
+                <div className="setting">
+                    <label><input type="checkbox" checked={ this.state.crackle } onChange={ this.updateCrackle } /> Play record crackle noise</label>
+                </div>
+                <div className="setting">
+                    <label><input type="checkbox" checked={ this.state.repeat } onChange={ this.updateRepeat } /> Single track repeat</label>
+                </div>
             </div>
         );
     }

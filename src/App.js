@@ -14,19 +14,6 @@ import Playlist from './Playlist.js';
 import Record from './Record.js';
 
 import Settings from './Settings.js';
-import Callback from './Callback.js';
-
-import GoogleLogin from 'react-google-login';
-
-const responseGoogle = (response) => {
-
-    console.log(response);
-
-    // fetch('https://www.googleapis.com/youtube/v3/search?part=snippet&q=Professor+Green&access_token='+response.accessToken).then((result)=>{
-    //     console.log(result.json());
-    // });
-
-}
 
   class App extends Component {
 
@@ -44,6 +31,7 @@ const responseGoogle = (response) => {
         this.onTrack       = this.onTrack.bind(this);
         this.addTrack      = this.addTrack.bind(this);
         this.updatePlaylist = this.updatePlaylist.bind(this);
+        this.onDeleteVideo = this.onDeleteVideo.bind(this);
         
         this.ogg_stylus = new Howl({ src: [ogg_stylus], loop: false, autoplay: false, autoload: true});
         this.ogg_crackle = new Howl({ src: [ogg_crackle], loop: true, autoplay: false, autoload: true});
@@ -125,6 +113,25 @@ const responseGoogle = (response) => {
 
     }
 
+    onDeleteVideo(videoId) {
+
+        var p = this.state.playlist.findIndex((track)=>{ return track.videoId===videoId });
+        console.log(p)
+        var pl = this.state.playlist;
+        pl.splice(p, 1);
+
+        if (p===this.state.playlist.length) { p = 0; }
+        
+        this.setState({
+            playlist: pl,
+            playlistPos: p,
+            videoId: this.state.playlist[p].videoId,
+            playing: true,
+            autoplay: 1
+        });
+
+    }
+        
     onPlay(event){
 
         let vData;
@@ -262,8 +269,6 @@ const responseGoogle = (response) => {
             }    
         }
 
-        pl = [];            
-        
         if (videoId) {
             pl.push({ videoId: videoId, title: '', playing: false, duration: 0, found: false });
         }
@@ -301,17 +306,10 @@ const responseGoogle = (response) => {
                 <div className="controls">
                     <div className="titleControls">
                         <h1>YT1210</h1>
-                        <div className="yt1210Controls">
-                            <Link to='/'>Home</Link>
-                            <Link to='/settings'>Settings</Link>
-                            <GoogleLogin
-                                clientId="801401456569-i7edtbbllc8cm2n2pni3fafk3krb2e6o.apps.googleusercontent.com"
-                                buttonText="Login"
-                                onSuccess={ responseGoogle }
-                                onFailure={ responseGoogle }
-                                isSignedIn='true'
-                            />
-                        </div>
+                        <ul className="yt1210Controls">
+                            <li><Link to='/'>Home</Link></li>
+                            <li><Link to='/settings'>Settings</Link></li>
+                        </ul>
                     </div>
                     <div className="buttons">
                         <div className='button' onClick={this.onPlayVideo}>Play</div>
@@ -330,8 +328,15 @@ const responseGoogle = (response) => {
                     </div>
                     <Switch>
                         <Route path='/settings' component={ Settings } />
-                        <Route path='/callback' component={ Callback } />
-                        <Route component={ ()=>{ return <Playlist playlist={ this.state.playlist } trackData={ this.state.trackData } playing={ this.state.videoId } onClick={ (i)=>{ this.onChangeVideo(i); } } addTrack={ (videoId)=>{ this.addTrack(videoId); } }></Playlist> } } />
+                        <Route component={ ()=>{ 
+                            return <Playlist 
+                                playlist={ this.state.playlist } 
+                                trackData={ this.state.trackData } 
+                                playing={ this.state.videoId } 
+                                onClick={ (i)=>{ this.onChangeVideo(i); } } 
+                                onDelete={ (i)=>{ this.onDeleteVideo(i); } } 
+                                addTrack={ (videoId)=>{ this.addTrack(videoId); } }
+                            ></Playlist> } } />
                     </Switch>
                 </div>
             </div>

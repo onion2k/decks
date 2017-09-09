@@ -44,6 +44,7 @@ class Record extends Component {
         } else {
             cancelAnimationFrame(this.state.request);
         }
+        if (nextProps.vData.videoId === null) { return; }
         this.setState({
             request: request,
             label: 'https://img.youtube.com/vi/'+nextProps.vData.videoId+'/0.jpg',
