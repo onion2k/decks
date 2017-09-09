@@ -16,9 +16,19 @@ import Record from './Record.js';
 import Settings from './Settings.js';
 import Callback from './Callback.js';
 
-import * as auth0 from 'auth0-js';
+import GoogleLogin from 'react-google-login';
 
-class App extends Component {
+const responseGoogle = (response) => {
+
+    console.log(response);
+
+    // fetch('https://www.googleapis.com/youtube/v3/search?part=snippet&q=Professor+Green&access_token='+response.accessToken).then((result)=>{
+    //     console.log(result.json());
+    // });
+
+}
+
+  class App extends Component {
 
     constructor() {
 
@@ -42,11 +52,6 @@ class App extends Component {
         let pl = this.updatePlaylist();
         const videoId = pl.length > 0 ? pl[0].videoId : null;
 
-        let webAuth = new auth0.WebAuth({
-            domain:       'ooer.eu.auth0.com',
-            clientID:     'DG-lhPij_tdpYJhd2MkL8lpOa3iDn9Y5'
-        });
-
         this.state = {
             playing: false,
             playlistPos: 0,
@@ -55,8 +60,7 @@ class App extends Component {
             videoId: videoId,
             autoplay: 0,
             crackle: true,
-            repeat: false,
-            webAuth: webAuth
+            repeat: false
         }
 
     }
@@ -243,7 +247,8 @@ class App extends Component {
     updatePlaylist(videoId) {
 
         let pl;
-        if (window.location.hash) {
+
+        if (window.location.hash && 0) {
             let plHashList = window.location.hash.substr(1).split(',');
             pl = plHashList.map((videoId)=>{
                 return { videoId: videoId, title: '', playing: false, duration: 0, found: false } 
@@ -251,12 +256,14 @@ class App extends Component {
         } else {
             let plJson = localStorage.getItem('yt1210-playlist');
             if (!plJson) {
-                pl = [];            
+                pl = [];
             } else {
                 pl = JSON.parse(plJson);
             }    
         }
 
+        pl = [];            
+        
         if (videoId) {
             pl.push({ videoId: videoId, title: '', playing: false, duration: 0, found: false });
         }
@@ -277,6 +284,7 @@ class App extends Component {
 
     }    
 
+
     render() {
 
         const opts = {
@@ -296,11 +304,13 @@ class App extends Component {
                         <div className="yt1210Controls">
                             <Link to='/'>Home</Link>
                             <Link to='/settings'>Settings</Link>
-                            <a onClick={ ()=> { this.state.webAuth.authorize({
-                                responseType: 'token',
-                                scope: 'https://www.googleapis.com/auth/youtube',
-                                redirectUri: 'http://localhost:3000/callback' 
-                            }) } }>Auth</a>
+                            <GoogleLogin
+                                clientId="801401456569-i7edtbbllc8cm2n2pni3fafk3krb2e6o.apps.googleusercontent.com"
+                                buttonText="Login"
+                                onSuccess={ responseGoogle }
+                                onFailure={ responseGoogle }
+                                isSignedIn='true'
+                            />
                         </div>
                     </div>
                     <div className="buttons">
