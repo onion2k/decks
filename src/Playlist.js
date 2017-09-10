@@ -5,7 +5,7 @@ class Playlist extends Component {
 
     constructor() {
         super();
-        this.state = { newtrack: 'https://www.youtube.com/watch?v=AkY-sEkWc-I&list=PLzxA_Q_hCNpcTiNkANkR_rm6nywQmi4WX&index=55' };
+        this.state = { newtrack: '' };
 
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);

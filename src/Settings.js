@@ -32,6 +32,9 @@ class Settings extends Component {
         return (
             <div className="Settings">
                 <div className="setting">
+                    <button onClick={ (e)=>{} }>Clear Playlist</button>
+                </div>
+                <div className="setting">
                     <label><input type="checkbox" checked={ this.state.crackle } onChange={ this.updateCrackle } /> Play record crackle noise</label>
                 </div>
                 <div className="setting">

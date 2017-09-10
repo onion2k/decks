@@ -116,10 +116,10 @@ import Settings from './Settings.js';
     onDeleteVideo(videoId) {
 
         var p = this.state.playlist.findIndex((track)=>{ return track.videoId===videoId });
-        console.log(p)
         var pl = this.state.playlist;
         pl.splice(p, 1);
 
+        if (0===this.state.playlist.length) { this.onStopVideo(); return; }
         if (p===this.state.playlist.length) { p = 0; }
         
         this.setState({
@@ -311,12 +311,6 @@ import Settings from './Settings.js';
                             <li><Link to='/settings'>Settings</Link></li>
                         </ul>
                     </div>
-                    <div className="buttons">
-                        <div className='button' onClick={this.onPlayVideo}>Play</div>
-                        <div className='button' onClick={this.onPauseVideo}>Pause</div>
-                        <div className='button' onClick={this.onStopVideo}>Stop</div>
-                        <div className='button' onClick={ ()=>{ this.onChangeVideo(); } }>Next</div>
-                    </div>
                     <div className='video'>
                         <YouTube
                             videoId={ this.state.videoId }
@@ -325,6 +319,12 @@ import Settings from './Settings.js';
                             onPlay={ this.onPlay }
                             onEnd={ this.onEnd }
                         />
+                    </div>
+                    <div className="buttons">
+                        <div className='button' onClick={this.onPlayVideo}>Play</div>
+                        <div className='button' onClick={this.onPauseVideo}>Pause</div>
+                        <div className='button' onClick={this.onStopVideo}>Stop</div>
+                        <div className='button' onClick={ ()=>{ this.onChangeVideo(); } }>Next</div>
                     </div>
                     <Switch>
                         <Route path='/settings' component={ Settings } />
