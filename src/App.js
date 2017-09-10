@@ -63,7 +63,7 @@ import Settings from './Settings.js';
 
         if (pl[t] && pl[t].found===true) {
 
-            vData = { videoId: pl[t].videoId, title: pl[t].title };
+            vData = { playlistPos: null, videoId: pl[t].videoId, title: pl[t].title };
             
         } else if (pl[t] && pl[t].found===false) {
 
@@ -77,10 +77,11 @@ import Settings from './Settings.js';
             localStorage.setItem('yt1210-'+pl[t].videoId, JSON.stringify({ title: data.title, duration: duration }));
 
             vData = pl[t];
+            vData.playlistPos = null; 
 
         } else {
 
-            vData = { videoId: null, title: '' };
+            vData = { playlistPos: null, videoId: null, title: '' };
 
         }
 
@@ -140,7 +141,7 @@ import Settings from './Settings.js';
 
         if (pl[t] && pl[t].found===true) {
 
-            vData = { videoId: pl[t].videoId, title: pl[t].title };
+            vData = { playlistPos:t, videoId: pl[t].videoId, title: pl[t].title };
 
         } else if (pl[t] && pl[t].found===false) {
 
@@ -158,10 +159,11 @@ import Settings from './Settings.js';
             }
 
             vData = pl[t];
+            vData.playlistPos = t;
             
         } else {
 
-            vData = { videoId: null, title: '' };
+            vData = { playlistPos: null, videoId: null, title: '' };
 
         }
 

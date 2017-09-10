@@ -3,6 +3,15 @@ import record from './img/record.png';
 import tonearm from './img/tonearm.png';
 import './Record.css';
 
+const tracks = [
+    { s: -47.6, e: -43.4 },
+    { s: -43.4, e: -39.7 },
+    { s: -39.7, e: -34.2 },
+    { s: -34.2, e: -28.5 },
+    { s: -28.5, e: -25.6 },
+    { s: -25.6, e: -20.0 }
+];
+
 class Record extends Component {
 
     constructor(props) {
@@ -26,17 +35,51 @@ class Record extends Component {
     }
 
     tick() {
-        var toneangle = this.state.toneangle+0.001;
+        var toneangle, toneanimto;
+
+        toneanimto = this.state.toneanimto;
+
+        if (this.state.toneanimto===null) {
+
+            toneanimto = null;
+            toneangle = this.state.toneangle+0.001;            
+
+        } else {
+
+            if (this.state.toneanimto > this.state.toneangle) {
+                toneangle = this.state.toneangle + 0.15;
+            } else {
+                toneangle = this.state.toneangle - 0.15;
+            }
+
+            if (Math.abs(toneangle - this.state.toneanimto) < 0.2) {
+                toneanimto = null;
+            }
+
+        }
         this.setState({
            millis: Date.now(),
            request: requestAnimationFrame(this.tick),
            toneangle: toneangle,
-           tonestyle: 'rotate('+toneangle+'deg)'
+           tonestyle: 'rotate('+toneangle+'deg)',
+           toneanimto: toneanimto
         });
      }
 
      componentWillReceiveProps(nextProps) {
         let request = false;
+        var toneangle;
+        if (nextProps.vData.playlistPos===null) {
+            toneangle = -54;
+            this.setState({
+               toneanimto: toneangle
+            });
+        } else {
+            toneangle = tracks[nextProps.vData.playlistPos].s;
+            this.setState({
+                toneanimto: toneangle
+            });
+        }
         if (nextProps.playing===true) {
             if (!this.state.request) {
                 request = requestAnimationFrame(this.tick);
@@ -46,7 +89,7 @@ class Record extends Component {
         }
         if (nextProps.vData.videoId === null) { return; }
         this.setState({
-            request: request,
+            request: request, //requestAnimationFrame ID for cancelling
             label: 'https://img.youtube.com/vi/'+nextProps.vData.videoId+'/0.jpg',
             title: nextProps.vData.title
         })
