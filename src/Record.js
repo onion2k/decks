@@ -60,6 +60,7 @@ class Record extends Component {
         this.setState({
            millis: Date.now(),
            request: requestAnimationFrame(this.tick),
+           tonestart: toneangle,
            toneangle: toneangle,
            tonestyle: 'rotate('+toneangle+'deg)',
            toneanimto: toneanimto
@@ -68,17 +69,11 @@ class Record extends Component {
 
      componentWillReceiveProps(nextProps) {
         let request = false;
-        var toneangle;
-        if (nextProps.vData.playlistPos===null) {
-            toneangle = -54;
-            this.setState({
-               toneanimto: toneangle
-            });
+
+        if (nextProps.tonearmPos===null) {
+            this.setState({ toneanimto: null });
         } else {
-            toneangle = tracks[nextProps.vData.playlistPos].s;
-            this.setState({
-                toneanimto: toneangle
-            });
+            this.setState({ toneanimto: tracks[nextProps.tonearmPos].s });
         }
         if (nextProps.playing===true) {
             if (!this.state.request) {

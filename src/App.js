@@ -48,7 +48,8 @@ import Settings from './Settings.js';
             videoId: videoId,
             autoplay: 0,
             crackle: true,
-            repeat: false
+            repeat: false,
+            tonearmPos: null
         }
 
     }
@@ -63,7 +64,7 @@ import Settings from './Settings.js';
 
         if (pl[t] && pl[t].found===true) {
 
-            vData = { playlistPos: null, videoId: pl[t].videoId, title: pl[t].title };
+            vData = { videoId: pl[t].videoId, title: pl[t].title };
             
         } else if (pl[t] && pl[t].found===false) {
 
@@ -77,18 +78,20 @@ import Settings from './Settings.js';
             localStorage.setItem('yt1210-'+pl[t].videoId, JSON.stringify({ title: data.title, duration: duration }));
 
             vData = pl[t];
-            vData.playlistPos = null; 
 
         } else {
 
-            vData = { playlistPos: null, videoId: null, title: '' };
+            vData = { videoId: null, title: '' };
 
         }
 
+        vData.tonearmPos = this.state.tonearmPos; 
+        
         this.setState({
             player: event.target,
             vData: vData,
             playlist: pl,
+            tonearmPos: null
         });
 
     }
@@ -108,7 +111,8 @@ import Settings from './Settings.js';
                 playlistPos: p,
                 videoId: this.state.playlist[p].videoId,
                 playing: true,
-                autoplay: 1
+                autoplay: 1,
+                tonearmPos: p
             });
         }
 
@@ -141,7 +145,7 @@ import Settings from './Settings.js';
 
         if (pl[t] && pl[t].found===true) {
 
-            vData = { playlistPos:t, videoId: pl[t].videoId, title: pl[t].title };
+            vData = { videoId: pl[t].videoId, title: pl[t].title };
 
         } else if (pl[t] && pl[t].found===false) {
 
@@ -159,27 +163,31 @@ import Settings from './Settings.js';
             }
 
             vData = pl[t];
-            vData.playlistPos = t;
             
         } else {
 
-            vData = { playlistPos: null, videoId: null, title: '' };
+            vData = { videoId: null, title: '' };
 
         }
 
         if (this.state.seekTo) {
             this.state.player.seekTo( (pl[t].duration/100)*this.state.seekTo, true );
         }
+            
+        this.setState({ 
+            vData: vData, 
+            playing: true, 
+            playlist: pl, 
+            seekTo: false
+        });
 
-        this.setState({ vData: vData, playing: true, playlist: pl, seekTo: false });
-        
     }
 
     onEnd(event){
         this.onChangeVideo();
     }
 
-    onPlayVideo() {
+    onPlayVideo(moveArm) {
 
         let pl = this.state.playlist;
         let t = pl.findIndex((track)=>{ return track.videoId===this.state.videoId });
@@ -187,10 +195,11 @@ import Settings from './Settings.js';
         this.ogg_stylus.play();
         this.state.player.playVideo();
         if (!this.ogg_crackle.playing() && this.state.crackle===true) { this.ogg_crackle.play() };
-        if (this.state.seekTo) {
-            this.state.player.seekTo( (pl[t].duration/100)*this.state.seekTo, true );
+
+        if (moveArm) {
+            this.setState({ tonearmPos: t });
         }
-        this.setState({ seekTo: false });
+
     }
 
     onPauseVideo() {
@@ -214,7 +223,8 @@ import Settings from './Settings.js';
             this.setState({
                 playing: true,
                 autoplay: 1,
-                seekTo: percentage
+                seekTo: percentage,
+                tonearmPos: null
             }, ()=>{
                 this.onPlayVideo();
             });
@@ -226,7 +236,8 @@ import Settings from './Settings.js';
                 videoId: this.state.playlist[tracknumber].videoId,
                 playing: true,
                 autoplay: 1,
-                seekTo: percentage
+                seekTo: percentage,
+                tonearmPos: null
             });
 
         }
@@ -304,7 +315,12 @@ import Settings from './Settings.js';
 
         return (
             <div className="App">
-                <Record onTrack={this.onTrack} vData={ this.state.vData } playing={ this.state.playing } />
+                <Record 
+                    onTrack={this.onTrack} 
+                    vData={ this.state.vData } 
+                    playing={ this.state.playing }
+                    tonearmPos={ this.state.tonearmPos } 
+                />
                 <div className="controls">
                     <div className="titleControls">
                         <h1>YT1210</h1>
@@ -323,7 +339,7 @@ import Settings from './Settings.js';
                         />
                     </div>
                     <div className="buttons">
-                        <div className='button' onClick={this.onPlayVideo}>Play</div>
+                        <div className='button' onClick={ ()=>{this.onPlayVideo(true); }}>Play</div>
                         <div className='button' onClick={this.onPauseVideo}>Pause</div>
                         <div className='button' onClick={this.onStopVideo}>Stop</div>
                         <div className='button' onClick={ ()=>{ this.onChangeVideo(); } }>Next</div>
