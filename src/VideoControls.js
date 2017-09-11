@@ -6,10 +6,15 @@ class VideoControls extends Component {
     render() {
         return (
         <div className="buttons">
-            <div className='button' onClick={ ()=>{ this.props.onPlayVideo(true); }}>Play</div>
-            <div className='button' onClick={ ()=>{ this.props.onPauseVideo(); }}>Pause</div>
-            <div className='button' onClick={ ()=>{ this.props.onStopVideo(); }}>Stop</div>
-            <div className='button' onClick={ ()=>{ this.props.onChangeVideo(); }}>Next</div>
+            <div className='button play' onClick={ ()=>{ this.props.onPlayVideo(true); }}><i className="fa fa-play" aria-hidden="true"></i></div>
+            <div className='button' onClick={ ()=>{ this.props.onPauseVideo(); }}><i className="fa fa-pause" aria-hidden="true"></i></div>
+            <div className='button' onClick={ ()=>{ this.props.onStopVideo(); }}><i className="fa fa-stop" aria-hidden="true"></i></div>
+            <div className='button' onClick={ ()=>{ this.props.onChangeVideo(); }}><i className="fa fa-step-forward" aria-hidden="true"></i></div>
+
+            <div className={'toggle'+(this.props.repeat?' on':'')} onClick={ ()=>{ this.props.onToggle('repeat'); }}><i className="fa fa-repeat" aria-hidden="true"></i></div>
+            <div className={'toggle'+(this.props.shuffle?' on':'')} onClick={ ()=>{ this.props.onToggle('shuffle'); }}><i className="fa fa-random" aria-hidden="true"></i></div>
+            <div className={'toggle'+(this.props.crackle?' on':'')} onClick={ ()=>{ this.props.onToggle('crackle'); }}><i className="fa fa-heart" aria-hidden="true"></i></div>
+
         </div>
         );
     }

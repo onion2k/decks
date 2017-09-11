@@ -7,7 +7,7 @@ class Nav extends Component {
         return (
             <ul className="yt1210Controls">
                 <li><Link to='/'>Home</Link></li>
-                <li><Link to='/settings'>Settings</Link></li>
+                <li><Link to='/about'>About</Link></li>
             </ul>
         );
     }

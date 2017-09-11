@@ -15,7 +15,7 @@ import Playlist from './Playlist.js';
 import Record from './Record.js';
 import Nav from './Nav.js';
 
-import Settings from './Settings.js';
+import About from './About.js';
 
   class App extends Component {
 
@@ -34,6 +34,7 @@ import Settings from './Settings.js';
         this.addTrack      = this.addTrack.bind(this);
         this.updatePlaylist = this.updatePlaylist.bind(this);
         this.onDeleteVideo = this.onDeleteVideo.bind(this);
+        this.onToggle      = this.onToggle.bind(this);
         
         this.ogg_stylus = new Howl({ src: [ogg_stylus], loop: false, autoplay: false, autoload: true});
         this.ogg_crackle = new Howl({ src: [ogg_crackle], loop: true, autoplay: false, autoload: true});
@@ -51,6 +52,7 @@ import Settings from './Settings.js';
             autoplay: 0,
             crackle: true,
             repeat: false,
+            shuffle: false,
             tonearmPos: null
         }
 
@@ -107,6 +109,18 @@ import Settings from './Settings.js';
         
         if (this.state.repeat===true && videoId===undefined) {
             this.state.player.playVideo();
+        } else if (this.state.shuffle===true && videoId===undefined) {
+            let np = p;
+            while (p===np) {
+                p = Math.floor(Math.random() * this.state.playlist.length);
+            }
+            this.setState({
+                playlistPos: p,
+                videoId: this.state.playlist[p].videoId,
+                playing: true,
+                autoplay: 1,
+                tonearmPos: p
+            });                
         } else {
             if (p===this.state.playlist.length-1) { p = 0; } else { p++; }
             this.setState({
@@ -126,17 +140,19 @@ import Settings from './Settings.js';
         var pl = this.state.playlist;
         pl.splice(p, 1);
 
-        if (0===this.state.playlist.length) { this.onStopVideo(); return; }
+        if (0===this.state.playlist.length) { this.onStopVideo(); p = null; }
         if (p===this.state.playlist.length) { p = 0; }
         
         this.setState({
             playlist: pl,
             playlistPos: p,
-            videoId: this.state.playlist[p].videoId,
-            playing: true,
-            autoplay: 1
+            videoId: (p===null) ? null : this.state.playlist[p].videoId,
+            playing: (p===null) ? false : true,
+            autoplay: (p===null) ? 0 : 1
         });
 
+        localStorage.setItem('yt1210-playlist', JSON.stringify(pl));
+        
     }
         
     onPlay(event){
@@ -187,6 +203,21 @@ import Settings from './Settings.js';
 
     onEnd(event){
         this.onChangeVideo();
+    }
+
+    onToggle(toggle){
+        let s = {};
+        s[toggle] = !this.state[toggle];
+        this.setState(s, ()=>{
+            if (toggle==='crackle') {
+                if (!this.ogg_crackle.playing() && this.state.crackle===true && this.state.playing===true) { 
+                    this.ogg_crackle.play(); 
+                } else {
+                    this.ogg_crackle.stop(); 
+                };
+            }
+        });
+
     }
 
     onPlayVideo(moveArm) {
@@ -304,7 +335,6 @@ import Settings from './Settings.js';
 
     }    
 
-
     render() {
 
         const opts = {
@@ -340,9 +370,14 @@ import Settings from './Settings.js';
                         onPauseVideo={ this.onPauseVideo }
                         onStopVideo={ this.onStopVideo }
                         onChangeVideo={ this.onChangeVideo }
+                        onToggle={ this.onToggle }
+                        playing={ this.state.playing }
+                        repeat={ this.state.repeat }
+                        shuffle={ this.state.shuffle }
+                        crackle={ this.state.crackle }
                     />
                     <Switch>
-                        <Route path='/settings' component={ Settings } />
+                        <Route path='/about' component={ About } />
                         <Route component={ ()=>{ 
                             return <Playlist 
                                 playlist={ this.state.playlist } 
