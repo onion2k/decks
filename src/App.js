@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import queryString from 'query-string';
 import './App.css';
 
@@ -10,8 +10,10 @@ import ogg_drag from './sounds/drag.ogg';
 import { Howl } from 'howler';
 import YouTube from 'react-youtube';
 
+import VideoControls from './VideoControls.js';
 import Playlist from './Playlist.js';
 import Record from './Record.js';
+import Nav from './Nav.js';
 
 import Settings from './Settings.js';
 
@@ -324,26 +326,21 @@ import Settings from './Settings.js';
                 <div className="controls">
                     <div className="titleControls">
                         <h1>YT1210</h1>
-                        <ul className="yt1210Controls">
-                            <li><Link to='/'>Home</Link></li>
-                            <li><Link to='/settings'>Settings</Link></li>
-                        </ul>
+                        <Nav></Nav>
                     </div>
-                    <div className='video'>
-                        <YouTube
-                            videoId={ this.state.videoId }
-                            opts={ opts }
-                            onReady={ this.onReady }
-                            onPlay={ this.onPlay }
-                            onEnd={ this.onEnd }
-                        />
-                    </div>
-                    <div className="buttons">
-                        <div className='button' onClick={ ()=>{this.onPlayVideo(true); }}>Play</div>
-                        <div className='button' onClick={this.onPauseVideo}>Pause</div>
-                        <div className='button' onClick={this.onStopVideo}>Stop</div>
-                        <div className='button' onClick={ ()=>{ this.onChangeVideo(); } }>Next</div>
-                    </div>
+                    <YouTube
+                        videoId={ this.state.videoId }
+                        opts={ opts }
+                        onReady={ this.onReady }
+                        onPlay={ this.onPlay }
+                        onEnd={ this.onEnd }
+                    />
+                    <VideoControls 
+                        onPlayVideo={ this.onPlayVideo }
+                        onPauseVideo={ this.onPauseVideo }
+                        onStopVideo={ this.onStopVideo }
+                        onChangeVideo={ this.onChangeVideo }
+                    />
                     <Switch>
                         <Route path='/settings' component={ Settings } />
                         <Route component={ ()=>{ 

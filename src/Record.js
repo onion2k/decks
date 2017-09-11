@@ -58,16 +58,16 @@ class Record extends Component {
 
         }
         this.setState({
-           millis: Date.now(),
-           request: requestAnimationFrame(this.tick),
-           tonestart: toneangle,
-           toneangle: toneangle,
-           tonestyle: 'rotate('+toneangle+'deg)',
-           toneanimto: toneanimto
+            millis: Date.now(),
+            request: requestAnimationFrame(this.tick),
+            tonestart: toneangle,
+            toneangle: toneangle,
+            tonestyle: 'rotate('+toneangle+'deg)',
+            toneanimto: toneanimto
         });
-     }
+    }
 
-     componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         let request = false;
 
         if (nextProps.tonearmPos===null) {
