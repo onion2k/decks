@@ -301,7 +301,7 @@ import About from './About.js';
 
         let pl;
 
-        if (window.location.hash && 0) {
+        if (window.location.hash) {
             let plHashList = window.location.hash.substr(1).split(',');
             pl = plHashList.map((videoId)=>{
                 return { videoId: videoId, title: '', playing: false, duration: 0, found: false } 

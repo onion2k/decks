@@ -68,8 +68,11 @@ class Record extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
+
         let request = false;
 
+        if (nextProps.vData.videoId === null) { return; }
+        
         if (nextProps.tonearmPos===null) {
             this.setState({ toneanimto: null });
         } else {
@@ -82,7 +85,7 @@ class Record extends Component {
         } else {
             cancelAnimationFrame(this.state.request);
         }
-        if (nextProps.vData.videoId === null) { return; }
+
         this.setState({
             request: request, //requestAnimationFrame ID for cancelling
             label: 'https://img.youtube.com/vi/'+nextProps.vData.videoId+'/0.jpg',
