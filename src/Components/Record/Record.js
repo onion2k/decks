@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import record from './img/record.png';
-import tonearm from './img/tonearm.png';
+import record from '../../img/record.png';
+import tonearm from '../../img/tonearm.png';
 import './Record.css';
 
 const tracks = [

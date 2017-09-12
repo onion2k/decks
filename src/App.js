@@ -4,18 +4,18 @@ import queryString from 'query-string';
 import './App.css';
 
 import ogg_crackle from './sounds/crackle.ogg';
-import ogg_stylus from './sounds/stylus2.ogg';
+import ogg_stylus from './sounds/stylus.ogg';
+import ogg_scratchin from './sounds/scratchin.ogg';
 import ogg_drag from './sounds/drag.ogg';
 
 import { Howl } from 'howler';
 import YouTube from 'react-youtube';
 
-import VideoControls from './VideoControls.js';
-import Playlist from './Playlist.js';
-import Record from './Record.js';
-import Nav from './Nav.js';
-
-import About from './About.js';
+import VideoControls from './Components/VideoControls/VideoControls.js';
+import Playlist from './Components/Playlist/Playlist.js';
+import Record from './Components/Record/Record.js';
+import Nav from './Components/Nav/Nav.js';
+import About from './Components/About/About.js';
 
   class App extends Component {
 
@@ -38,7 +38,8 @@ import About from './About.js';
         
         this.ogg_stylus = new Howl({ src: [ogg_stylus], loop: false, autoplay: false, autoload: true});
         this.ogg_crackle = new Howl({ src: [ogg_crackle], loop: true, autoplay: false, autoload: true});
-        this.ogg_drag = new Howl({ src: [ogg_drag], loop: false, autoplay: false, autoload: true});
+        this.ogg_drag = new Howl({ src: [ogg_drag], loop: false, autoplay: false, autoload: true, volume: 0.05});
+        this.ogg_scratchin = new Howl({ src: [ogg_scratchin], loop: false, autoplay: false, autoload: true, volume: 0.5});
 
         let pl = this.updatePlaylist();
         const videoId = pl.length > 0 ? pl[0].videoId : null;
@@ -106,8 +107,10 @@ import About from './About.js';
 
         if (videoId!==undefined) { p = this.state.playlist.findIndex((track)=>{ return track.videoId===videoId })-1; }
         if (!this.ogg_crackle.playing() && this.state.crackle===true) { this.ogg_crackle.play() };
-        
-        if (this.state.repeat===true && videoId===undefined) {
+    
+        if (videoId!==undefined && videoId===this.state.videoId) {
+            this.onPlayVideo(true);
+        } else if (this.state.repeat===true && videoId===undefined) {
             this.state.player.playVideo();
         } else if (this.state.shuffle===true && videoId===undefined) {
             let np = p;
@@ -134,27 +137,6 @@ import About from './About.js';
 
     }
 
-    onDeleteVideo(videoId) {
-
-        var p = this.state.playlist.findIndex((track)=>{ return track.videoId===videoId });
-        var pl = this.state.playlist;
-        pl.splice(p, 1);
-
-        if (0===this.state.playlist.length) { this.onStopVideo(); p = null; }
-        if (p===this.state.playlist.length) { p = 0; }
-        
-        this.setState({
-            playlist: pl,
-            playlistPos: p,
-            videoId: (p===null) ? null : this.state.playlist[p].videoId,
-            playing: (p===null) ? false : true,
-            autoplay: (p===null) ? 0 : 1
-        });
-
-        localStorage.setItem('yt1210-playlist', JSON.stringify(pl));
-        
-    }
-        
     onPlay(event){
 
         let vData;
@@ -205,23 +187,8 @@ import About from './About.js';
         this.onChangeVideo();
     }
 
-    onToggle(toggle){
-        let s = {};
-        s[toggle] = !this.state[toggle];
-        this.setState(s, ()=>{
-            if (toggle==='crackle') {
-                if (!this.ogg_crackle.playing() && this.state.crackle===true && this.state.playing===true) { 
-                    this.ogg_crackle.play(); 
-                } else {
-                    this.ogg_crackle.stop(); 
-                };
-            }
-        });
-
-    }
-
     onPlayVideo(moveArm) {
-
+        
         let pl = this.state.playlist;
         let t = pl.findIndex((track)=>{ return track.videoId===this.state.videoId });
 
@@ -260,6 +227,7 @@ import About from './About.js';
                 tonearmPos: null
             }, ()=>{
                 this.onPlayVideo();
+                this.ogg_scratchin.play();
             });
 
         } else {
@@ -271,10 +239,27 @@ import About from './About.js';
                 autoplay: 1,
                 seekTo: percentage,
                 tonearmPos: null
+            }, ()=>{
+                this.ogg_drag.play();                
             });
 
         }
         
+    }
+
+    onToggle(toggle){
+        let s = {};
+        s[toggle] = !this.state[toggle];
+        this.setState(s, ()=>{
+            if (toggle==='crackle') {
+                if (!this.ogg_crackle.playing() && this.state.crackle===true && this.state.playing===true) { 
+                    this.ogg_crackle.play(); 
+                } else {
+                    this.ogg_crackle.stop(); 
+                };
+            }
+        });
+
     }
 
     addTrack(state){
@@ -335,6 +320,27 @@ import About from './About.js';
 
     }    
 
+    onDeleteVideo(videoId) {
+
+        var p = this.state.playlist.findIndex((track)=>{ return track.videoId===videoId });
+        var pl = this.state.playlist;
+        pl.splice(p, 1);
+
+        if (0===this.state.playlist.length) { this.onStopVideo(); p = null; }
+        if (p===this.state.playlist.length) { p = 0; }
+        
+        this.setState({
+            playlist: pl,
+            playlistPos: p,
+            videoId: (p===null) ? null : this.state.playlist[p].videoId,
+            playing: (p===null) ? false : true,
+            autoplay: (p===null) ? 0 : 1
+        });
+
+        localStorage.setItem('yt1210-playlist', JSON.stringify(pl));
+        
+    }
+        
     render() {
 
         const opts = {
