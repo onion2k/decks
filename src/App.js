@@ -3,19 +3,19 @@ import { Switch, Route } from 'react-router-dom';
 import queryString from 'query-string';
 import './App.css';
 
+import { Howl } from 'howler';
+import YouTube from 'react-youtube';
+
 import ogg_crackle from './sounds/crackle.ogg';
 import ogg_stylus from './sounds/stylus.ogg';
 import ogg_scratchin from './sounds/scratchin.ogg';
 import ogg_drag from './sounds/drag.ogg';
 
-import { Howl } from 'howler';
-import YouTube from 'react-youtube';
-
-import VideoControls from './Components/VideoControls/VideoControls.js';
-import Playlist from './Components/Playlist/Playlist.js';
-import Record from './Components/Record/Record.js';
-import Nav from './Components/Nav/Nav.js';
-import About from './Components/About/About.js';
+import Controls from './Components/Controls';
+import Playlist from './Components/Playlist';
+import Record from './Components/Record';
+import Nav from './Components/Nav';
+import About from './Components/About';
 
   class App extends Component {
 
@@ -371,7 +371,7 @@ import About from './Components/About/About.js';
                         onPlay={ this.onPlay }
                         onEnd={ this.onEnd }
                     />
-                    <VideoControls 
+                    <Controls 
                         onPlayVideo={ this.onPlayVideo }
                         onPauseVideo={ this.onPauseVideo }
                         onStopVideo={ this.onStopVideo }

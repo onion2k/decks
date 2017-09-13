@@ -1,4 +1,12 @@
 
+.PlaylistSelector {
+    font-family: 'Architects Daughter';
+    font-size: 17px;
+    background-color: #ddd;
+    color: #000;
+    padding: 10px;
+}
+
 .Playlist {
     font-family: 'Architects Daughter';
     font-size: 17px;
