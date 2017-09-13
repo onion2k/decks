@@ -1,0 +1,36 @@
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 15px;
+}
+
+.button {
+    background-color: #000;
+    border: 1px solid #ddd;
+    padding: 12px;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.play {
+    grid-column: span 2;
+}
+
+.toggle {
+    color: #666;
+    background-color: #000;
+    border: 1px solid #ddd;
+    padding: 12px;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.toggle.on {
+    color: #4f4;
+}
+
+.button:hover, .toggle:hover {
+    background-color: #444;
+    cursor: pointer;
+}
