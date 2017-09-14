@@ -41,21 +41,28 @@ import About from './Components/About';
         this.ogg_drag = new Howl({ src: [ogg_drag], loop: false, autoplay: false, autoload: true, volume: 0.05});
         this.ogg_scratchin = new Howl({ src: [ogg_scratchin], loop: false, autoplay: false, autoload: true, volume: 0.5});
 
-        let pl = this.updatePlaylist();
-        const videoId = pl.length > 0 ? pl[0].videoId : null;
-
         this.state = {
             playing: false,
             playlistPos: 0,
             trackData: {},
-            playlist: pl,
-            videoId: videoId,
+            playlist: [],
+            videoId: null,
             autoplay: 0,
             crackle: true,
             repeat: false,
             shuffle: false,
-            tonearmPos: null
+            tonearmPos: null,
+            playlistId: 1
         }
+
+    }
+
+    componentWillMount(){
+
+        let pl = this.updatePlaylist();
+        const videoId = pl.length > 0 ? pl[0].videoId : null;
+
+        this.setState({ playlist: pl, videoId: videoId});
 
     }
 
@@ -304,7 +311,7 @@ import About from './Components/About';
             pl.push({ videoId: videoId, title: '', playing: false, duration: 0, found: false });
         }
 
-        localStorage.setItem('yt1210-playlist', JSON.stringify(pl));
+        localStorage.setItem('yt1210-playlist-'+this.state.playlistId, JSON.stringify(pl));
 
         pl.forEach((track)=>{
             var lsPlDetails = localStorage.getItem('yt1210-'+track.videoId);
