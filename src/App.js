@@ -17,6 +17,8 @@ import Record from './Components/Record';
 import Nav from './Components/Nav';
 import About from './Components/About';
 
+import PlaylistManager from './Components/PlaylistManager';
+
   class App extends Component {
 
     constructor() {
@@ -299,7 +301,7 @@ import About from './Components/About';
                 return { videoId: videoId, title: '', playing: false, duration: 0, found: false } 
             });
         } else {
-            let plJson = localStorage.getItem('yt1210-playlist');
+            let plJson = localStorage.getItem('yt1210-playlist-'+this.state.playlistId);
             if (!plJson) {
                 pl = [];
             } else {
@@ -391,6 +393,7 @@ import About from './Components/About';
                     />
                     <Switch>
                         <Route path='/about' component={ About } />
+                        <Route path='/playlists' component={ PlaylistManager } />
                         <Route component={ ()=>{ 
                             return <Playlist 
                                 playlist={ this.state.playlist } 

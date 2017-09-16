@@ -51,11 +51,11 @@
 
 .track:hover .fa-trash {
     display: inline;
-    padding: 0 1px 0 0;
+    padding: 0 3px 0 0;
     color: #F00;
 }
 
-.track:hover .fa-music {
+.track:hover .fa-music, .track:hover .fa-list {
     display: none;
 }
 
