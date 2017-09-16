@@ -7,7 +7,6 @@ class PlaylistTitle extends Component {
         return (
             <div className="PlaylistTitle">
                 <span>{ this.props.title }</span>
-                <button>Playlists</button>
             </div>
         );
     }
