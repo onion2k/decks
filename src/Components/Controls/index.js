@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Controls.css';
 
 class Controls extends Component {
@@ -6,6 +7,8 @@ class Controls extends Component {
     render() {
         return (
         <div className="buttons">
+            <Link to="/playlists" className='button'><i className="fa fa-list" aria-hidden="true"></i></Link>
+
             <div className='button play' onClick={ ()=>{ this.props.onPlayVideo(true); }}><i className="fa fa-play" aria-hidden="true"></i></div>
             <div className='button' onClick={ ()=>{ this.props.onPauseVideo(); }}><i className="fa fa-pause" aria-hidden="true"></i></div>
             <div className='button' onClick={ ()=>{ this.props.onStopVideo(); }}><i className="fa fa-stop" aria-hidden="true"></i></div>
