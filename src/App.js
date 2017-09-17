@@ -43,6 +43,23 @@ import PlaylistManager from './Components/PlaylistManager';
         this.ogg_drag = new Howl({ src: [ogg_drag], loop: false, autoplay: false, autoload: true, volume: 0.05});
         this.ogg_scratchin = new Howl({ src: [ogg_scratchin], loop: false, autoplay: false, autoload: true, volume: 0.5});
 
+        let playlists;
+        let plJson = localStorage.getItem('yt1210-playlists');
+        if (!plJson) {
+            playlists = [
+                { playlistId: 1, title: 'Jazzy Triphop Volume 1' },
+                { playlistId: 2, title: 'Jazzy Triphop Volume 2' },
+                { playlistId: 3, title: 'Jazzy Triphop Volume 3' },
+                { playlistId: 4, title: 'Jazzy Triphop Volume 4' },
+                { playlistId: 5, title: 'Trance Volume 1' },
+                { playlistId: 6, title: 'Trance Volume 2' },
+                { playlistId: 7, title: 'Best of The Eagles' },
+                { playlistId: 8, title: 'No Repeat Sunday' }
+            ];
+        } else {
+            playlists = JSON.parse(plJson);
+        }
+
         this.state = {
             playing: false,
             playlistPos: 0,
@@ -54,6 +71,7 @@ import PlaylistManager from './Components/PlaylistManager';
             repeat: false,
             shuffle: false,
             tonearmPos: null,
+            playlists: playlists,
             playlistId: 1
         }
 
@@ -393,7 +411,11 @@ import PlaylistManager from './Components/PlaylistManager';
                     />
                     <Switch>
                         <Route path='/about' component={ About } />
-                        <Route path='/playlists' component={ PlaylistManager } />
+                        <Route path='/playlists' component={ ()=>{
+                            return <PlaylistManager 
+                                playlists={ this.state.playlists }
+                            /> 
+                        } } />
                         <Route component={ ()=>{ 
                             return <Playlist 
                                 playlist={ this.state.playlist } 
