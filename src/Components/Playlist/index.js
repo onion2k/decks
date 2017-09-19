@@ -11,7 +11,7 @@ class Playlist extends Component {
 
         return (
             <div className="PlaylistWrapper">
-                <PlaylistTitle title={'Jazzy Triphop Volume 2'}></PlaylistTitle>
+                <PlaylistTitle title={ this.props.title }></PlaylistTitle>
                 <PlaylistTracks playlist={ this.props.playlist } onClick={ this.props.onClick } onDelete={ this.props.onDelete }></PlaylistTracks>
                 <PlaylistAdd addTrack={ this.props.addTrack }></PlaylistAdd>
             </div>

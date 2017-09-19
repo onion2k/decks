@@ -6,18 +6,20 @@ class Controls extends Component {
 
     render() {
 
-        let playlistsLink;
+        let playlistsLink, playlistsIcon;
 
         if (window.location.pathname === '/playlists') {
+            playlistsIcon = 'fa fa-music';
             playlistsLink = '/';   
         } else {
+            playlistsIcon = 'fa fa-list';
             playlistsLink = '/playlists';
         }
 
         return (
         <div className="buttons">
 
-            <Link to={ playlistsLink } className='button'><i className="fa fa-list" aria-hidden="true"></i></Link>
+            <Link to={ playlistsLink } className='button'><i className={ playlistsIcon } aria-hidden="true"></i></Link>
 
             <div className='button play' onClick={ ()=>{ this.props.onPlayVideo(true); }}><i className="fa fa-play" aria-hidden="true"></i></div>
             <div className='button' onClick={ ()=>{ this.props.onPauseVideo(); }}><i className="fa fa-pause" aria-hidden="true"></i></div>

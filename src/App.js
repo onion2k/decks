@@ -37,6 +37,10 @@ import PlaylistManager from './Components/PlaylistManager';
         this.updatePlaylist = this.updatePlaylist.bind(this);
         this.onDeleteVideo = this.onDeleteVideo.bind(this);
         this.onToggle      = this.onToggle.bind(this);
+
+        this.playList      = this.playList.bind(this);
+        this.addList       = this.addList.bind(this);
+        this.deleteList    = this.deleteList.bind(this);
         
         this.ogg_stylus = new Howl({ src: [ogg_stylus], loop: false, autoplay: false, autoload: true});
         this.ogg_crackle = new Howl({ src: [ogg_crackle], loop: true, autoplay: false, autoload: true});
@@ -309,6 +313,49 @@ import PlaylistManager from './Components/PlaylistManager';
 
     }
 
+    playList(playlistId){
+
+        var p = this.state.playlists.findIndex((playlist)=>{ return playlist.playlistId===playlistId });
+
+        this.setState({ playlistId: playlistId }, ()=>{
+            let pl = this.updatePlaylist();
+            const videoId = pl.length > 0 ? pl[0].videoId : null;
+            this.setState({ playlistTitle: this.state.playlists[p].title, playlist: pl, videoId: videoId});
+        });
+
+    }
+
+    addList(state){
+
+        var newlist = state.newtrack;
+        var pl = this.state.playlists;
+
+        pl.push({ playlistId: pl.length+1, title: newlist });
+
+        this.setState({ playlists: pl });
+
+    }
+
+    deleteList(playlistId) {
+
+        var p = this.state.playlists.findIndex((playlist)=>{ return playlist.playlistId===playlistId });
+        var pl = this.state.playlists;
+        pl.splice(p, 1);
+
+        //Handle deleting the currently playing list
+
+        if (0===this.state.playlists.length) { 
+            //p = null;
+        }
+        
+        this.setState({
+            playlists: pl
+        });
+
+        //localStorage.setItem('yt1210-playlist', JSON.stringify(pl));
+        
+    }
+
     updatePlaylist(videoId) {
 
         let pl;
@@ -329,9 +376,8 @@ import PlaylistManager from './Components/PlaylistManager';
 
         if (videoId) {
             pl.push({ videoId: videoId, title: '', playing: false, duration: 0, found: false });
+            localStorage.setItem('yt1210-playlist-'+this.state.playlistId, JSON.stringify(pl));
         }
-
-        localStorage.setItem('yt1210-playlist-'+this.state.playlistId, JSON.stringify(pl));
 
         pl.forEach((track)=>{
             var lsPlDetails = localStorage.getItem('yt1210-'+track.videoId);
@@ -413,11 +459,15 @@ import PlaylistManager from './Components/PlaylistManager';
                         <Route path='/about' component={ About } />
                         <Route path='/playlists' component={ ()=>{
                             return <PlaylistManager 
+                                playList={ this.playList }
+                                addList={ this.addList }
+                                deleteList={ this.deleteList }
                                 playlists={ this.state.playlists }
                             /> 
                         } } />
                         <Route component={ ()=>{ 
                             return <Playlist 
+                                title={ this.state.playlistTitle } 
                                 playlist={ this.state.playlist } 
                                 trackData={ this.state.trackData } 
                                 playing={ this.state.videoId } 
