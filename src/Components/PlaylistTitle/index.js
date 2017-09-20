@@ -6,7 +6,7 @@ class PlaylistTitle extends Component {
 
         return (
             <div className="PlaylistTitle">
-                <span>{ this.props.title }</span>
+                <span>{ this.props.title || 'No playlist selected' }</span>
             </div>
         );
     }

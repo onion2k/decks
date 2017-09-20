@@ -39,6 +39,12 @@ class PlaylistManager extends Component {
         
         return (
             <div className="PlaylistManager">
+                <div className="PlaylistTitle">
+                    <span>Your playlists</span>
+                </div>
+                <div className='Playlist'>
+                    { playlists }
+                </div>
                 <form className="NewTrack">
                     <label>
                         New List:
@@ -46,9 +52,6 @@ class PlaylistManager extends Component {
                     </label>
                     <button onClick={ this.onSubmit }>Add List</button>
                 </form>
-                <div className='Playlist'>
-                    { playlists }
-                </div>
             </div>
         );
     }
