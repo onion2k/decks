@@ -463,7 +463,7 @@ import PlaylistManager from './Components/PlaylistManager';
                                 addList={ this.addList }
                                 deleteList={ this.deleteList }
                                 playlists={ this.state.playlists }
-                            /> 
+                            />
                         } } />
                         <Route component={ ()=>{ 
                             return <Playlist 
