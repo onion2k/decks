@@ -28,10 +28,9 @@ class PlaylistManager extends Component {
 
         if (this.state.playlists.length > 0) {
             playlists = this.state.playlists.map((playlist)=>{
-
                 return <div 
                     key={ playlist.playlistId } 
-                    className={ 'track'+(playlist.videoId===this.props.playing?' playing':'') }
+                    className={ 'track' }
                     onClick={ (e)=>{
                         this.props.playList(playlist.playlistId); 
                         this.props.history.push('/'); 
