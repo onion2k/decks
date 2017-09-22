@@ -51,14 +51,14 @@ import PlaylistManager from './Components/PlaylistManager';
         let plJson = localStorage.getItem('yt1210-playlists');
         if (!plJson) {
             playlists = [
-                { playlistId: 1, title: 'Jazzy Triphop Volume 1' },
-                { playlistId: 2, title: 'Jazzy Triphop Volume 2' },
-                { playlistId: 3, title: 'Jazzy Triphop Volume 3' },
-                { playlistId: 4, title: 'Jazzy Triphop Volume 4' },
-                { playlistId: 5, title: 'Trance Volume 1' },
-                { playlistId: 6, title: 'Trance Volume 2' },
-                { playlistId: 7, title: 'Best of The Eagles' },
-                { playlistId: 8, title: 'No Repeat Sunday' }
+                { playlistId: 1, title: 'Jazzy Triphop Volume 1', length: 0 },
+                { playlistId: 2, title: 'Jazzy Triphop Volume 2', length: 0 },
+                { playlistId: 3, title: 'Jazzy Triphop Volume 3', length: 0 },
+                { playlistId: 4, title: 'Jazzy Triphop Volume 4', length: 0 },
+                { playlistId: 5, title: 'Trance Volume 1', length: 0 },
+                { playlistId: 6, title: 'Trance Volume 2', length: 0 },
+                { playlistId: 7, title: 'Best of The Eagles', length: 0 },
+                { playlistId: 8, title: 'No Repeat Sunday', length: 6 }
             ];
         } else {
             playlists = JSON.parse(plJson);

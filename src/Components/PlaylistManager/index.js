@@ -28,13 +28,14 @@ class PlaylistManager extends Component {
 
         if (this.state.playlists.length > 0) {
             playlists = this.state.playlists.map((playlist)=>{
+
                 return <div 
                     key={ playlist.playlistId } 
                     className={ 'track'+(playlist.videoId===this.props.playing?' playing':'') }
                     onClick={ (e)=>{
                         this.props.playList(playlist.playlistId); 
                         this.props.history.push('/'); 
-                    } }><i className="fa fa-trash" aria-hidden="true" onClick={ (e)=>{ e.stopPropagation(); this.props.deleteList(playlist.playlistId); } }></i> <i className="fa fa-list" aria-hidden="true"></i> { playlist.title } <span>{ playlist.tracks || 'Empty' }</span></div>;
+                    } }><i className="fa fa-trash" aria-hidden="true" onClick={ (e)=>{ e.stopPropagation(); this.props.deleteList(playlist.playlistId); } }></i> <i className="fa fa-list" aria-hidden="true"></i> { playlist.title } <span>{ playlist.length || 'No' } tracks</span></div>;
             });
         } else {
             playlists = <div className='track'>No playlists found</div>;
