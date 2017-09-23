@@ -65,6 +65,17 @@ import PlaylistManager from './Components/PlaylistManager';
             playlists = JSON.parse(plJson);
         }
 
+        playlists.forEach((playlist)=>{
+            let plJson = localStorage.getItem('yt1210-playlist-'+playlist);
+            if (plJson) {
+                playlist.length = JSON.parse(plJson).length;
+            } else {
+                playlist.length = 0;
+            }
+        });
+
+        console.log(playlists);
+
         this.state = {
             playing: false,
             playlistPos: 0,
@@ -315,6 +326,27 @@ import PlaylistManager from './Components/PlaylistManager';
 
     }
 
+    onDeleteVideo(videoId) {
+        
+        var p = this.state.playlist.findIndex((track)=>{ return track.videoId===videoId });
+        var pl = this.state.playlist;
+        pl.splice(p, 1);
+
+        if (0===this.state.playlist.length) { this.onStopVideo(); p = null; }
+        if (p===this.state.playlist.length) { p = 0; }
+        
+        this.setState({
+            playlist: pl,
+            playlistPos: p,
+            videoId: (p===null) ? null : this.state.playlist[p].videoId,
+            playing: (p===null) ? false : true,
+            autoplay: (p===null) ? 0 : 1
+        });
+
+        localStorage.setItem('yt1210-playlist-'+this.state.playlistId, JSON.stringify(pl));
+        
+    }
+    
     playList(playlistId){
 
         var p = this.state.playlists.findIndex((playlist)=>{ return playlist.playlistId===playlistId });
@@ -398,28 +430,7 @@ import PlaylistManager from './Components/PlaylistManager';
         return pl;
 
     }    
-
-    onDeleteVideo(videoId) {
-
-        var p = this.state.playlist.findIndex((track)=>{ return track.videoId===videoId });
-        var pl = this.state.playlist;
-        pl.splice(p, 1);
-
-        if (0===this.state.playlist.length) { this.onStopVideo(); p = null; }
-        if (p===this.state.playlist.length) { p = 0; }
-        
-        this.setState({
-            playlist: pl,
-            playlistPos: p,
-            videoId: (p===null) ? null : this.state.playlist[p].videoId,
-            playing: (p===null) ? false : true,
-            autoplay: (p===null) ? 0 : 1
-        });
-
-        localStorage.setItem('yt1210-playlist-'+this.state.playlistId, JSON.stringify(pl));
-        
-    }
-        
+       
     render() {
 
         const opts = {
