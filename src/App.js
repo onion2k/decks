@@ -60,6 +60,7 @@ import PlaylistManager from './Components/PlaylistManager';
                 { playlistId: 7, title: 'Best of The Eagles', length: 0 },
                 { playlistId: 8, title: 'No Repeat Sunday', length: 6 }
             ];
+            localStorage.setItem('yt1210-playlists', JSON.stringify(playlists));
         } else {
             playlists = JSON.parse(plJson);
         }
@@ -72,11 +73,12 @@ import PlaylistManager from './Components/PlaylistManager';
             videoId: null,
             autoplay: 0,
             crackle: true,
+            video: true,
             repeat: false,
             shuffle: false,
             tonearmPos: null,
             playlists: playlists,
-            playlistId: 1
+            playlistId: null
         }
 
     }
@@ -327,17 +329,21 @@ import PlaylistManager from './Components/PlaylistManager';
 
     addList(state){
 
-        var newlist = state.newtrack;
+        var newlist = state.newlist;
         var pl = this.state.playlists;
 
         pl.push({ playlistId: pl.length+1, title: newlist });
 
         this.setState({ playlists: pl });
 
+        localStorage.setItem('yt1210-playlists', JSON.stringify(pl));
+        
     }
 
     deleteList(playlistId) {
 
+        localStorage.removeItem('yt1210-playlist-'+this.state.playlistId);
+        
         var p = this.state.playlists.findIndex((playlist)=>{ return playlist.playlistId===playlistId });
         var pl = this.state.playlists;
         pl.splice(p, 1);
@@ -352,7 +358,7 @@ import PlaylistManager from './Components/PlaylistManager';
             playlists: pl
         });
 
-        //localStorage.setItem('yt1210-playlist', JSON.stringify(pl));
+        localStorage.setItem('yt1210-playlists', JSON.stringify(pl));
         
     }
 
@@ -410,7 +416,7 @@ import PlaylistManager from './Components/PlaylistManager';
             autoplay: (p===null) ? 0 : 1
         });
 
-        localStorage.setItem('yt1210-playlist', JSON.stringify(pl));
+        localStorage.setItem('yt1210-playlist-'+this.state.playlistId, JSON.stringify(pl));
         
     }
         
@@ -422,6 +428,10 @@ import PlaylistManager from './Components/PlaylistManager';
                 controls: 0,
                 autoplay: this.state.autoplay
             }
+        }
+
+        if (!this.state.video) {
+            opts.height = '0px';
         }
 
         return (
@@ -454,6 +464,7 @@ import PlaylistManager from './Components/PlaylistManager';
                         repeat={ this.state.repeat }
                         shuffle={ this.state.shuffle }
                         crackle={ this.state.crackle }
+                        video={ this.state.video }
                     />
                     <Switch>
                         <Route path='/about' component={ About } />
