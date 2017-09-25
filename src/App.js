@@ -47,7 +47,7 @@ import PlaylistManager from './Components/PlaylistManager';
         this.ogg_drag = new Howl({ src: [ogg_drag], loop: false, autoplay: false, autoload: true, volume: 0.05});
         this.ogg_scratchin = new Howl({ src: [ogg_scratchin], loop: false, autoplay: false, autoload: true, volume: 0.5});
 
-        let playlists;
+        let playlists, playlistId, playlistTitle;
         let plJson = localStorage.getItem('yt1210-playlists');
         if (!plJson) {
             playlists = [
@@ -74,7 +74,10 @@ import PlaylistManager from './Components/PlaylistManager';
             }
         });
 
-        console.log(playlists);
+        if (playlists.length > 0) {
+            playlistId = playlists[0].playlistId;
+            playlistTitle = playlists[0].title;
+        }
 
         this.state = {
             playing: false,
@@ -89,7 +92,8 @@ import PlaylistManager from './Components/PlaylistManager';
             shuffle: false,
             tonearmPos: null,
             playlists: playlists,
-            playlistId: null
+            playlistId: playlistId,
+            playlistTitle: playlistTitle
         }
 
     }
