@@ -7,7 +7,3 @@ Decks is an online record player, complete with warm crackly background noise, w
 ## Running Decks
 
 Clone the repo in to a fresh directory and use `npm i && npm run start` to initialise it on port 3000, then point a browser at http://localhost:3000/ (if it doesn't happen automatically).
-
-## TODO
-
-* Tonearm positioning
