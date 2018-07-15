@@ -10,6 +10,7 @@ Clone the repo in to a fresh directory and use `npm i && npm run start` to initi
 
 TODO:
 
-* Improve the UI. Make it easier to create playlists
+* Improve the UI. Make it easier to create playlists (music.youtube.com style?)
 * New track component with progress bar
 * Make it responsive.. tape on mobile?
+* Add storybook
