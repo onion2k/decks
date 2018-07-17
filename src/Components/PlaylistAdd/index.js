@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class PlaylistTitle extends Component {
+class PlaylistAdd extends Component {
 
     constructor() {
 
@@ -37,4 +37,4 @@ class PlaylistTitle extends Component {
 
 }
 
-export default PlaylistTitle;
+export default PlaylistAdd;
