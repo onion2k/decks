@@ -14,3 +14,4 @@ TODO:
 * New track component with progress bar
 * Make it responsive.. tape on mobile?
 * Add storybook
+* Add tests using Jest + Enzyme
