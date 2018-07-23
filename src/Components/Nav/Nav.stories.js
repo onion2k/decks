@@ -7,7 +7,7 @@ import { linkTo } from '@storybook/addon-links';
 
 import Nav from './index.js';
 
-storiesOf('about', module)
+storiesOf('Nav', module)
   .addDecorator(
     StoryRouter(
       {
@@ -17,4 +17,4 @@ storiesOf('about', module)
       { initialEntries: ['/about'] }
     )
   )
-  .add('about', () => <Nav />);
+  .add('Basic', () => <Nav />);
