@@ -57,6 +57,7 @@ class Record extends Component {
             }
 
         }
+
         this.setState({
             millis: Date.now(),
             request: requestAnimationFrame(this.tick),
@@ -65,6 +66,7 @@ class Record extends Component {
             tonestyle: 'rotate('+toneangle+'deg)',
             toneanimto: toneanimto
         });
+
     }
 
     componentWillReceiveProps(nextProps) {
