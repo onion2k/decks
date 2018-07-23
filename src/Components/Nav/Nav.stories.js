@@ -1,9 +1,20 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import Nav from '../Components/Nav';
 
-storiesOf('Nav', module)
-  .add('Basic', () => (
-    <Nav />
-  ));
+import StoryRouter from 'storybook-react-router';
+import { linkTo } from '@storybook/addon-links';
+
+import Nav from './index.js';
+
+storiesOf('about', module)
+  .addDecorator(
+    StoryRouter(
+      {
+        '/': linkTo('Linked stories', 'home'),
+        '/articles/*': linkTo('Linked stories', 'article'),
+      },
+      { initialEntries: ['/about'] }
+    )
+  )
+  .add('about', () => <Nav />);
