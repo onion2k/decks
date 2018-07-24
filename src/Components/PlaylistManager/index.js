@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import './PlaylistManager.css';
 
 class PlaylistManager extends Component {
 
@@ -33,8 +32,12 @@ class PlaylistManager extends Component {
                     className={ 'track' }
                     onClick={ (e)=>{
                         this.props.playList(playlist.playlistId); 
-                        this.props.history.push('/'); 
-                    } }><i className="fa fa-trash" aria-hidden="true" onClick={ (e)=>{ e.stopPropagation(); e.preventDefault(); this.props.deleteList(playlist.playlistId); } }></i> <i className="fa fa-list" aria-hidden="true"></i> { playlist.title } <span>{ playlist.length || 'No' } tracks</span></div>;
+                        // this.props.history.push('/');
+                    } }><i className="fa fa-trash" aria-hidden="true" onClick={ (e)=>{
+                        e.stopPropagation();
+                        e.preventDefault();
+                        this.props.deleteList(playlist.playlistId);
+                    } }></i> <i className="fa fa-list" aria-hidden="true"></i> { playlist.title } <span>{ playlist.length || 'No' } tracks</span></div>;
             });
         } else {
             playlists = <div className='track'>No playlists found</div>;

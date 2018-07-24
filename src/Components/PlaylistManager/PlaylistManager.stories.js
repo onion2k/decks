@@ -7,7 +7,10 @@ import StoryRouter from 'storybook-react-router';
 import { linkTo } from '@storybook/addon-links';
 
 const playlists = [];
-const addList = action('add-list')
+const playlistsWithLists = [{ title: 'Playlist 1', playlistId: 'pl1', length: 6 }, { title: 'Playlist 2', playlistId: 'pl2', length: 6 }, { title: 'Playlist 3', playlistId: 'pl3', length: 6 }];
+const addList = action('add list');
+const playList = action('play list');
+const deleteList = action('delete list');
 
 storiesOf('PlaylistManager', module)
   .addDecorator(
@@ -19,4 +22,5 @@ storiesOf('PlaylistManager', module)
       { initialEntries: ['/about'] }
     )
   )
-  .add('Basic', () => <PlaylistManager playlists={playlists} addList={addList} />);
+  .add('Basic', () => <PlaylistManager playlists={playlists} addList={addList} />)
+  .add('With lists', () => <PlaylistManager playlists={playlistsWithLists} addList={addList} playList={playList} deleteList={deleteList} />);
