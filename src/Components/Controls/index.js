@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './Controls.css';
 
 class Controls extends Component {
-
     render() {
 
         let playlistsLink, playlistsIcon;

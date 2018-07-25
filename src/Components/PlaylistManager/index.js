@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router';
 
 class PlaylistManager extends Component {
 
     constructor(props){
         super(props);
+
         this.state = {
             newlist: '',
             playlists: props.playlists
         }
+
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
@@ -20,6 +23,8 @@ class PlaylistManager extends Component {
     onSubmit(e){
         e.preventDefault();
         this.props.addList(this.state);
+        this.props.playlistStore.playlistToggle = !this.props.playlistStore.playlistToggle;
+        this.props.playlistStore.playlists.push('New list');
     }
 
     render() {
@@ -63,4 +68,4 @@ class PlaylistManager extends Component {
     }
 }
 
-export default withRouter(PlaylistManager);
+export default withRouter(inject("playlistStore")(observer(PlaylistManager)));

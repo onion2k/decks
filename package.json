@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "howler": "^2.0.4",
+    "mobx": "^5.0.3",
+    "mobx-react": "^5.2.3",
     "query-string": "^5.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

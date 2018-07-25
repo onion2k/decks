@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { decorate, observable, action } from "mobx";
+import { Provider } from "mobx-react";
 import { Switch, Route } from 'react-router-dom';
 import queryString from 'query-string';
 import './App.css';
@@ -19,11 +21,24 @@ import About from './Components/About';
 
 import PlaylistManager from './Components/PlaylistManager';
 
+class playlistStore {
+    playlistToggle = false;
+    playlists = [];
+}
+decorate(playlistStore, {
+    playlistToggle: observable,
+    playlists: observable
+})
+
+const yt1210State = {
+    playlistStore: new playlistStore()
+};
+
   class App extends Component {
 
-    constructor() {
+    constructor(props) {
 
-        super();
+        super(props);
 
         this.onReady       = this.onReady.bind(this);
         this.onChangeVideo = this.onChangeVideo.bind(this);
@@ -450,60 +465,62 @@ import PlaylistManager from './Components/PlaylistManager';
         }
 
         return (
-            <div className="App">
-                <Record 
-                    onTrack={this.onTrack} 
-                    vData={ this.state.vData } 
-                    playing={ this.state.playing }
-                    tonearmPos={ this.state.tonearmPos } 
-                />
-                <div className="controls">
-                    <div className="titleControls">
-                        <h1>YT1210</h1>
-                        <Nav></Nav>
-                    </div>
-                    <YouTube
-                        videoId={ this.state.videoId }
-                        opts={ opts }
-                        onReady={ this.onReady }
-                        onPlay={ this.onPlay }
-                        onEnd={ this.onEnd }
-                    />
-                    <Controls 
-                        onPlayVideo={ this.onPlayVideo }
-                        onPauseVideo={ this.onPauseVideo }
-                        onStopVideo={ this.onStopVideo }
-                        onChangeVideo={ this.onChangeVideo }
-                        onToggle={ this.onToggle }
+            <Provider {...yt1210State}>
+                <div className="App">
+                    <Record 
+                        onTrack={this.onTrack} 
+                        vData={ this.state.vData } 
                         playing={ this.state.playing }
-                        repeat={ this.state.repeat }
-                        shuffle={ this.state.shuffle }
-                        crackle={ this.state.crackle }
-                        video={ this.state.video }
+                        tonearmPos={ this.state.tonearmPos } 
                     />
-                    <Switch>
-                        <Route path='/about' component={ About } />
-                        <Route path='/playlists' component={ ()=>{
-                            return <PlaylistManager 
-                                playList={ this.playList }
-                                addList={ this.addList }
-                                deleteList={ this.deleteList }
-                                playlists={ this.state.playlists }
-                            />
-                        } } />
-                        <Route component={ ()=>{ 
-                            return <Playlist 
-                                title={ this.state.playlistTitle } 
-                                playlist={ this.state.playlist } 
-                                trackData={ this.state.trackData } 
-                                playing={ this.state.videoId } 
-                                onClick={ (i)=>{ this.onChangeVideo(i); } } 
-                                onDelete={ (i)=>{ this.onDeleteVideo(i); } } 
-                                addTrack={ (videoId)=>{ this.addTrack(videoId); } }
-                            ></Playlist> } } />
-                    </Switch>
+                    <div className="controls">
+                        <div className="titleControls">
+                            <h1>YT1210</h1>
+                            <Nav></Nav>
+                        </div>
+                        <YouTube
+                            videoId={ this.state.videoId }
+                            opts={ opts }
+                            onReady={ this.onReady }
+                            onPlay={ this.onPlay }
+                            onEnd={ this.onEnd }
+                        />
+                        <Controls 
+                            onPlayVideo={ this.onPlayVideo }
+                            onPauseVideo={ this.onPauseVideo }
+                            onStopVideo={ this.onStopVideo }
+                            onChangeVideo={ this.onChangeVideo }
+                            onToggle={ this.onToggle }
+                            playing={ this.state.playing }
+                            repeat={ this.state.repeat }
+                            shuffle={ this.state.shuffle }
+                            crackle={ this.state.crackle }
+                            video={ this.state.video }
+                        />
+                        <Switch>
+                            <Route path='/about' component={ About } />
+                            <Route path='/playlists' component={ ()=>{
+                                return <PlaylistManager 
+                                    playList={ this.playList }
+                                    addList={ this.addList }
+                                    deleteList={ this.deleteList }
+                                    playlists={ this.state.playlists }
+                                />
+                            } } />
+                            <Route component={ ()=>{ 
+                                return <Playlist 
+                                    title={ this.state.playlistTitle } 
+                                    playlist={ this.state.playlist } 
+                                    trackData={ this.state.trackData } 
+                                    playing={ this.state.videoId } 
+                                    onClick={ (i)=>{ this.onChangeVideo(i); } } 
+                                    onDelete={ (i)=>{ this.onDeleteVideo(i); } } 
+                                    addTrack={ (videoId)=>{ this.addTrack(videoId); } }
+                                ></Playlist> } } />
+                        </Switch>
+                    </div>
                 </div>
-            </div>
+            </Provider>
         );
     }
 }

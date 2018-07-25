@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 import record from '../../img/record.png';
 import tonearm from '../../img/tonearm.png';
 import './Record.css';
@@ -17,6 +18,7 @@ class Record extends Component {
     constructor(props) {
 
         super(props);
+
         this.armMove = this.armMove.bind(this);
         this.armUp = this.armUp.bind(this);
         this.tick = this.tick.bind(this);
@@ -95,6 +97,10 @@ class Record extends Component {
         })
     }
 
+    componentWillReact() {
+        console.log("I will re-render, since the todo has changed!")
+    }
+
     armMove(e){
         
         if (this.state.dragtone) {
@@ -162,9 +168,10 @@ class Record extends Component {
                 <div className={'Tonearm'+(this.props.playing===true?' playing':'')}>
                     <img draggable="false" src={ tonearm } alt='Tonearm' style={{ transform: this.state.tonestyle }} />
                 </div>
+                { this.props.playlistStore.playlistToggle }
             </div>
         );
     }
 }
 
-export default Record;
+export default inject("playlistStore")(observer(Record));
