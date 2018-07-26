@@ -97,12 +97,7 @@ class Record extends Component {
         })
     }
 
-    componentWillReact() {
-        console.log("I will re-render, since the todo has changed!")
-    }
-
     armMove(e){
-        
         if (this.state.dragtone) {
             if (this.state.request) { cancelAnimationFrame(this.state.request); }
             let toneangle = this.state.tonestart + ((e.pageX - this.lastX) / 10);
@@ -159,19 +154,18 @@ class Record extends Component {
     render() {
         return (
             <div className="Deck" onMouseDown={ (e)=>{ this.lastX = e.pageX; this.setState({ dragtone: true })} } onMouseUp={ (e)=>{ this.armUp(e); } } onMouseMove={ (e)=>{ this.armMove(e); } }>
-                <div className={'Record'+(this.props.playing===true?' playing':'')} style={{ backgroundImage: 'url('+record+')' }} >
+                <div className={'Record'+(this.props.yt1210Store.playing===true?' playing':'')} style={{ backgroundImage: 'url('+record+')' }} >
                     <div className="label">
                         <img src={ this.state.label } alt='Record' />
                         <span className="title">{ this.state.title }</span>
                     </div>
                 </div>
-                <div className={'Tonearm'+(this.props.playing===true?' playing':'')}>
+                <div className={'Tonearm'+(this.props.yt1210Store.playing===true?' playing':'')}>
                     <img draggable="false" src={ tonearm } alt='Tonearm' style={{ transform: this.state.tonestyle }} />
                 </div>
-                { this.props.playlistStore.playlistToggle }
             </div>
         );
     }
 }
 
-export default inject("playlistStore")(observer(Record));
+export default inject("yt1210Store")(observer(Record));

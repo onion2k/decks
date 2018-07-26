@@ -23,8 +23,8 @@ class PlaylistManager extends Component {
     onSubmit(e){
         e.preventDefault();
         this.props.addList(this.state);
-        this.props.playlistStore.playlistToggle = !this.props.playlistStore.playlistToggle;
-        this.props.playlistStore.playlists.push('New list');
+        this.props.yt1210Store.playing = !this.props.yt1210Store.playing;
+        this.props.yt1210Store.playlists.push('New list');
     }
 
     render() {
@@ -68,4 +68,4 @@ class PlaylistManager extends Component {
     }
 }
 
-export default withRouter(inject("playlistStore")(observer(PlaylistManager)));
+export default withRouter(inject("yt1210Store")(observer(PlaylistManager)));
