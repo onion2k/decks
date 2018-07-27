@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import './Controls.css';
 
@@ -25,14 +26,14 @@ class Controls extends Component {
             <div className='button' onClick={ ()=>{ this.props.onStopVideo(); }}><i className="fa fa-stop" aria-hidden="true"></i></div>
             <div className='button' onClick={ ()=>{ this.props.onChangeVideo(); }}><i className="fa fa-step-forward" aria-hidden="true"></i></div>
 
-            <div className={'toggle'+(this.props.repeat?' on':'')} onClick={ ()=>{ this.props.onToggle('repeat'); }}><i className="fa fa-repeat" aria-hidden="true"></i></div>
-            <div className={'toggle'+(this.props.shuffle?' on':'')} onClick={ ()=>{ this.props.onToggle('shuffle'); }}><i className="fa fa-random" aria-hidden="true"></i></div>
-            <div className={'toggle'+(this.props.crackle?' on':'')} onClick={ ()=>{ this.props.onToggle('crackle'); }}><i className="fa fa-headphones" aria-hidden="true"></i></div>
-            <div className={'toggle'+(this.props.video?' on':'')} onClick={ ()=>{ this.props.onToggle('video'); }}><i className="fa fa-youtube" aria-hidden="true"></i></div>
+            <div className={'toggle'+(this.props.yt1210Store.repeat?' on':'')} onClick={ ()=>{ this.props.yt1210Store.repeat = !this.props.yt1210Store.repeat; }}><i className="fa fa-repeat" aria-hidden="true"></i></div>
+            <div className={'toggle'+(this.props.yt1210Store.shuffle?' on':'')} onClick={ ()=>{ this.props.yt1210Store.shuffle = !this.props.yt1210Store.shuffle; }}><i className="fa fa-random" aria-hidden="true"></i></div>
+            <div className={'toggle'+(this.props.yt1210Store.crackle?' on':'')} onClick={ ()=>{ this.props.yt1210Store.crackle = !this.props.yt1210Store.crackle; }}><i className="fa fa-headphones" aria-hidden="true"></i></div>
+            <div className={'toggle'+(this.props.yt1210Store.video?' on':'')} onClick={ ()=>{ this.props.yt1210Store.video = !this.props.yt1210Store.video; }}><i className="fa fa-youtube" aria-hidden="true"></i></div>
 
         </div>
         );
     }
 }
 
-export default Controls;
+export default inject("yt1210Store")(observer(Controls));

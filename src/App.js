@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { decorate, observable } from "mobx";
 import { Provider } from "mobx-react";
 
-import DevTools from 'mobx-react-devtools';
-
 import { Switch, Route } from 'react-router-dom';
 import queryString from 'query-string';
 import './App.css';
@@ -26,11 +24,19 @@ import PlaylistManager from './Components/PlaylistManager';
 
 class yt1210Store {
     playing = false;
+    repeat = false;
+    shuffle = false;
+    crackle = true;
+    video = true;
     playlists = [];
 }
 
 decorate(yt1210Store, {
     playing: observable,
+    crackle: observable,
+    video: observable,
+    repeat: observable,
+    shuffle: observable,
     playlists: observable
 })
 
@@ -523,7 +529,6 @@ const yt1210State = {
                                 ></Playlist> } } />
                         </Switch>
                     </div>
-                    <DevTools />
                 </div>
             </Provider>
         );
