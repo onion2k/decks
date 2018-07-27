@@ -53,7 +53,7 @@ autorun(()=>{
 });
 
 
-  class App extends Component {
+class App extends Component {
 
     constructor(props) {
 
@@ -70,7 +70,7 @@ autorun(()=>{
         this.addTrack      = this.addTrack.bind(this);
         this.updatePlaylist = this.updatePlaylist.bind(this);
         this.onDeleteVideo = this.onDeleteVideo.bind(this);
-        this.onToggle      = this.onToggle.bind(this);
+        // this.onToggle      = this.onToggle.bind(this);
 
         this.playList      = this.playList.bind(this);
         this.addList       = this.addList.bind(this);
@@ -329,19 +329,19 @@ autorun(()=>{
         
     }
 
-    onToggle(toggle){
-        let s = {};
-        s[toggle] = !this.state[toggle];
-        this.setState(s, ()=>{
-            if (toggle==='crackle') {
-                if (!this.ogg_crackle.playing() && this.state.crackle===true && this.state.playing===true) { 
-                    this.ogg_crackle.play(); 
-                } else {
-                    this.ogg_crackle.stop(); 
-                };
-            }
-        });
-    }
+    // onToggle(toggle){
+    //     let s = {};
+    //     s[toggle] = !this.state[toggle];
+    //     this.setState(s, ()=>{
+    //         if (toggle==='crackle') {
+    //             if (!this.ogg_crackle.playing() && this.state.crackle===true && this.state.playing===true) { 
+    //                 this.ogg_crackle.play(); 
+    //             } else {
+    //                 this.ogg_crackle.stop(); 
+    //             };
+    //         }
+    //     });
+    // }
 
     addTrack(state){
 
@@ -508,7 +508,7 @@ autorun(()=>{
                             onPauseVideo={ this.onPauseVideo }
                             onStopVideo={ this.onStopVideo }
                             onChangeVideo={ this.onChangeVideo }
-                            onToggle={ this.onToggle }
+                            // onToggle={ this.onToggle }
                             playing={ this.state.playing }
                             repeat={ this.state.repeat }
                             shuffle={ this.state.shuffle }
