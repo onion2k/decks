@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { decorate, observable } from "mobx";
+import { decorate, observable, autorun } from "mobx";
 import { Provider } from "mobx-react";
 
 import { Switch, Route } from 'react-router-dom';
@@ -43,6 +43,15 @@ decorate(yt1210Store, {
 const yt1210State = {
     yt1210Store: new yt1210Store()
 };
+
+autorun(()=>{
+    if (!yt1210State.yt1210Store.crackle && yt1210State.yt1210Store.playing) {
+        console.log("Crackling");
+    } else {
+        console.log("Stopping");
+    }
+});
+
 
   class App extends Component {
 
@@ -332,7 +341,6 @@ const yt1210State = {
                 };
             }
         });
-
     }
 
     addTrack(state){
