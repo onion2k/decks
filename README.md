@@ -13,5 +13,5 @@ TODO:
 * Improve the UI. Make it easier to create playlists (music.youtube.com style?)
 * New track component with progress bar
 * Make it responsive.. tape on mobile?
-* Add storybook
 * Add tests using Jest + Enzyme
+* Add mobx state (done) and actions
