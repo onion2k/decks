@@ -29,6 +29,19 @@ class yt1210Store {
     crackle = true;
     video = true;
     playlists = [];
+
+    // sound actions
+    // play crackle
+
+    // playlist actions
+    // add playlist
+    // add track
+    // delete playlist
+    // delete track
+
+    //copy playlist from youtube
+
+    // user actions
 }
 
 decorate(yt1210Store, {
