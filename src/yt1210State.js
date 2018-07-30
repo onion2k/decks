@@ -1,5 +1,7 @@
 import { decorate, observable, action, autorun } from "mobx";
 
+import fx from './yt1210Sounds';
+
 class yt1210Store {
     playing = false;
     repeat = false;
@@ -43,7 +45,7 @@ class yt1210Store {
 
     onToggle_repeat = autorun(() => {
         if (this.repeat) {
-            console.log("repeat");
+            fx.ogg_scratchin.play();
         } else {
             console.log("no repeat");
         }
