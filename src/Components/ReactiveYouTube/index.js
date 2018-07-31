@@ -6,13 +6,7 @@ class ReactiveYouTube extends Component {
 
     componentWillReact(){
         console.log("Updated yt");
-
-        let data = this.player.getVideoData();
-        let duration = this.player.getDuration();
-
-        console.log(data, duration);
-
-        this.player.playVideo();
+        console.log(this.props.yt1210Store.repeat);
     }
 
     render() {
@@ -30,13 +24,12 @@ class ReactiveYouTube extends Component {
                 videoId={ this.props.yt1210Store.videoId }
                 opts={ opts }
                 onReady={ (e) => { this.player = e.target; } }
-                onPlay={ this.props.onPlay }
-                onEnd={ this.props.onEnd }
+                // onPlay={ this.props.onPlay }
+                // onEnd={ this.props.onEnd }
                 onStateChange={(e)=>{
                     if (e.data===5){ // 5 === cued
                         let data = this.player.getVideoData();
                         let duration = this.player.getDuration();
-                        console.log(data, duration);
                         this.player.playVideo();
                     }
                 }}
