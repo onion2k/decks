@@ -3,6 +3,9 @@ import { decorate, observable, action, autorun } from "mobx";
 import fx from './yt1210Sounds';
 
 class yt1210Store {
+
+    videoId = null;
+
     playing = false;
     repeat = false;
     shuffle = false;
@@ -22,11 +25,21 @@ class yt1210Store {
     // play track
     play = action(()=>{
         console.log("play");
+
+        console.log("Find next track id");
+        console.log("set yt to play");
+
+        // set videoId
+        this.videoId = "v_yTphvyiPU";
+
+        // play stylus fx
+        // if crackle and crackle is not playing, play crackle fx
     });
 
     // pause track
     pause = action(()=>{
         console.log("pause");
+        // if crackle, pause crackle fx
     });
 
     // stop track
@@ -37,6 +50,9 @@ class yt1210Store {
     // next track
     next = action(()=>{
         console.log("next");
+        // play scratchin fx
+
+        // if skip, play drag fx
     });
 
     // copy playlist from youtube
@@ -70,6 +86,7 @@ class yt1210Store {
 }
 
 decorate(yt1210Store, {
+    videoId: observable,
     playing: observable,
     crackle: observable,
     video: observable,

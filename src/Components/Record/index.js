@@ -60,14 +60,14 @@ class Record extends Component {
 
         }
 
-        this.setState({
-            millis: Date.now(),
-            request: requestAnimationFrame(this.tick),
-            tonestart: toneangle,
-            toneangle: toneangle,
-            tonestyle: 'rotate('+toneangle+'deg)',
-            toneanimto: toneanimto
-        });
+        // this.setState({
+        //     millis: Date.now(),
+        //     request: requestAnimationFrame(this.tick),
+        //     tonestart: toneangle,
+        //     toneangle: toneangle,
+        //     tonestyle: 'rotate('+toneangle+'deg)',
+        //     toneanimto: toneanimto
+        // });
 
     }
 

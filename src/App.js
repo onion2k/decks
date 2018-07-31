@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import { Provider } from "mobx-react";
 import { Switch, Route } from 'react-router-dom';
 import queryString from 'query-string';
-import YouTube from 'react-youtube';
+
+import DevTools from 'mobx-react-devtools';
 
 import './App.css';
 
-import { Howl } from 'howler';
+// import { Howl } from 'howler';
 
-import ogg_crackle from './sounds/crackle.ogg';
-import ogg_stylus from './sounds/stylus.ogg';
-import ogg_scratchin from './sounds/scratchin.ogg';
-import ogg_drag from './sounds/drag.ogg';
+// import ogg_crackle from './sounds/crackle.ogg';
+// import ogg_stylus from './sounds/stylus.ogg';
+// import ogg_scratchin from './sounds/scratchin.ogg';
+// import ogg_drag from './sounds/drag.ogg';
 
 import Controls from './Components/Controls';
 import Playlist from './Components/Playlist';
@@ -19,6 +20,7 @@ import Record from './Components/Record';
 import Nav from './Components/Nav';
 import About from './Components/About';
 import PlaylistManager from './Components/PlaylistManager';
+import ReactiveYouTube from './Components/ReactiveYouTube';
 
 import yt1210State from "./yt1210State";
 
@@ -45,10 +47,10 @@ class App extends Component {
         this.addList       = this.addList.bind(this);
         this.deleteList    = this.deleteList.bind(this);
         
-        this.ogg_stylus = new Howl({ src: [ogg_stylus], loop: false, autoplay: false, autoload: true});
-        this.ogg_crackle = new Howl({ src: [ogg_crackle], loop: true, autoplay: false, autoload: true});
-        this.ogg_drag = new Howl({ src: [ogg_drag], loop: false, autoplay: false, autoload: true, volume: 0.05});
-        this.ogg_scratchin = new Howl({ src: [ogg_scratchin], loop: false, autoplay: false, autoload: true, volume: 0.5});
+        // this.ogg_stylus = new Howl({ src: [ogg_stylus], loop: false, autoplay: false, autoload: true});
+        // this.ogg_crackle = new Howl({ src: [ogg_crackle], loop: true, autoplay: false, autoload: true});
+        // this.ogg_drag = new Howl({ src: [ogg_drag], loop: false, autoplay: false, autoload: true, volume: 0.05});
+        // this.ogg_scratchin = new Howl({ src: [ogg_scratchin], loop: false, autoplay: false, autoload: true, volume: 0.5});
 
         let playlists, playlistId, playlistTitle;
         let plJson = localStorage.getItem('yt1210-playlists');
@@ -112,17 +114,22 @@ class App extends Component {
 
     onReady(event) {
 
+        console.log(event.target);
+
         event.target.setVolume(100);
 
         let vData;
-        let pl = this.state.playlist;
-        let t = pl.findIndex((track)=>{ return track.videoId===this.state.videoId });
+        let pl = [{}];
+        let t = 0;
 
-        if (pl[t] && pl[t].found===true) {
+        // let pl = this.state.playlist;
+        // let t = pl.findIndex((track)=>{ return track.videoId===this.state.videoId });
 
-            vData = { videoId: pl[t].videoId, title: pl[t].title };
+        // if (pl[t] && pl[t].found===true) {
+
+        //     vData = { videoId: pl[t].videoId, title: pl[t].title };
             
-        } else if (pl[t] && pl[t].found===false) {
+        // } else if (pl[t] && pl[t].found===false) {
 
             let data = event.target.getVideoData();
             let duration = event.target.getDuration();
@@ -131,17 +138,19 @@ class App extends Component {
             pl[t].duration = duration;
             pl[t].found = true;
     
-            localStorage.setItem('yt1210-'+pl[t].videoId, JSON.stringify({ title: data.title, duration: duration }));
+        //    localStorage.setItem('yt1210-'+pl[t].videoId, JSON.stringify({ title: data.title, duration: duration }));
 
             vData = pl[t];
 
-        } else {
+        // } else {
 
-            vData = { videoId: null, title: '' };
+        //     vData = { videoId: null, title: '' };
 
-        }
+        // }
 
-        vData.tonearmPos = this.state.tonearmPos; 
+        vData.tonearmPos = this.state.tonearmPos;
+
+        console.log("ready");
         
         this.setState({
             player: event.target,
@@ -157,7 +166,7 @@ class App extends Component {
         var p = this.state.playlistPos;
 
         if (videoId!==undefined) { p = this.state.playlist.findIndex((track)=>{ return track.videoId===videoId })-1; }
-        if (!this.ogg_crackle.playing() && this.state.crackle===true) { this.ogg_crackle.play() };
+        // if (!this.ogg_crackle.playing() && this.state.crackle===true) { this.ogg_crackle.play() };
     
         if (videoId!==undefined && videoId===this.state.videoId) {
             this.onPlayVideo(true);
@@ -238,14 +247,21 @@ class App extends Component {
         this.onChangeVideo();
     }
 
-    onPlayVideo(moveArm) {
+    onPlayVideo(e, moveArm) {
+
+        console.log(e, moveArm);
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        // yt1210State.yt1210Store.play();
         
         let pl = this.state.playlist;
         let t = pl.findIndex((track)=>{ return track.videoId===this.state.videoId });
 
-        this.ogg_stylus.play();
+        // this.ogg_stylus.play();
         this.state.player.playVideo();
-        if (!this.ogg_crackle.playing() && this.state.crackle===true) { this.ogg_crackle.play() };
+        // if (!this.ogg_crackle.playing() && this.state.crackle===true) { this.ogg_crackle.play() };
 
         if (moveArm) {
             this.setState({ tonearmPos: t });
@@ -258,7 +274,7 @@ class App extends Component {
     }
 
     onStopVideo() {
-        this.ogg_crackle.pause();
+        // this.ogg_crackle.pause();
         this.setState({ playing: false });
         this.state.player.stopVideo();
     }
@@ -278,7 +294,7 @@ class App extends Component {
                 tonearmPos: null
             }, ()=>{
                 this.onPlayVideo();
-                this.ogg_scratchin.play();
+                // this.ogg_scratchin.play();
             });
 
         } else {
@@ -291,7 +307,7 @@ class App extends Component {
                 seekTo: percentage,
                 tonearmPos: null
             }, ()=>{
-                this.ogg_drag.play();                
+                // this.ogg_drag.play();                
             });
 
         }
@@ -439,18 +455,6 @@ class App extends Component {
        
     render() {
 
-        const opts = {
-            width: '100%',
-            playerVars: {
-                controls: 0,
-                autoplay: this.state.autoplay
-            }
-        }
-
-        if (!this.state.video) {
-            opts.height = '0px';
-        }
-
         return (
             <Provider {...yt1210State}>
                 <div className="App">
@@ -465,9 +469,7 @@ class App extends Component {
                             <h1>YT1210</h1>
                             <Nav></Nav>
                         </div>
-                        <YouTube
-                            videoId={ this.state.videoId }
-                            opts={ opts }
+                        <ReactiveYouTube
                             onReady={ this.onReady }
                             onPlay={ this.onPlay }
                             onEnd={ this.onEnd }
@@ -506,6 +508,7 @@ class App extends Component {
                                 ></Playlist> } } />
                         </Switch>
                     </div>
+                    <DevTools />
                 </div>
             </Provider>
         );

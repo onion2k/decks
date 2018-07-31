@@ -21,10 +21,13 @@ class Controls extends Component {
 
             <Link to={ playlistsLink } className='button'><i className={ playlistsIcon } aria-hidden="true"></i></Link>
 
-            <div className='button play' onClick={ ()=>{ this.props.yt1210Store.play(); this.props.onPlayVideo(true); }}><i className="fa fa-play" aria-hidden="true"></i></div>
-            <div className='button' onClick={ ()=>{ this.props.onPauseVideo(); }}><i className="fa fa-pause" aria-hidden="true"></i></div>
-            <div className='button' onClick={ ()=>{ this.props.onStopVideo(); }}><i className="fa fa-stop" aria-hidden="true"></i></div>
-            <div className='button' onClick={ ()=>{ this.props.onChangeVideo(); }}><i className="fa fa-step-forward" aria-hidden="true"></i></div>
+            <div className='button play' onClick={ (e)=>{
+                this.props.yt1210Store.play(e);
+                // this.props.onPlayVideo(e, true);
+            }}><i className="fa fa-play" aria-hidden="true"></i></div>
+            <div className='button' onClick={ (e)=>{ this.props.onPauseVideo(e); }}><i className="fa fa-pause" aria-hidden="true"></i></div>
+            <div className='button' onClick={ (e)=>{ this.props.onStopVideo(e); }}><i className="fa fa-stop" aria-hidden="true"></i></div>
+            <div className='button' onClick={ (e)=>{ this.props.onChangeVideo(e); }}><i className="fa fa-step-forward" aria-hidden="true"></i></div>
 
             <div className={'toggle'+(this.props.yt1210Store.repeat?' on':'')} onClick={ ()=>{ this.props.yt1210Store.repeat = !this.props.yt1210Store.repeat; }}><i className="fa fa-repeat" aria-hidden="true"></i></div>
             <div className={'toggle'+(this.props.yt1210Store.shuffle?' on':'')} onClick={ ()=>{ this.props.yt1210Store.shuffle = !this.props.yt1210Store.shuffle; }}><i className="fa fa-random" aria-hidden="true"></i></div>
