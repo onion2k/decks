@@ -12,6 +12,7 @@ class yt1210Store {
     crackle = true;
     video = true;
     playlists = [];
+    tracks = [];
 
     // sound actions
     // play crackle
@@ -22,15 +23,16 @@ class yt1210Store {
     // delete playlist
     // delete track
 
+    updateTrackData = action((data, duration)=>{
+
+    });
+
     // play track
     play = action(()=>{
-        console.log("play");
-
-        console.log("Find next track id");
-        console.log("set yt to play");
 
         // set videoId
         this.videoId = "v_yTphvyiPU";
+        this.playing = true;
 
         // play stylus fx
         // if crackle and crackle is not playing, play crackle fx
@@ -39,25 +41,27 @@ class yt1210Store {
     // pause track
     pause = action(()=>{
         console.log("pause");
+        this.playing = !this.playing;
+        ;
         // if crackle, pause crackle fx
     });
 
     // stop track
     stop = action(()=>{
         console.log("stop");
+        this.playing = false;
     });
 
     // next track
     next = action(()=>{
         console.log("next");
+        this.videoId = "Rs38lKxmtI4";
         // play scratchin fx
 
         // if skip, play drag fx
     });
 
     // copy playlist from youtube
-
-    // user actions
 
     onToggle_repeat = autorun(() => {
         if (this.repeat) {
@@ -92,7 +96,8 @@ decorate(yt1210Store, {
     video: observable,
     repeat: observable,
     shuffle: observable,
-    playlists: observable
+    playlists: observable,
+    tracks: observable
 });
 
 const yt1210State = {
