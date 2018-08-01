@@ -1,9 +1,6 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import PlaylistTitle from './index.js';
+import React from "react";
+import { storiesOf } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
+import PlaylistTitle from "./index.js";
 
-storiesOf('PlaylistTitle', module)
-  .add('Basic', () => (
-    <PlaylistTitle />
-  ));
+storiesOf("PlaylistTitle", module).add("Basic", () => <PlaylistTitle />);

@@ -1,4 +1,4 @@
-import { configure } from '@storybook/react';
+import { configure } from "@storybook/react";
 import "../src/index.css";
 import "../src/App.css";
 

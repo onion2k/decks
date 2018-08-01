@@ -4,9 +4,7 @@ import Record from "./Record";
 
 describe("Record", () => {
   it("renders properly", () => {
-    const tree = renderer
-      .create(<Record />)
-      .toJSON();
+    const tree = renderer.create(<Record />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
