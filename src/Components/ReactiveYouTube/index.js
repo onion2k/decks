@@ -29,13 +29,18 @@ class ReactiveYouTube extends Component {
             <YouTube
                 videoId={ this.props.yt1210Store.videoId }
                 opts={ opts }
-                onReady={ (e) => { this.player = e.target; } }
+                onReady={ (e) => {
+                    this.player = e.target;
+                    this.player.setVolume(100);
+                }}
                 onPlay={ () => {
                     let data = this.player.getVideoData();
                     let duration = this.player.getDuration();
                     this.props.yt1210Store.updateTrackData(data, duration);
                 }}
-                onEnd={ this.props.yt1210Store.next() }
+                onEnd={ () => {
+                    this.props.yt1210Store.next() 
+                }}
                 onStateChange={(e)=>{
                     if (e.data===5 && this.props.yt1210Store.playing){ // 5 === cued
                         this.player.playVideo();

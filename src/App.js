@@ -114,10 +114,6 @@ class App extends Component {
 
     onReady(event) {
 
-        console.log(event.target);
-
-        event.target.setVolume(100);
-
         let vData;
         let pl = [{}];
         let t = 0;
