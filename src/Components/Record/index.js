@@ -66,28 +66,29 @@ class Record extends Component {
   componentWillReceiveProps(nextProps) {
     let request = false;
 
-    if (nextProps.vData.videoId === null) {
-      return;
-    }
+    // if (nextProps.vData.videoId === null) {
+    //   return;
+    // }
 
-    if (nextProps.tonearmPos === null) {
-      this.setState({ toneanimto: null });
-    } else {
-      this.setState({ toneanimto: tracks[nextProps.tonearmPos].s });
-    }
-    if (nextProps.playing === true) {
-      if (!this.state.request) {
-        request = requestAnimationFrame(this.tick);
-      }
-    } else {
-      cancelAnimationFrame(this.state.request);
-    }
+    // if (nextProps.tonearmPos === null) {
+    //   this.setState({ toneanimto: null });
+    // } else {
+    //   this.setState({ toneanimto: tracks[nextProps.tonearmPos].s });
+    // }
+    // if (nextProps.playing === true) {
+    //   if (!this.state.request) {
+    //     request = requestAnimationFrame(this.tick);
+    //   }
+    // } else {
+    //   cancelAnimationFrame(this.state.request);
+    // }
 
-    this.setState({
-      request: request, //requestAnimationFrame ID for cancelling
-      label: "https://img.youtube.com/vi/" + nextProps.vData.videoId + "/0.jpg",
-      title: nextProps.vData.title
-    });
+    // this.setState({
+    //   request: request, //requestAnimationFrame ID for cancelling
+    //   label: "https://img.youtube.com/vi/" + nextProps.vData.videoId + "/0.jpg",
+    //   title: nextProps.vData.title
+    // });
+
   }
 
   armMove(e) {

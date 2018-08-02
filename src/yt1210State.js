@@ -3,6 +3,7 @@ import { decorate, observable, action, autorun } from "mobx";
 import fx from "./yt1210Sounds";
 
 class yt1210Store {
+  
   videoId = null;
 
   playing = false;
@@ -10,19 +11,36 @@ class yt1210Store {
   shuffle = false;
   crackle = true;
   video = true;
-  playlists = [];
-  tracks = [];
+
+  playlists = [
+    { "id": 1, "title": "Playlist 1", tracks: [0,1,2,3,4,5] },
+    { "id": 2, "title": "Playlist 2", tracks: [] },
+    { "id": 3, "title": "Playlist 3", tracks: [] },
+    { "id": 4, "title": "Playlist 4", tracks: [] }
+  ];
+
+  tracks = [
+    { title: "", videoId: "v_yTphvyiPU", duration: "" },
+    { title: "", videoId: "Rs38lKxmtI4", duration: "" },
+    { title: "", videoId: "BuVJEn9wk9Y", duration: "" },
+    { title: "", videoId: "e4Ao-iNPPUc", duration: "" },
+    { title: "", videoId: "FALYmqt-7TQ", duration: "" },
+    { title: "", videoId: "a3Z4RWZa9WA", duration: "" }
+  ];
 
   // sound actions
   // play crackle
 
   // playlist actions
+  // get playlist
   // add playlist
   // add track
   // delete playlist
   // delete track
 
-  updateTrackData = action((data, duration) => {});
+  updateTrackData = action((data, duration) => {
+
+  });
 
   // play track
   play = action(() => {

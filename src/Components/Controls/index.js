@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
-import { Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import "./Controls.css";
 
 class Controls extends Component {
+
   render() {
     let playlistsLink, playlistsIcon;
 
@@ -92,4 +93,4 @@ class Controls extends Component {
   }
 }
 
-export default inject("yt1210Store")(observer(Controls));
+export default withRouter(inject("yt1210Store")(observer(Controls)));

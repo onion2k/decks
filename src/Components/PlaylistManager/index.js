@@ -21,9 +21,7 @@ class PlaylistManager extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.addList(this.state);
-    this.props.yt1210Store.playing = !this.props.yt1210Store.playing;
-    this.props.yt1210Store.playlists.push("New list");
+    // this.props.addList(this.state);
   }
 
   render() {
