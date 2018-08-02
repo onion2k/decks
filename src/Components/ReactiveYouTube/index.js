@@ -4,9 +4,11 @@ import { autorun } from "mobx";
 import YouTube from "react-youtube";
 
 class ReactiveYouTube extends Component {
+
   playstate = autorun(() => {
+    const { playing } = this.props.yt1210Store;
     if (this.player) {
-      if (!this.props.yt1210Store.playing) {
+      if (!playing) {
         this.player.pauseVideo();
       } else {
         this.player.playVideo();
@@ -25,7 +27,7 @@ class ReactiveYouTube extends Component {
 
     return (
       <YouTube
-        videoId={this.props.yt1210Store.videoId}
+        videoId={ this.props.yt1210Store.videoId }
         opts={opts}
         onReady={e => {
           this.player = e.target;
