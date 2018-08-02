@@ -42,8 +42,8 @@ class ReactiveYouTube extends Component {
           this.props.yt1210Store.next();
         }}
         onStateChange={e => {
+          // 5 === cued
           if (e.data === 5 && this.props.yt1210Store.playing) {
-            // 5 === cued
             this.player.playVideo();
           }
         }}
