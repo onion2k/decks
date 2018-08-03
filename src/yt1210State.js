@@ -38,6 +38,18 @@ class yt1210Store {
   // delete playlist
   // delete track
 
+  // load playlist
+  load = action((id) => {
+    // set videoId
+    console.log("Loading ", id);
+
+    this.videoId = "v_yTphvyiPU";
+    this.playing = true;
+
+    // play stylus fx
+    // if crackle and crackle is not playing, play crackle fx
+  });
+
   updateTrackData = action((data, duration) => {
 
   });

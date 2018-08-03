@@ -34,8 +34,9 @@ class PlaylistManager extends Component {
             key={playlist.id}
             className={"track"}
             onClick={e => {
-              this.props.playList(playlist.playlistId);
-              // this.props.history.push('/');
+              this.props.yt1210Store.load(playlist.id);
+              // this.props.playList(playlist.playlistId);
+              this.props.history.push('/');
             }}
           >
             <i
