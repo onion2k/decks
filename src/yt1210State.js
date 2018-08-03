@@ -16,9 +16,9 @@ class yt1210Store {
 
   playlists = [
     { "id": 1, "title": "Playlist 1", tracks: [
-      { title: "", videoId: "v_yTphvyiPU", duration: "" },
-      { title: "", videoId: "Rs38lKxmtI4", duration: "" },
       { title: "", videoId: "BuVJEn9wk9Y", duration: "" },
+      { title: "", videoId: "Rs38lKxmtI4", duration: "" },
+      { title: "", videoId: "v_yTphvyiPU", duration: "" },
       { title: "", videoId: "e4Ao-iNPPUc", duration: "" },
       { title: "", videoId: "FALYmqt-7TQ", duration: "" },
       { title: "", videoId: "a3Z4RWZa9WA", duration: "" }
@@ -37,29 +37,20 @@ class yt1210Store {
     { title: "", videoId: "a3Z4RWZa9WA", duration: "" }
   ];
 
-  // sound actions
-  // play crackle
-
   // playlist actions
-  // get playlist
+
+  // load playlist
+  load = action((id) => {
+    this.playlist = this.playlists.find((playlist) => playlist.id === id).tracks;
+    this.videoId = this.playlist[0].videoId;
+    this.playing = true;
+  });
+
+
   // add playlist
   // add track
   // delete playlist
   // delete track
-
-  // load playlist
-  load = action((id) => {
-    // set videoId
-    console.log("Loading ", id);
-
-    this.videoId = "v_yTphvyiPU";
-    this.playing = true;
-
-    this.playlist = this.playlists.find((playlist) => playlist.id === id).tracks;
-
-    // play stylus fx
-    // if crackle and crackle is not playing, play crackle fx
-  });
 
   updateTrackData = action((data, duration) => {
 
