@@ -27,11 +27,11 @@ class PlaylistManager extends Component {
   render() {
     let playlists;
 
-    if (this.state.playlists.length > 0) {
-      playlists = this.state.playlists.map(playlist => {
+    if (this.props.yt1210Store.playlists.length > 0) {
+      playlists = this.props.yt1210Store.playlists.map(playlist => {
         return (
           <div
-            key={playlist.playlistId}
+            key={playlist.id}
             className={"track"}
             onClick={e => {
               this.props.playList(playlist.playlistId);

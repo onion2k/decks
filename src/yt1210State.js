@@ -54,7 +54,6 @@ class yt1210Store {
 
   // pause track
   pause = action(() => {
-    console.log("pause");
     this.playing = !this.playing;
     // if crackle, pause crackle fx
   });
