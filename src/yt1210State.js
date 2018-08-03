@@ -4,6 +4,8 @@ import fx from "./yt1210Sounds";
 
 class yt1210Store {
   
+  playlist = [];
+
   videoId = null;
 
   playing = false;
@@ -13,10 +15,17 @@ class yt1210Store {
   video = true;
 
   playlists = [
-    { "id": 1, "title": "Playlist 1", tracks: [0,1,2,3,4,5] },
-    { "id": 2, "title": "Playlist 2", tracks: [] },
-    { "id": 3, "title": "Playlist 3", tracks: [] },
-    { "id": 4, "title": "Playlist 4", tracks: [] }
+    { "id": 1, "title": "Playlist 1", tracks: [
+      { title: "", videoId: "v_yTphvyiPU", duration: "" },
+      { title: "", videoId: "Rs38lKxmtI4", duration: "" },
+      { title: "", videoId: "BuVJEn9wk9Y", duration: "" },
+      { title: "", videoId: "e4Ao-iNPPUc", duration: "" },
+      { title: "", videoId: "FALYmqt-7TQ", duration: "" },
+      { title: "", videoId: "a3Z4RWZa9WA", duration: "" }
+    ]},
+    { "id": 2, "title": "Playlist 2", tracks: [0,1,2,3,4,5] },
+    { "id": 3, "title": "Playlist 3", tracks: [0,1,2,3,4,5] },
+    { "id": 4, "title": "Playlist 4", tracks: [0,1,2,3,4,5] }
   ];
 
   tracks = [
@@ -45,6 +54,8 @@ class yt1210Store {
 
     this.videoId = "v_yTphvyiPU";
     this.playing = true;
+
+    this.playlist = this.playlists.find((playlist) => playlist.id === id).tracks;
 
     // play stylus fx
     // if crackle and crackle is not playing, play crackle fx
@@ -113,6 +124,7 @@ class yt1210Store {
 }
 
 decorate(yt1210Store, {
+  playlist: observable,
   videoId: observable,
   playing: observable,
   crackle: observable,

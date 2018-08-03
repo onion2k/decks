@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { inject, observer } from "mobx-react";
+import { withRouter } from "react-router";
 
 class PlaylistTracks extends Component {
   timeFormat(time) {
@@ -23,8 +25,8 @@ class PlaylistTracks extends Component {
   render() {
     let tracklist;
 
-    if (this.props.playlist.length > 0) {
-      tracklist = this.props.playlist.map(track => {
+    if (this.props.yt1210Store.playlist.length > 0) {
+      tracklist = this.props.yt1210Store.playlist.map(track => {
         return (
           <div
             key={track.videoId}
@@ -56,4 +58,4 @@ class PlaylistTracks extends Component {
   }
 }
 
-export default PlaylistTracks;
+export default withRouter(inject("yt1210Store")(observer(PlaylistTracks)));
