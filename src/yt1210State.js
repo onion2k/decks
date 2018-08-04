@@ -46,11 +46,28 @@ class yt1210Store {
     this.playing = true;
   });
 
-
   // add playlist
+
+  playlistAdd = action((title)=>{
+    this.playlists.push({ id: this.playlists.length+1, title: title, tracks: [] });
+  });
+
   // add track
+  playlistAddTrack = action((id, videoId)=>{
+    this.playlist = this.playlists.find((playlist) => playlist.id === id);
+    this.playlist.tracks.push({ title: "", videoId: videoId, duration: "" });
+  });
+
   // delete playlist
+  playlistAddTrack = action((index)=>{
+    this.playlists.splice(index, 1);
+  }
+
   // delete track
+  playlistDeleteTrack = action((id, index)=>{
+    this.playlist = this.playlists.find((playlist) => playlist.id === id);
+    this.playlist.tracks.splice(index, 1);
+  });
 
   updateTrackData = action((data, duration) => {
 
