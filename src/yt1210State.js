@@ -1,6 +1,8 @@
-import { decorate, observable, action, autorun } from "mobx";
+import { configure, decorate, observable, action, autorun } from "mobx";
 
 import fx from "./yt1210Sounds";
+
+configure({ enforceActions: true });
 
 class yt1210Store {
   
