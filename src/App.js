@@ -22,7 +22,7 @@ import About from "./Components/About";
 import PlaylistManager from "./Components/PlaylistManager";
 import ReactiveYouTube from "./Components/ReactiveYouTube";
 
-import yt1210State from "./yt1210State";
+import yt1210State from "./state/";
 
 class App extends Component {
   constructor(props) {
