@@ -1,4 +1,4 @@
-import { configure, decorate, observable, action, autorun } from "mobx";
+import { configure, decorate, observable, action, computed } from "mobx";
 
 configure({ enforceActions: true });
 
@@ -47,33 +47,33 @@ export default class yt12010PlaylistManager {
         this.playlist.tracks.splice(index, 1);
     });
 
+    get tracks() {
+        return this.playlists.find((playlist) => playlist.id === this.playlist).tracks;
+    };
+
     updateTrackData = action((data, duration) => {
-        console.log(data, duration)
-        const pl = this.playlists.find((playlist) => playlist.id === this.playlist).tracks;
-        const track = pl.find((track)=>track.videoId === data.video_id);
+        const track = this.tracks.find((track)=>track.videoId === data.video_id);
         track.title = data.title;
         track.duration = duration;
     });
 
     getTracks = action(() => {
-        const pl = this.playlists.find((playlist) => playlist.id === this.playlist).tracks;
-        return pl;
+        return this.tracks;
     });
 
     getCurrentTrack = action(() => {
-        const pl = this.playlists.find((playlist) => playlist.id === this.playlist).tracks;
-        return pl[this.current];
+        return this.tracks[this.current];
     });
 
     getNextTrack = action(() => {
-        const pl = this.playlists.find((playlist) => playlist.id === this.playlist).tracks;
-        return pl[this.current++];
+        return this.tracks[this.current++];
     });
 
 }
 
 decorate(yt12010PlaylistManager, {
     playlist: observable,
+    tracks: computed,
     playlists: observable,
     load: action,
     playlistAdd: action,
