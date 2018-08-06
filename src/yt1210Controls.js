@@ -2,7 +2,13 @@ import { configure, decorate, observable, action, autorun } from "mobx";
 
 import fx from "./yt1210Sounds";
 
+configure({ enforceActions: true });
+
 export default class yt1210Controls {
+
+    constructor(pm){
+      this.pm = pm;
+    }
     
     videoId = null;
   
@@ -15,7 +21,7 @@ export default class yt1210Controls {
     // play track
     play = action(() => {
       // set videoId
-      this.videoId = "v_yTphvyiPU";
+      this.videoId = this.pm.getCurrentTrack().videoId;
       this.playing = true;
   
       // play stylus fx
@@ -30,14 +36,12 @@ export default class yt1210Controls {
   
     // stop track
     stop = action(() => {
-      console.log("stop");
       this.playing = false;
     });
   
     // next track
     next = action(() => {
-      console.log("next");
-      this.videoId = "Rs38lKxmtI4";
+      this.videoId = this.pm.getNextTrack().videoId;
       // play scratchin fx
   
       // if skip, play drag fx

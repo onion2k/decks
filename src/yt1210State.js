@@ -1,13 +1,12 @@
-import { configure, decorate, observable, action, autorun } from "mobx";
 
 import playlistControls from "./yt1210Controls";
 import playlistManager from "./yt1210PlaylistManager";
 
-configure({ enforceActions: true });
+const pm = new playlistManager();
 
 const yt1210State = {
-  playlistControls: new playlistControls(),
-  playlistManager: new playlistManager()
+  playlistControls: new playlistControls(pm),
+  playlistManager: pm
 };
 
 export default yt1210State;

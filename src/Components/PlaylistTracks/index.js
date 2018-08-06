@@ -25,8 +25,8 @@ class PlaylistTracks extends Component {
   render() {
     let tracklist;
 
-    if (this.props.playlistManager.playlist.length > 0) {
-      tracklist = this.props.playlistManager.playlist.map(track => {
+    if (this.props.playlistManager.playlist) {
+      tracklist = this.props.playlistManager.getTracks().map(track => {
         return (
           <div
             key={track.videoId}
