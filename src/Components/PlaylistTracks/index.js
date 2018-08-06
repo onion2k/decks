@@ -25,8 +25,8 @@ class PlaylistTracks extends Component {
   render() {
     let tracklist;
 
-    if (this.props.yt1210Store.playlist.length > 0) {
-      tracklist = this.props.yt1210Store.playlist.map(track => {
+    if (this.props.playlistManager.playlist.length > 0) {
+      tracklist = this.props.playlistManager.playlist.map(track => {
         return (
           <div
             key={track.videoId}
@@ -58,4 +58,4 @@ class PlaylistTracks extends Component {
   }
 }
 
-export default withRouter(inject("yt1210Store")(observer(PlaylistTracks)));
+export default withRouter(inject("playlistManager")(observer(PlaylistTracks)));

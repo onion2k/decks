@@ -166,7 +166,7 @@ class Record extends Component {
       >
         <div
           className={
-            "Record" + (this.props.yt1210Store.playing === true ? " playing" : "")
+            "Record" + (this.props.playlistControls.playing === true ? " playing" : "")
           }
           style={{ backgroundImage: "url(" + record + ")" }}
         >
@@ -177,7 +177,7 @@ class Record extends Component {
         </div>
         <div
           className={
-            "Tonearm" + (this.props.yt1210Store.playing === true ? " playing" : "")
+            "Tonearm" + (this.props.playlistControls.playing === true ? " playing" : "")
           }
         >
           <img
@@ -192,4 +192,4 @@ class Record extends Component {
   }
 }
 
-export default inject("yt1210Store")(observer(Record));
+export default inject("playlistControls")(observer(Record));

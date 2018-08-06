@@ -6,7 +6,7 @@ import YouTube from "react-youtube";
 class ReactiveYouTube extends Component {
 
   playstate = autorun(() => {
-    const { playing } = this.props.yt1210Store;
+    const { playing } = this.props.playlistControls;
     if (this.player) {
       if (!playing) {
         this.player.pauseVideo();
@@ -27,7 +27,7 @@ class ReactiveYouTube extends Component {
 
     return (
       <YouTube
-        videoId={ this.props.yt1210Store.videoId }
+        videoId={ this.props.playlistControls.videoId }
         opts={opts}
         onReady={e => {
           this.player = e.target;
@@ -36,14 +36,14 @@ class ReactiveYouTube extends Component {
         onPlay={() => {
           let data = this.player.getVideoData();
           let duration = this.player.getDuration();
-          this.props.yt1210Store.updateTrackData(data, duration);
+          this.props.playlistManager.updateTrackData(data, duration);
         }}
         onEnd={() => {
-          this.props.yt1210Store.next();
+          this.props.playlistControls.next();
         }}
         onStateChange={e => {
           // 5 === cued
-          if (e.data === 5 && this.props.yt1210Store.playing) {
+          if (e.data === 5 && this.props.playlistControls.playing) {
             this.player.playVideo();
           }
         }}
@@ -52,4 +52,4 @@ class ReactiveYouTube extends Component {
   }
 }
 
-export default inject("yt1210Store")(observer(ReactiveYouTube));
+export default inject("playlistControls", "playlistManager")(observer(ReactiveYouTube));

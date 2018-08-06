@@ -27,14 +27,14 @@ class PlaylistManager extends Component {
   render() {
     let playlists;
 
-    if (this.props.yt1210Store.playlists.length > 0) {
-      playlists = this.props.yt1210Store.playlists.map(playlist => {
+    if (this.props.playlistManager.playlists.length > 0) {
+      playlists = this.props.playlistManager.playlists.map(playlist => {
         return (
           <div
             key={playlist.id}
             className={"track"}
             onClick={e => {
-              this.props.yt1210Store.load(playlist.id);
+              this.props.playlistManager.load(playlist.id);
               // this.props.playList(playlist.playlistId);
               this.props.history.push('/');
             }}
@@ -75,4 +75,4 @@ class PlaylistManager extends Component {
   }
 }
 
-export default withRouter(inject("yt1210Store")(observer(PlaylistManager)));
+export default withRouter(inject("playlistManager")(observer(PlaylistManager)));

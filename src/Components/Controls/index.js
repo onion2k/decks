@@ -25,7 +25,7 @@ class Controls extends Component {
         <div
           className="button play"
           onClick={e => {
-            this.props.yt1210Store.play(e);
+            this.props.playlistControls.play(e);
             // this.props.onPlayVideo(e, true);
           }}
         >
@@ -34,7 +34,7 @@ class Controls extends Component {
         <div
           className="button"
           onClick={e => {
-            this.props.yt1210Store.pause(e);
+            this.props.playlistControls.pause(e);
           }}
         >
           <i className="fa fa-pause" aria-hidden="true" />
@@ -42,7 +42,7 @@ class Controls extends Component {
         <div
           className="button"
           onClick={e => {
-            this.props.yt1210Store.stop(e);
+            this.props.playlistControls.stop(e);
           }}
         >
           <i className="fa fa-stop" aria-hidden="true" />
@@ -50,40 +50,40 @@ class Controls extends Component {
         <div
           className="button"
           onClick={e => {
-            this.props.yt1210Store.next(e);
+            this.props.playlistControls.next(e);
           }}
         >
           <i className="fa fa-step-forward" aria-hidden="true" />
         </div>
 
         <div
-          className={"toggle" + (this.props.yt1210Store.repeat ? " on" : "")}
+          className={"toggle" + (this.props.playlistControls.repeat ? " on" : "")}
           onClick={() => {
-            this.props.yt1210Store.repeat = !this.props.yt1210Store.repeat;
+            this.props.playlistControls.repeat = !this.props.playlistControls.repeat;
           }}
         >
           <i className="fa fa-repeat" aria-hidden="true" />
         </div>
         <div
-          className={"toggle" + (this.props.yt1210Store.shuffle ? " on" : "")}
+          className={"toggle" + (this.props.playlistControls.shuffle ? " on" : "")}
           onClick={() => {
-            this.props.yt1210Store.shuffle = !this.props.yt1210Store.shuffle;
+            this.props.playlistControls.shuffle = !this.props.playlistControls.shuffle;
           }}
         >
           <i className="fa fa-random" aria-hidden="true" />
         </div>
         <div
-          className={"toggle" + (this.props.yt1210Store.crackle ? " on" : "")}
+          className={"toggle" + (this.props.playlistControls.crackle ? " on" : "")}
           onClick={() => {
-            this.props.yt1210Store.crackle = !this.props.yt1210Store.crackle;
+            this.props.playlistControls.crackle = !this.props.playlistControls.crackle;
           }}
         >
           <i className="fa fa-headphones" aria-hidden="true" />
         </div>
         <div
-          className={"toggle" + (this.props.yt1210Store.video ? " on" : "")}
+          className={"toggle" + (this.props.playlistControls.video ? " on" : "")}
           onClick={() => {
-            this.props.yt1210Store.video = !this.props.yt1210Store.video;
+            this.props.playlistControls.video = !this.props.playlistControls.video;
           }}
         >
           <i className="fa fa-youtube" aria-hidden="true" />
@@ -93,4 +93,4 @@ class Controls extends Component {
   }
 }
 
-export default withRouter(inject("yt1210Store")(observer(Controls)));
+export default withRouter(inject("playlistControls")(observer(Controls)));
