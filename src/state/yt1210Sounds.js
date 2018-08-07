@@ -1,9 +1,9 @@
 import { Howl } from "howler";
 
-import ogg_crackle from "./sounds/crackle.ogg";
-import ogg_stylus from "./sounds/stylus.ogg";
-import ogg_scratchin from "./sounds/scratchin.ogg";
-import ogg_drag from "./sounds/drag.ogg";
+import ogg_crackle from "../sounds/crackle.ogg";
+import ogg_stylus from "../sounds/stylus.ogg";
+import ogg_scratchin from "../sounds/scratchin.ogg";
+import ogg_drag from "../sounds/drag.ogg";
 
 class sounds {
   ogg_stylus = new Howl({

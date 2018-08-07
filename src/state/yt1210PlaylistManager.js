@@ -17,12 +17,20 @@ export default class yt12010PlaylistManager {
           { title: "", videoId: "e4Ao-iNPPUc", duration: "" },
           { title: "", videoId: "FALYmqt-7TQ", duration: "" },
           { title: "", videoId: "a3Z4RWZa9WA", duration: "" }
-        ]}
+        ]},
+        { "id": 2, "title": "Playlist 2", tracks: [
+            { title: "", videoId: "a3Z4RWZa9WA", duration: "" },
+            { title: "", videoId: "BuVJEn9wk9Y", duration: "" },
+            { title: "", videoId: "Rs38lKxmtI4", duration: "" },
+            { title: "", videoId: "v_yTphvyiPU", duration: "" },
+            { title: "", videoId: "e4Ao-iNPPUc", duration: "" },
+            { title: "", videoId: "FALYmqt-7TQ", duration: "" }
+          ]}
     ];
 
     load = action((id) => {
         this.playlist = id;
-        const pl = this.playlists.find((playlist) => playlist.id === this.playlist).tracks;
+        // const pl = this.playlists.find((playlist) => playlist.id === this.playlist).tracks;
     });
 
     // add playlist

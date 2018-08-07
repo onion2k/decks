@@ -23,6 +23,7 @@ class Record extends Component {
     this.lastX = 0;
 
     this.state = {
+      requestAnimationFrameId: null,
       title: "Unknown",
       label: "",
       dragtone: false,
@@ -53,14 +54,30 @@ class Record extends Component {
       }
     }
 
-    // this.setState({
-    //     millis: Date.now(),
-    //     request: requestAnimationFrame(this.tick),
-    //     tonestart: toneangle,
-    //     toneangle: toneangle,
-    //     tonestyle: 'rotate('+toneangle+'deg)',
-    //     toneanimto: toneanimto
-    // });
+    this.setState({
+        millis: Date.now(),
+        requestAnimationFrameId: requestAnimationFrame(this.tick),
+        tonestart: toneangle,
+        toneangle: toneangle,
+        tonestyle: 'rotate('+toneangle+'deg)',
+        toneanimto: toneanimto
+    });
+  }
+
+  componentWillReact(){
+    let state = this.state;
+    state.label = "https://img.youtube.com/vi/BuVJEn9wk9Y/0.jpg";
+    state.title = "Song Title";
+    if (this.props.playlistControls.playing === true) {
+      if (!this.state.requestAnimationFrameId) {
+        state.requestAnimationFrameId = requestAnimationFrame(this.tick);
+      }
+    } else if (this.state.requestAnimationFrameId) {
+      cancelAnimationFrame(this.state.requestAnimationFrameId);
+    }
+    this.setState(state);
+    // label: "https://img.youtube.com/vi/" + this.props.playlistControls.videoId + "/0.jpg",
+    // title: this.props.playlistControls.title
   }
 
   componentWillReceiveProps(nextProps) {
@@ -93,8 +110,8 @@ class Record extends Component {
 
   armMove(e) {
     if (this.state.dragtone) {
-      if (this.state.request) {
-        cancelAnimationFrame(this.state.request);
+      if (this.state.requestAnimationFrameId) {
+        cancelAnimationFrame(this.state.requestAnimationFrameId);
       }
       let toneangle = this.state.tonestart + (e.pageX - this.lastX) / 10;
       if (toneangle < -54) {
@@ -104,7 +121,7 @@ class Record extends Component {
         toneangle = -19;
       }
       this.setState({
-        request: false,
+        requestAnimationFrameId: false,
         toneangle: toneangle,
         tonestyle: "rotate(" + toneangle + "deg)"
       });
