@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
+import { autorun } from "mobx";
 import record from "../../img/record.png";
 import tonearm from "../../img/tonearm.png";
 import "./Record.css";
@@ -14,6 +15,12 @@ const tracks = [
 ];
 
 class Record extends Component {
+
+  track = autorun(() => {
+    const { track } = this.props.playlistManager;
+    console.log("Track changed", track, this.props.playlistManager.track);
+  });
+
   constructor(props) {
     super(props);
 
@@ -81,7 +88,7 @@ class Record extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let request = false;
+    // let request = false;
 
     // if (nextProps.vData.videoId === null) {
     //   return;
@@ -209,4 +216,4 @@ class Record extends Component {
   }
 }
 
-export default inject("playlistControls")(observer(Record));
+export default inject("playlistControls", "playlistManager")(observer(Record));

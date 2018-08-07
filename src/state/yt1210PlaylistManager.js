@@ -7,7 +7,7 @@ export default class yt12010PlaylistManager {
     // Playlists
 
     playlist = 1;
-    current = 0;
+    track = 0;
 
     playlists = [
         { "id": 1, "title": "Playlist 1", tracks: [
@@ -70,17 +70,18 @@ export default class yt12010PlaylistManager {
     });
 
     getCurrentTrack = action(() => {
-        return this.tracks[this.current];
+        return this.tracks[this.track];
     });
 
     getNextTrack = action(() => {
-        return this.tracks[this.current++];
+        return this.tracks[this.track++];
     });
 
 }
 
 decorate(yt12010PlaylistManager, {
     playlist: observable,
+    track: observable,
     tracks: computed,
     playlists: observable,
     load: action,
