@@ -8,6 +8,7 @@ export default class yt12010PlaylistManager {
 
     playlist = 1;
     track = 0;
+    currentTrack = { videoId: "", label: "" };
 
     playlists = [
         { "id": 1, "title": "Playlist 1", tracks: [
@@ -28,62 +29,65 @@ export default class yt12010PlaylistManager {
           ]}
     ];
 
-    load = action((id) => {
+    load = (id) => {
         this.playlist = id;
         // const pl = this.playlists.find((playlist) => playlist.id === this.playlist).tracks;
-    });
+    };
 
     // add playlist
-    playlistAdd = action((title)=>{
+    playlistAdd = (title)=>{
         this.playlists.push({ id: this.playlists.length+1, title: title, tracks: [] });
-    });
+    };
 
     // delete playlist
-    playlistDelete = action((index)=>{
+    playlistDelete = (index)=>{
         this.playlists.splice(index, 1);
-    });
+    };
 
     // add track
-    playlistAddTrack = action((id, videoId)=>{
+    playlistAddTrack = (id, videoId)=>{
         this.playlist = this.playlists.find((playlist) => playlist.id === id);
         this.playlist.tracks.push({ title: "", videoId: videoId, duration: "" });
-    });
+    };
 
     // delete track
-    playlistDeleteTrack = action((id, index)=>{
+    playlistDeleteTrack = (id, index)=>{
         this.playlist = this.playlists.find((playlist) => playlist.id === id);
         this.playlist.tracks.splice(index, 1);
-    });
+    };
 
     get tracks() {
         return this.playlists.find((playlist) => playlist.id === this.playlist).tracks;
     };
 
-    updateTrackData = action((data, duration) => {
+    updateTrackData = (data, duration) => {
         const track = this.tracks.find((track)=>track.videoId === data.video_id);
-        track.title = data.title;
-        track.duration = duration;
-    });
+              track.title = data.title;
+              track.duration = duration;
 
-    getTracks = action(() => {
+        this.currentTrack = track;
+    };
+
+    getTracks = () => {
         return this.tracks;
-    });
+    };
 
-    getCurrentTrack = action(() => {
+    getCurrentTrack = () => {
         return this.tracks[this.track];
-    });
+    };
 
-    getNextTrack = action(() => {
+    getNextTrack = () => {
         return this.tracks[this.track++];
-    });
+    };
 
 }
 
 decorate(yt12010PlaylistManager, {
+    currentTrack: observable,
+    playlists: observable,
     playlist: observable,
     track: observable,
     tracks: computed,
-    playlists: observable,
     load: action,
     playlistAdd: action,
     playlistDelete: action,

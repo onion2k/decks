@@ -16,11 +16,6 @@ const tracks = [
 
 class Record extends Component {
 
-  track = autorun(() => {
-    const { track } = this.props.playlistManager;
-    console.log("Track changed", track, this.props.playlistManager.track);
-  });
-
   constructor(props) {
     super(props);
 
@@ -28,6 +23,8 @@ class Record extends Component {
     this.armUp = this.armUp.bind(this);
     this.tick = this.tick.bind(this);
     this.lastX = 0;
+
+    this.requestAnimationFrameId = null;
 
     this.state = {
       requestAnimationFrameId: null,
@@ -41,6 +38,25 @@ class Record extends Component {
     };
   }
 
+  track = autorun(() => {
+    const { track } = this.props.playlistManager;
+
+    if (track) {
+      this.setState({
+        toneanimto: tracks[track-1].s
+      });
+      if (this.props.playlistControls.playing === true) {
+        if (!this.requestAnimationFrameId) {
+          this.requestAnimationFrameId = requestAnimationFrame(this.tick);
+        }
+      } else if (this.requestAnimationFrameId) {
+        cancelAnimationFrame(this.requestAnimationFrameId);
+      }
+    }
+
+  });
+
+
   tick() {
     var toneangle, toneanimto;
 
@@ -48,7 +64,7 @@ class Record extends Component {
 
     if (this.state.toneanimto === null) {
       toneanimto = null;
-      toneangle = this.state.toneangle + 0.001;
+      toneangle = this.state.toneangle + 0.001; // This will die on it's arse on a long track
     } else {
       if (this.state.toneanimto > this.state.toneangle) {
         toneangle = this.state.toneangle + 0.15;
@@ -69,50 +85,6 @@ class Record extends Component {
         tonestyle: 'rotate('+toneangle+'deg)',
         toneanimto: toneanimto
     });
-  }
-
-  componentWillReact(){
-    let state = this.state;
-    state.label = "https://img.youtube.com/vi/BuVJEn9wk9Y/0.jpg";
-    state.title = "Song Title";
-    if (this.props.playlistControls.playing === true) {
-      if (!this.state.requestAnimationFrameId) {
-        state.requestAnimationFrameId = requestAnimationFrame(this.tick);
-      }
-    } else if (this.state.requestAnimationFrameId) {
-      cancelAnimationFrame(this.state.requestAnimationFrameId);
-    }
-    this.setState(state);
-    // label: "https://img.youtube.com/vi/" + this.props.playlistControls.videoId + "/0.jpg",
-    // title: this.props.playlistControls.title
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // let request = false;
-
-    // if (nextProps.vData.videoId === null) {
-    //   return;
-    // }
-
-    // if (nextProps.tonearmPos === null) {
-    //   this.setState({ toneanimto: null });
-    // } else {
-    //   this.setState({ toneanimto: tracks[nextProps.tonearmPos].s });
-    // }
-    // if (nextProps.playing === true) {
-    //   if (!this.state.request) {
-    //     request = requestAnimationFrame(this.tick);
-    //   }
-    // } else {
-    //   cancelAnimationFrame(this.state.request);
-    // }
-
-    // this.setState({
-    //   request: request, //requestAnimationFrame ID for cancelling
-    //   label: "https://img.youtube.com/vi/" + nextProps.vData.videoId + "/0.jpg",
-    //   title: nextProps.vData.title
-    // });
-
   }
 
   armMove(e) {
@@ -174,6 +146,7 @@ class Record extends Component {
   }
 
   render() {
+
     return (
       <div
         className="Deck"
@@ -195,8 +168,8 @@ class Record extends Component {
           style={{ backgroundImage: "url(" + record + ")" }}
         >
           <div className="label">
-            <img src={this.state.label} alt="Record" />
-            <span className="title">{this.state.title}</span>
+            <img src={"https://img.youtube.com/vi/" + this.props.playlistManager.currentTrack.videoId + "/0.jpg"} alt="Record" />
+            <span className="title">{this.props.playlistManager.currentTrack.title}</span>
           </div>
         </div>
         <div
