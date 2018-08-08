@@ -64,7 +64,6 @@ export default class yt12010PlaylistManager {
         const track = this.tracks.find((track)=>track.videoId === data.video_id);
               track.title = data.title;
               track.duration = duration;
-
         this.currentTrack = track;
     };
 
@@ -80,6 +79,10 @@ export default class yt12010PlaylistManager {
         return this.tracks[this.track++];
     };
 
+    getTrackById = (id) => {
+        this.track = this.tracks.findIndex((track) => track.videoId === id);
+        return this.tracks[this.track];
+    };
 }
 
 decorate(yt12010PlaylistManager, {

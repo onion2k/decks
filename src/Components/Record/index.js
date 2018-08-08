@@ -45,13 +45,13 @@ class Record extends Component {
       this.setState({
         toneanimto: tracks[track-1].s
       });
-      if (this.props.playlistControls.playing === true) {
-        if (!this.requestAnimationFrameId) {
-          this.requestAnimationFrameId = requestAnimationFrame(this.tick);
-        }
-      } else if (this.requestAnimationFrameId) {
-        cancelAnimationFrame(this.requestAnimationFrameId);
-      }
+      // if (this.props.playlistControls.playing === true) {
+      //   if (!this.requestAnimationFrameId) {
+      //     this.requestAnimationFrameId = requestAnimationFrame(this.tick);
+      //   }
+      // } else if (this.requestAnimationFrameId) {
+      //   cancelAnimationFrame(this.requestAnimationFrameId);
+      // }
     }
 
   });

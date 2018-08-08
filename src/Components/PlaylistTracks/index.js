@@ -35,7 +35,7 @@ class PlaylistTracks extends Component {
               (track.videoId === this.props.playing ? " playing" : "") +
               (track.found ? " found" : "")
             }
-            onClick={e => this.props.onClick(track.videoId)}
+            onClick={e => this.props.playlistControls.play(track.videoId)}
           >
             <i
               className="fa fa-trash"
@@ -58,4 +58,4 @@ class PlaylistTracks extends Component {
   }
 }
 
-export default withRouter(inject("playlistManager")(observer(PlaylistTracks)));
+export default withRouter(inject("playlistControls","playlistManager")(observer(PlaylistTracks)));

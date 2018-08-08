@@ -19,9 +19,13 @@ export default class yt1210Controls {
     video = true;
   
     // play track
-    play = () => {
+    play = (id = null) => {
       // set videoId
-      this.videoId = this.pm.getCurrentTrack().videoId;
+      if (!id) {
+        this.videoId = this.pm.getCurrentTrack().videoId;
+      } else {
+        this.videoId = this.pm.getTrackById(id).videoId;
+      }
       this.playing = true;
   
       // play stylus fx
