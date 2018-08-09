@@ -52,30 +52,24 @@ export default class yt1210Controls {
     };
   
     // copy playlist from youtube
+
+
+    toggle_repeat = () => {
+      this.repeat = !this.repeat;
+      if (this.repeat) { fx.ogg_scratchin.play(); }
+    }
   
-    onToggle_repeat = autorun(() => {
-      if (this.repeat) {
-        fx.ogg_scratchin.play();
-      } else {
-        console.log("no repeat");
-      }
-    });
+    toggle_shuffle = () => {
+      this.shuffle = !this.shuffle;
+    };
   
-    onToggle_shuffle = autorun(() => {
-      if (this.shuffle) {
-        console.log("shuffle");
-      } else {
-        console.log("no shuffle");
-      }
-    });
-  
-    onToggle_crackle = autorun(() => {
-      if (!this.crackle && this.playing) {
-        console.log("Crackling");
-      } else {
-        console.log("Stopping");
-      }
-    });
+    toggle_crackle = () => {
+      this.crackle = !this.crackle;
+    };
+
+    toggle_video = () => {
+      this.video = !this.video;
+    };
   }
   
   decorate(yt1210Controls, {
@@ -83,6 +77,10 @@ export default class yt1210Controls {
     pause: action,
     stop: action,
     next: action,
+    toggle_repeat: action,
+    toggle_shuffle: action,
+    toggle_crackle: action,
+    toggle_video: action,
     videoId: observable,
     playing: observable,
     crackle: observable,

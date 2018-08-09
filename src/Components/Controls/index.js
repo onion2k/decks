@@ -58,33 +58,25 @@ class Controls extends Component {
 
         <div
           className={"toggle" + (this.props.playlistControls.repeat ? " on" : "")}
-          onClick={() => {
-            this.props.playlistControls.repeat = !this.props.playlistControls.repeat;
-          }}
+          onClick={this.props.playlistControls.toggle_repeat}
         >
           <i className="fa fa-repeat" aria-hidden="true" />
         </div>
         <div
           className={"toggle" + (this.props.playlistControls.shuffle ? " on" : "")}
-          onClick={() => {
-            this.props.playlistControls.shuffle = !this.props.playlistControls.shuffle;
-          }}
+          onClick={this.props.playlistControls.toggle_shuffle}
         >
           <i className="fa fa-random" aria-hidden="true" />
         </div>
         <div
           className={"toggle" + (this.props.playlistControls.crackle ? " on" : "")}
-          onClick={() => {
-            this.props.playlistControls.crackle = !this.props.playlistControls.crackle;
-          }}
+          onClick={this.props.playlistControls.toggle_crackle}
         >
           <i className="fa fa-headphones" aria-hidden="true" />
         </div>
         <div
           className={"toggle" + (this.props.playlistControls.video ? " on" : "")}
-          onClick={() => {
-            this.props.playlistControls.video = !this.props.playlistControls.video;
-          }}
+          onClick={this.props.playlistControls.toggle_video}
         >
           <i className="fa fa-youtube" aria-hidden="true" />
         </div>
