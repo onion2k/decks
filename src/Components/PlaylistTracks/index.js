@@ -32,8 +32,7 @@ class PlaylistTracks extends Component {
             key={track.videoId}
             className={
               "track" +
-              (track.videoId === this.props.playing ? " playing" : "") +
-              (track.found ? " found" : "")
+              (track.videoId === this.props.playlistManager.currentTrack.videoId ? " playing" : "")
             }
             onClick={e => this.props.playlistControls.play(track.videoId)}
           >

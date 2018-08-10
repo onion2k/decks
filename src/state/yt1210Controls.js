@@ -1,4 +1,4 @@
-import { configure, decorate, observable, action, autorun } from "mobx";
+import { configure, decorate, observable, action } from "mobx";
 
 import fx from "./yt1210Sounds";
 
