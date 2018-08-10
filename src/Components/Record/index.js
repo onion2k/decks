@@ -23,7 +23,6 @@ class Record extends Component {
     // this.armUp = this.armUp.bind(this);
     // this.tick = this.tick.bind(this);
     this.lastX = 0;
-
     this.requestAnimationFrameId = null;
 
     // this.state = {
@@ -171,6 +170,7 @@ class Record extends Component {
             <span className="title">{this.props.playlistManager.currentTrack.title}</span>
           </div>
         </div>
+
         <div
           className={
             "Tonearm" + (this.props.playlistControls.playing === true ? " playing" : "")

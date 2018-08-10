@@ -20,7 +20,7 @@ export default class yt1210Controls {
   
     // play track
     play = (id = null) => {
-      if (!id) {
+      if (id!==null) {
         this.videoId = this.pm.getCurrentTrack().videoId;
       } else {
         this.videoId = this.pm.getTrackById(id).videoId;
