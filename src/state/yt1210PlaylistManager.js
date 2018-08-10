@@ -63,7 +63,6 @@ export default class yt12010PlaylistManager {
                 let lsTrackDetailsJson = JSON.parse(lsTrackDetails);
                 track.title = lsTrackDetailsJson.title.substr(0, 50);
                 track.duration = lsTrackDetailsJson.duration;
-                track.found = true;
             }
             return track;
         });
@@ -73,6 +72,7 @@ export default class yt12010PlaylistManager {
         const track = this.tracks.find((track)=>track.videoId === data.video_id);
               track.title = data.title;
               track.duration = duration;
+        localStorage.setItem('yt1210-'+track.videoId, JSON.stringify({ title: track.title, duration: track.duration }));
         this.currentTrack = track;
     };
 
