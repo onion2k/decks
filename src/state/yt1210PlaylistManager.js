@@ -57,8 +57,25 @@ export default class yt12010PlaylistManager {
     };
 
     get tracks() {
-        return this.playlists.find((playlist) => playlist.id === this.playlist).tracks;
+        return this.playlists.find((playlist) => playlist.id === this.playlist).tracks.map((track)=>{
+            let lsPlDetails = localStorage.getItem("yt1210-" + track.videoId);
+            if (lsPlDetails) {
+                let lsPlDetailsJson = JSON.parse(lsPlDetails);
+                track.title = lsPlDetailsJson.title.substr(0, 50);
+                track.duration = lsPlDetailsJson.duration;
+                track.found = true;
+            }
+            return track;
+        });
     };
+
+    // var lsPlDetails = localStorage.getItem("yt1210-" + track.videoId);
+    // if (lsPlDetails) {
+    //   let lsPlDetailsJson = JSON.parse(lsPlDetails);
+    //   track.title = lsPlDetailsJson.title.substr(0, 50);
+    //   track.duration = lsPlDetailsJson.duration;
+    //   track.found = true;
+    // }
 
     updateTrackData = (data, duration) => {
         const track = this.tracks.find((track)=>track.videoId === data.video_id);

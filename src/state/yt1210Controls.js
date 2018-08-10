@@ -20,22 +20,17 @@ export default class yt1210Controls {
   
     // play track
     play = (id = null) => {
-      // set videoId
       if (!id) {
         this.videoId = this.pm.getCurrentTrack().videoId;
       } else {
         this.videoId = this.pm.getTrackById(id).videoId;
       }
       this.playing = true;
-  
-      // play stylus fx
-      // if crackle and crackle is not playing, play crackle fx
     };
   
     // pause track
     pause = () => {
       this.playing = !this.playing;
-      // if crackle, pause crackle fx
     };
   
     // stop track
@@ -46,13 +41,10 @@ export default class yt1210Controls {
     // next track
     next = () => {
       this.videoId = this.pm.getNextTrack().videoId;
-      // play scratchin fx
-  
-      // if skip, play drag fx
+      this.playing = true;
     };
   
     // copy playlist from youtube
-
 
     toggle_repeat = () => {
       this.repeat = !this.repeat;
