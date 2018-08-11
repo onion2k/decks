@@ -40,8 +40,12 @@ export default class yt1210Controls {
   
     // next track
     next = () => {
-      this.videoId = this.pm.getNextTrack().videoId;
-      this.playing = true;
+        if (this.shuffle) {
+            this.videoId = this.pm.getNextTrack().videoId;
+        } else {
+            this.videoId = this.pm.getNextTrack().videoId;
+        }
+        this.playing = true;
     };
   
     // copy playlist from youtube
