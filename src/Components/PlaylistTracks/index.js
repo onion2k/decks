@@ -41,7 +41,7 @@ class PlaylistTracks extends Component {
               aria-hidden="true"
               onClick={e => {
                 e.stopPropagation();
-                this.props.onDelete(track.videoId);
+                // this.props.onDelete(track.videoId);
               }}
             />{" "}
             <i className="fa fa-music" aria-hidden="true" />{" "}

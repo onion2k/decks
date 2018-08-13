@@ -435,7 +435,7 @@ class App extends Component {
 //       } else {
 //         pl = JSON.parse(plJson);
 //       }
-    }
+//    }
 
 //     if (videoId) {
 //       pl.push({ videoId: videoId, title: "", playing: false, duration: 0, found: false });
@@ -464,9 +464,9 @@ class App extends Component {
         <div className="App">
           <Record
             onTrack={this.onTrack}
-            vData={this.state.vData}
-            playing={this.state.playing}
-            tonearmPos={this.state.tonearmPos}
+            // vData={this.state.vData}
+            // playing={this.state.playing}
+            // tonearmPos={this.state.tonearmPos}
           />
           <div className="controls">
             <div className="titleControls">
@@ -484,11 +484,11 @@ class App extends Component {
               onStopVideo={this.onStopVideo}
               onChangeVideo={this.onChangeVideo}
               // onToggle={ this.onToggle }
-              playing={this.state.playing}
-              repeat={this.state.repeat}
-              shuffle={this.state.shuffle}
-              crackle={this.state.crackle}
-              video={this.state.video}
+              // playing={this.state.playing}
+              // repeat={this.state.repeat}
+              // shuffle={this.state.shuffle}
+              // crackle={this.state.crackle}
+              // video={this.state.video}
             />
             <Switch>
               <Route path="/about" component={About} />
@@ -497,10 +497,10 @@ class App extends Component {
                 component={() => {
                   return (
                     <PlaylistManager
-                      playList={this.playList}
-                      addList={this.addList}
-                      deleteList={this.deleteList}
-                      playlists={this.state.playlists}
+                      // playList={this.playList}
+                      // addList={this.addList}
+                      // deleteList={this.deleteList}
+                      // playlists={this.state.playlists}
                     />
                   );
                 }}
@@ -509,10 +509,10 @@ class App extends Component {
                 component={() => {
                   return (
                     <Playlist
-                      title={this.state.playlistTitle}
-                      playlist={this.state.playlist}
-                      trackData={this.state.trackData}
-                      playing={this.state.videoId}
+                      // title={this.state.playlistTitle}
+                      // playlist={this.state.playlist}
+                      // trackData={this.state.trackData}
+                      // playing={this.state.videoId}
                       onClick={i => {
                         this.onChangeVideo(i);
                       }}
