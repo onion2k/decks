@@ -35,7 +35,6 @@ class PlaylistManager extends Component {
             className={"track"}
             onClick={e => {
               this.props.playlistManager.load(playlist.id);
-              // this.props.playList(playlist.playlistId);
               this.props.history.push('/');
             }}
           >
@@ -49,7 +48,7 @@ class PlaylistManager extends Component {
               }}
             />{" "}
             <i className="fa fa-list" aria-hidden="true" /> {playlist.title}{" "}
-            <span>{playlist.length || "No"} tracks</span>
+            <span>{playlist.tracks.length || "No"} tracks</span>
           </div>
         );
       });
