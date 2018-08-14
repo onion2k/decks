@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Provider } from "mobx-react";
 import { Switch, Route } from "react-router-dom";
-import queryString from "query-string";
 
 import "./App.css";
 

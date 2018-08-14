@@ -21,7 +21,7 @@ class PlaylistManager extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    // this.props.addList(this.state);
+    this.props.playlistManager.playlistAdd(this.state.newlist);
   }
 
   render() {

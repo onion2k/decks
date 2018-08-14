@@ -1,4 +1,5 @@
 import { configure, decorate, observable, action, computed } from "mobx";
+import queryString from "query-string";
 
 configure({ enforceActions: true });
 
@@ -12,12 +13,12 @@ export default class yt12010PlaylistManager {
 
     playlists = [
         { "id": 1, "title": "Playlist 1", tracks: [
-          { title: "", videoId: "BuVJEn9wk9Y", duration: "" },
-          { title: "", videoId: "Rs38lKxmtI4", duration: "" },
-          { title: "", videoId: "v_yTphvyiPU", duration: "" },
-          { title: "", videoId: "e4Ao-iNPPUc", duration: "" },
-          { title: "", videoId: "FALYmqt-7TQ", duration: "" },
-          { title: "", videoId: "a3Z4RWZa9WA", duration: "" }
+            { title: "", videoId: "BuVJEn9wk9Y", duration: "" },
+            { title: "", videoId: "Rs38lKxmtI4", duration: "" },
+            { title: "", videoId: "v_yTphvyiPU", duration: "" },
+            { title: "", videoId: "e4Ao-iNPPUc", duration: "" },
+            { title: "", videoId: "FALYmqt-7TQ", duration: "" },
+            { title: "", videoId: "a3Z4RWZa9WA", duration: "" }
         ]},
         { "id": 2, "title": "Playlist 2", tracks: [
             { title: "", videoId: "a3Z4RWZa9WA", duration: "" },
@@ -26,7 +27,7 @@ export default class yt12010PlaylistManager {
             { title: "", videoId: "v_yTphvyiPU", duration: "" },
             { title: "", videoId: "e4Ao-iNPPUc", duration: "" },
             { title: "", videoId: "FALYmqt-7TQ", duration: "" }
-          ]}
+        ]}
     ];
 
     get title() {
@@ -35,15 +36,20 @@ export default class yt12010PlaylistManager {
 
     get tracks() {
         return this.playlists.find((playlist) => playlist.id === this.playlist).tracks.map((track)=>{
+            let t = { videoId: track.videoId };
             let lsTrackDetails = localStorage.getItem("yt1210-" + track.videoId);
             if (lsTrackDetails) {
                 let lsTrackDetailsJson = JSON.parse(lsTrackDetails);
-                track.title = lsTrackDetailsJson.title.substr(0, 50);
-                track.duration = lsTrackDetailsJson.duration;
+                t.title = lsTrackDetailsJson.title.substr(0, 50);
+                t.duration = lsTrackDetailsJson.duration;
             }
-            return track;
+            return t;
         });
     };
+
+    // set tracks(id) {
+    //     this.playlists.find((playlist) => playlist.id === this.playlist).tracks.push({ title: "", videoId: id, duration: "" });
+    // };
 
     load = (id) => {
         this.playlist = id;
@@ -61,9 +67,10 @@ export default class yt12010PlaylistManager {
     };
 
     // add track
-    playlistAddTrack = (id, videoId)=>{
-        this.playlist = this.playlists.find((playlist) => playlist.id === id);
-        this.playlist.tracks.push({ title: "", videoId: videoId, duration: "" });
+    playlistAddTrack = (link)=>{
+        const url = queryString.parse(link.substr(link.indexOf('?')));
+        this.playlists.find((playlist) => playlist.id === this.playlist).tracks.push({ title: "", videoId: url.v, duration: "" });
+        console.log(url.v);
     };
 
     // delete track

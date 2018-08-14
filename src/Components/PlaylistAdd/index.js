@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { inject, observer } from "mobx-react";
 
 class PlaylistAdd extends Component {
   constructor() {
@@ -15,7 +16,7 @@ class PlaylistAdd extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.addTrack(this.state);
+    this.props.playlistManager.playlistAddTrack(this.state.newtrack);
   }
 
   render() {
@@ -31,4 +32,4 @@ class PlaylistAdd extends Component {
   }
 }
 
-export default PlaylistAdd;
+export default inject("playlistManager")(observer(PlaylistAdd));
