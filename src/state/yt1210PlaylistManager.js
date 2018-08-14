@@ -29,6 +29,22 @@ export default class yt12010PlaylistManager {
           ]}
     ];
 
+    get title() {
+        return this.playlists.find((playlist) => playlist.id === this.playlist).title;
+    };
+
+    get tracks() {
+        return this.playlists.find((playlist) => playlist.id === this.playlist).tracks.map((track)=>{
+            let lsTrackDetails = localStorage.getItem("yt1210-" + track.videoId);
+            if (lsTrackDetails) {
+                let lsTrackDetailsJson = JSON.parse(lsTrackDetails);
+                track.title = lsTrackDetailsJson.title.substr(0, 50);
+                track.duration = lsTrackDetailsJson.duration;
+            }
+            return track;
+        });
+    };
+
     load = (id) => {
         this.playlist = id;
         // const pl = this.playlists.find((playlist) => playlist.id === this.playlist).tracks;
@@ -54,22 +70,6 @@ export default class yt12010PlaylistManager {
     playlistDeleteTrack = (id, index)=>{
         this.playlist = this.playlists.find((playlist) => playlist.id === id);
         this.playlist.tracks.splice(index, 1);
-    };
-
-    get title() {
-        return this.playlists.find((playlist) => playlist.id === this.playlist).title;
-    };
-
-    get tracks() {
-        return this.playlists.find((playlist) => playlist.id === this.playlist).tracks.map((track)=>{
-            let lsTrackDetails = localStorage.getItem("yt1210-" + track.videoId);
-            if (lsTrackDetails) {
-                let lsTrackDetailsJson = JSON.parse(lsTrackDetails);
-                track.title = lsTrackDetailsJson.title.substr(0, 50);
-                track.duration = lsTrackDetailsJson.duration;
-            }
-            return track;
-        });
     };
 
     updateTrackData = (data, duration) => {

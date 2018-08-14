@@ -25,8 +25,7 @@ class Controls extends Component {
         <div
           className="button play"
           onClick={e => {
-            this.props.playlistControls.play(e);
-            // this.props.onPlayVideo(e, true);
+            this.props.playlistControls.play();
           }}
         >
           <i className="fa fa-play" aria-hidden="true" />
@@ -34,7 +33,7 @@ class Controls extends Component {
         <div
           className="button"
           onClick={e => {
-            this.props.playlistControls.pause(e);
+            this.props.playlistControls.pause();
           }}
         >
           <i className="fa fa-pause" aria-hidden="true" />
@@ -42,7 +41,7 @@ class Controls extends Component {
         <div
           className="button"
           onClick={e => {
-            this.props.playlistControls.stop(e);
+            this.props.playlistControls.stop();
           }}
         >
           <i className="fa fa-stop" aria-hidden="true" />
@@ -50,7 +49,7 @@ class Controls extends Component {
         <div
           className="button"
           onClick={e => {
-            this.props.playlistControls.next(e);
+            this.props.playlistControls.next();
           }}
         >
           <i className="fa fa-step-forward" aria-hidden="true" />
