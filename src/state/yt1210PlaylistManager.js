@@ -56,6 +56,10 @@ export default class yt12010PlaylistManager {
         this.playlist.tracks.splice(index, 1);
     };
 
+    get title() {
+        return this.playlists.find((playlist) => playlist.id === this.playlist).title;
+    };
+
     get tracks() {
         return this.playlists.find((playlist) => playlist.id === this.playlist).tracks.map((track)=>{
             let lsTrackDetails = localStorage.getItem("yt1210-" + track.videoId);
@@ -99,6 +103,7 @@ decorate(yt12010PlaylistManager, {
     playlists: observable,
     playlist: observable,
     track: observable,
+    title: computed,
     tracks: computed,
     load: action,
     playlistAdd: action,
