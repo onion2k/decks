@@ -79,7 +79,7 @@
     color: #3EAF3E;
 }
 
-.playing::before {
+.track.playing::before {
     content: '';
     position: absolute;
     top: 0;

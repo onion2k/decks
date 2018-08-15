@@ -7,10 +7,15 @@ export default class yt12010PlaylistManager {
 
     // Playlists
 
+    // state
     playlist = 1;
     track = 0;
     currentTrack = { videoId: "", label: "" };
 
+    // auth
+    user = 1;
+
+    // user data
     playlists = [
         { "id": 1, "title": "Playlist 1", tracks: [
             { title: "", videoId: "BuVJEn9wk9Y", duration: "" },
