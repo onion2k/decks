@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import "./About.css";
 
 class About extends Component {
+
   render() {
     return (
       <div className="About">
+
         <p>A video playlist manager with a record player UI.</p>
 
         <p>
