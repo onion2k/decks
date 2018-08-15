@@ -41,9 +41,12 @@ class Record extends Component {
     const { track } = this.props.playlistManager;
 
     if (track) {
-      this.setState({
-        toneanimto: tracks[track-1].s
-      });
+      if (track > -1 && track < tracks.length) {
+        this.setState({
+          toneanimto: tracks[track-1].s
+        });
+      }
+
       // if (this.props.playlistControls.playing === true) {
       //   if (!this.requestAnimationFrameId) {
       //     this.requestAnimationFrameId = requestAnimationFrame(this.tick);

@@ -9,13 +9,9 @@ class Playlist extends Component {
   render() {
     return (
       <div className="PlaylistWrapper">
-        <PlaylistTitle title={this.props.title} />
-        <PlaylistTracks
-          playlist={this.props.playlist}
-          onClick={this.props.onClick}
-          onDelete={this.props.onDelete}
-        />
-        <PlaylistAdd addTrack={this.props.addTrack} />
+        <PlaylistTitle />
+        <PlaylistTracks />
+        <PlaylistAdd />
       </div>
     );
   }

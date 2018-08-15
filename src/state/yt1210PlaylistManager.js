@@ -47,13 +47,8 @@ export default class yt12010PlaylistManager {
         });
     };
 
-    // set tracks(id) {
-    //     this.playlists.find((playlist) => playlist.id === this.playlist).tracks.push({ title: "", videoId: id, duration: "" });
-    // };
-
     load = (id) => {
         this.playlist = id;
-        // const pl = this.playlists.find((playlist) => playlist.id === this.playlist).tracks;
     };
 
     // add playlist
@@ -70,7 +65,6 @@ export default class yt12010PlaylistManager {
     playlistAddTrack = (link)=>{
         const url = queryString.parse(link.substr(link.indexOf('?')));
         this.playlists.find((playlist) => playlist.id === this.playlist).tracks.push({ title: "", videoId: url.v, duration: "" });
-        console.log(url.v);
     };
 
     // delete track

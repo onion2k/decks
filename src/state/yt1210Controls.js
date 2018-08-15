@@ -11,7 +11,6 @@ export default class yt1210Controls {
     }
     
     videoId = null;
-  
     playing = false;
     repeat = false;
     shuffle = false;
@@ -20,7 +19,6 @@ export default class yt1210Controls {
   
     // play track
     play = (id = null) => {
-      console.log(id)
       if (id!==null) {
         this.videoId = this.pm.getTrackById(id).videoId;
       } else {
@@ -49,8 +47,6 @@ export default class yt1210Controls {
         this.playing = true;
     };
   
-    // copy playlist from youtube
-
     toggle_repeat = () => {
       this.repeat = !this.repeat;
       if (this.repeat) { fx.ogg_scratchin.play(); }

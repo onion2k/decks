@@ -1,8 +1,11 @@
+:root {
+    --track-duration: 30s;
+}
 
 .PlaylistTitle {
-    font-family: 'Architects Daughter';
-    font-size: 17px;
-    padding: 15px;
+    font-family: 'Muli';
+    font-size: 14px;
+    padding: 10px;
     border: 1px solid #ddd;
     background-color: rgba(40,40,40,0.8);
     display: flex;
@@ -20,8 +23,8 @@
 }
 
 .Playlist {
-    font-family: 'Architects Daughter';
-    font-size: 17px;
+    font-family: 'Muli';
+    font-size: 12px;
     user-select: none;
     border: 1px solid #ddd;
     background-color: rgba(255,255,255,0.8);
@@ -32,16 +35,17 @@
 }
 
 .track {
+    position: relative;
     cursor: pointer;
     color: #666;
     background-color: #eee;
     border-bottom: 1px dotted #B0B0FB;
-    padding:  6px 13px 5px;
+    padding:  10px 10px;
 }
 
 .track .fa {
     font-size: 14px;
-    margin-right: 5px;
+    margin-right: 8px;
     color: #ccc;
 }
 
@@ -51,16 +55,12 @@
 
 .track:hover .fa-trash {
     display: inline;
-    padding: 0 3px 0 0;
+    padding: 0 0 0 0;
     color: #F00;
 }
 
 .track:hover .fa-music, .track:hover .fa-list {
     display: none;
-}
-
-.track:nth-of-type(1) {
-    padding-top: 10px;
 }
 
 .track > span {
@@ -78,6 +78,27 @@
 .playing {
     color: #3EAF3E;
 }
+
+.playing::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.1);
+    animation-name: playtrack;
+    animation-duration: var(--track-duration);
+    animation-timing-function: linear;
+    animation-delay: 0;
+    animation-iteration-count: 1;
+}
+
+@keyframes playtrack {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
 
 .NewTrack {
     padding: 15px;
