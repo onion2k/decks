@@ -16,7 +16,21 @@ export default class yt1210Controls {
     shuffle = false;
     crackle = true;
     video = true;
-  
+    startTime = 0;
+    endTime = 0;
+    duration = 0;
+
+    updatePlayState(playing){
+
+      const video = this.pm.getTrackById(this.videoId);
+
+      this.playing = playing;
+      this.startTime = Date.now();
+      this.endTime = this.startTime + (video.duration * 1000);
+      this.duration = video.duration;
+
+    }
+
     // play track
     play = (id = null) => {
       if (id!==null) {
@@ -24,17 +38,19 @@ export default class yt1210Controls {
       } else {
         this.videoId = this.pm.getCurrentTrack().videoId;
       }
-      this.playing = true;
+      this.updatePlayState(true);
     };
   
     // pause track
     pause = () => {
       this.playing = !this.playing;
+      this.updatePlayState(false);
     };
   
     // stop track
     stop = () => {
       this.playing = false;
+      this.updatePlayState(false);
     };
   
     // next track
@@ -44,8 +60,8 @@ export default class yt1210Controls {
         } else {
             this.videoId = this.pm.getNextTrack().videoId;
         }
-        this.playing = true;
-    };
+        this.updatePlayState(true);
+      };
   
     toggle_repeat = () => {
       this.repeat = !this.repeat;
@@ -79,6 +95,9 @@ export default class yt1210Controls {
     crackle: observable,
     video: observable,
     repeat: observable,
-    shuffle: observable
+    shuffle: observable,
+    startTime: observable,
+    endTime: observable,
+    duration: observable
   });
   

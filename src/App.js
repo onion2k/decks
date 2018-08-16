@@ -11,6 +11,7 @@ import Nav from "./Components/Nav";
 import About from "./Components/About";
 import PlaylistManager from "./Components/PlaylistManager";
 import ReactiveYouTube from "./Components/ReactiveYouTube";
+import ReactiveCSSVar from "./Components/ReactiveCSSVar";
 
 import yt1210State from "./state/";
 
@@ -20,6 +21,7 @@ class App extends Component {
     return (
       <Provider {...yt1210State}>
         <div className="App">
+          <ReactiveCSSVar />
           <Record
             onTrack={this.onTrack}
             // vData={this.state.vData}

@@ -24,7 +24,6 @@ class PlaylistTracks extends Component {
   }
   render() {
     let tracklist;
-
     if (this.props.playlistManager.playlist) {
       tracklist = this.props.playlistManager.getTracks().map(track => {
         return (
