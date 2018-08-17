@@ -19,9 +19,12 @@ class Record extends Component {
   constructor(props) {
     super(props);
 
-    this.armMove = this.armMove.bind(this);
-    this.armUp = this.armUp.bind(this);
-    // this.tick = this.tick.bind(this);
+    this.drag = this.drag.bind(this);
+    this.dragEnd = this.dragEnd.bind(this);
+    this.dragStart = this.dragStart.bind(this);
+
+    this.tick = this.tick.bind(this);
+
     this.lastX = 0;
     this.requestAnimationFrameId = null;
 
@@ -37,56 +40,55 @@ class Record extends Component {
 
   track = autorun(() => {
     const { track } = this.props.playlistManager;
-
     if (track) {
+
       if (track > -1 && track < tracks.length) {
         this.setState({
-          toneanimto: tracks[track-1].s
+          toneanimto: tracks[track].s
         });
       }
 
-      // if (this.props.playlistControls.playing === true) {
-      //   if (!this.requestAnimationFrameId) {
-      //     this.requestAnimationFrameId = requestAnimationFrame(this.tick);
-      //   }
-      // } else if (this.requestAnimationFrameId) {
-      //   cancelAnimationFrame(this.requestAnimationFrameId);
-      // }
+      if (this.props.playlistControls.playing === true) {
+        if (!this.requestAnimationFrameId) {
+          this.requestAnimationFrameId = requestAnimationFrame(this.tick);
+        }
+      } else if (this.requestAnimationFrameId) {
+        cancelAnimationFrame(this.requestAnimationFrameId);
+      }
     }
-
   });
 
-  // tick() {
-  //   var toneangle, toneanimto;
+  tick() {
+    var toneangle, toneanimto;
 
-  //   toneanimto = this.state.toneanimto;
+    toneanimto = this.state.toneanimto;
 
-  //   if (this.state.toneanimto === null) {
-  //     toneanimto = null;
-  //     toneangle = this.state.toneangle + 0.001; // This will die on it's arse on a long track
-  //   } else {
-  //     if (this.state.toneanimto > this.state.toneangle) {
-  //       toneangle = this.state.toneangle + 0.15;
-  //     } else {
-  //       toneangle = this.state.toneangle - 0.15;
-  //     }
+    if (this.state.toneanimto === null) {
+      toneanimto = null;
+      toneangle = this.state.toneangle + 0.001; // This will die on it's arse on a long track
+    } else {
+      if (this.state.toneanimto > this.state.toneangle) {
+        toneangle = this.state.toneangle + 0.15;
+      } else {
+        toneangle = this.state.toneangle - 0.15;
+      }
 
-  //     if (Math.abs(toneangle - this.state.toneanimto) < 0.2) {
-  //       toneanimto = null;
-  //     }
-  //   }
+      if (Math.abs(toneangle - this.state.toneanimto) < 0.2) {
+        toneanimto = null;
+      }
+    }
 
-    // this.setState({
-    //     millis: Date.now(),
-    //     requestAnimationFrameId: requestAnimationFrame(this.tick),
-    //     tonestart: toneangle,
-    //     toneangle: toneangle,
-    //     tonestyle: 'rotate('+toneangle+'deg)',
-    //     toneanimto: toneanimto
-    // });
-  //  }
+    this.setState({
+        millis: Date.now(),
+        requestAnimationFrameId: requestAnimationFrame(this.tick),
+        tonestart: toneangle,
+        toneangle: toneangle,
+        tonestyle: 'rotate('+toneangle+'deg)',
+        toneanimto: toneanimto
+    });
+   }
 
-  armMove(e) {
+   drag(e) {
     if (this.state.dragtone) {
       if (this.state.requestAnimationFrameId) {
         cancelAnimationFrame(this.state.requestAnimationFrameId);
@@ -106,7 +108,7 @@ class Record extends Component {
     }
   }
 
-  armUp(e) {
+  dragEnd(e) {
     var toneangle, per;
 
     let percentageTrackDistance = function(s, e, p) {
@@ -144,20 +146,24 @@ class Record extends Component {
     }
   }
 
+  dragStart(e){
+    this.lastX = e.pageX;
+    this.setState({ dragtone: true });
+  }
+
   render() {
 
     return (
       <div
         className="Deck"
-        onMouseDown={e => {
-          this.lastX = e.pageX;
-          this.setState({ dragtone: true });
+        onMouseDown={e => { // button done / drag start
+          this.dragStart(e);
         }}
-        onMouseUp={e => {
-          this.armUp(e);
+        onMouseUp={e => { // button up / drag end
+          this.dragEnd(e);
         }}
-        onMouseMove={e => {
-          this.armMove(e);
+        onMouseMove={e => { // dragging
+          this.drag(e);
         }}
       >
         <div

@@ -22,61 +22,28 @@ class App extends Component {
       <Provider {...yt1210State}>
         <div className="App">
           <ReactiveCSSVar />
-          <Record
-            onTrack={this.onTrack}
-            // vData={this.state.vData}
-            // playing={this.state.playing}
-            // tonearmPos={this.state.tonearmPos}
-          />
+          <Record />
           <div className="controls">
             <div className="titleControls">
               <h1>YT1210</h1>
               <Nav />
             </div>
-            <ReactiveYouTube
-              // onReady={this.onReady}
-              // onPlay={this.onPlay}
-              // onEnd={this.onEnd}
-            />
-            <Controls
-              // onPlayVideo={this.onPlayVideo}
-              // onPauseVideo={this.onPauseVideo}
-              // onStopVideo={this.onStopVideo}
-              // onChangeVideo={this.onChangeVideo}
-            />
+            <ReactiveYouTube />
+            <Controls />
             <Switch>
               <Route path="/about" component={About} />
               <Route
                 path="/playlists"
                 component={() => {
                   return (
-                    <PlaylistManager
-                      // playList={this.playList}
-                      // addList={this.addList}
-                      // deleteList={this.deleteList}
-                      // playlists={this.state.playlists}
-                    />
+                    <PlaylistManager />
                   );
                 }}
               />
               <Route
                 component={() => {
                   return (
-                    <Playlist
-                      // title={this.state.playlistTitle}
-                      // playlist={this.state.playlist}
-                      // trackData={this.state.trackData}
-                      // playing={this.state.videoId}
-                      // onClick={i => {
-                      //   this.onChangeVideo(i);
-                      // }}
-                      // onDelete={i => {
-                      //   this.onDeleteVideo(i);
-                      // }}
-                      // addTrack={videoId => {
-                      //   this.addTrack(videoId);
-                      // }}
-                    />
+                    <Playlist />
                   );
                 }}
               />
