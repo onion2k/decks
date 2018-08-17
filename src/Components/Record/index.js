@@ -108,14 +108,20 @@ class Record extends Component {
     }
   }
 
-  dragEnd(e) {
-    var toneangle, per;
+  dragStart(e){
+    this.lastX = e.pageX;
+    this.setState({ dragtone: true });
+  }
 
-    let percentageTrackDistance = function(s, e, p) {
-      let tl = Math.abs(s) - Math.abs(e);
-      let per = p + Math.abs(s);
-      return (per / tl) * 100;
-    };
+  dragEnd(e) {
+    // let per;
+    let toneangle;
+
+    // let percentageTrackDistance = function(s, e, p) {
+    //   let tl = Math.abs(s) - Math.abs(e);
+    //   let per = p + Math.abs(s);
+    //   return (per / tl) * 100;
+    // };
 
     this.setState({ dragtone: false, tonestart: this.state.toneangle });
 
@@ -124,31 +130,26 @@ class Record extends Component {
     if (toneangle > -20) {
       //off
     } else if (toneangle > -25.6) {
-      per = percentageTrackDistance(-25.6, -20, toneangle);
+      // per = percentageTrackDistance(-25.6, -20, toneangle);
       // this.props.onTrack(5, per);
     } else if (toneangle > -28.5) {
-      per = percentageTrackDistance(-28.5, -25.6, toneangle);
+      // per = percentageTrackDistance(-28.5, -25.6, toneangle);
       // this.props.onTrack(4, per);
     } else if (toneangle > -34.2) {
-      per = percentageTrackDistance(-34.2, -28.5, toneangle);
+      // per = percentageTrackDistance(-34.2, -28.5, toneangle);
       // this.props.onTrack(3, per);
     } else if (toneangle > -39.7) {
-      per = percentageTrackDistance(-39.7, -34.2, toneangle);
+      // per = percentageTrackDistance(-39.7, -34.2, toneangle);
       // this.props.onTrack(2, per);
     } else if (toneangle > -43.4) {
-      per = percentageTrackDistance(-43.4, -39.7, toneangle);
+      // per = percentageTrackDistance(-43.4, -39.7, toneangle);
       // this.props.onTrack(1, per);
     } else if (toneangle > -47.6) {
-      per = percentageTrackDistance(-47.6, -43.4, toneangle);
+      // per = percentageTrackDistance(-47.6, -43.4, toneangle);
       // this.props.onTrack(0, per);
     } else {
       //off
     }
-  }
-
-  dragStart(e){
-    this.lastX = e.pageX;
-    this.setState({ dragtone: true });
   }
 
   render() {
