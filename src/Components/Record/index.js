@@ -14,6 +14,11 @@ const tracks = [
   { s: -25.6, e: -20.0 }
 ];
 
+
+// track id / position changes
+// move arm to track start position
+// tick arm to end
+
 class Record extends Component {
 
   constructor(props) {
@@ -29,7 +34,6 @@ class Record extends Component {
     this.requestAnimationFrameId = null;
 
     this.state = {
-      requestAnimationFrameId: null,
       dragtone: false,
       tonestart: -54,
       toneangle: -54,
@@ -80,19 +84,18 @@ class Record extends Component {
 
     this.setState({
         millis: Date.now(),
-        requestAnimationFrameId: requestAnimationFrame(this.tick),
         tonestart: toneangle,
         toneangle: toneangle,
         tonestyle: 'rotate('+toneangle+'deg)',
         toneanimto: toneanimto
+    }, ()=>{
+      this.requestAnimationFrameId = requestAnimationFrame(this.tick);
     });
    }
 
    drag(e) {
     if (this.state.dragtone) {
-      if (this.state.requestAnimationFrameId) {
-        cancelAnimationFrame(this.state.requestAnimationFrameId);
-      }
+
       let toneangle = this.state.tonestart + (e.pageX - this.lastX) / 10;
       if (toneangle < -54) {
         toneangle = -54;
@@ -100,17 +103,22 @@ class Record extends Component {
       if (toneangle > -19) {
         toneangle = -19;
       }
+      
       this.setState({
         requestAnimationFrameId: false,
         toneangle: toneangle,
         tonestyle: "rotate(" + toneangle + "deg)"
       });
+
     }
   }
 
   dragStart(e){
     this.lastX = e.pageX;
-    this.setState({ dragtone: true });
+    if (this.state.requestAnimationFrameId) {
+      cancelAnimationFrame(this.state.requestAnimationFrameId);
+    }
+    this.setState({ dragtone: true, requestAnimationFrameId: null });
   }
 
   dragEnd(e) {
@@ -123,7 +131,7 @@ class Record extends Component {
     //   return (per / tl) * 100;
     // };
 
-    this.setState({ dragtone: false, tonestart: this.state.toneangle });
+    this.setState({ dragtone: false });
 
     toneangle = this.state.toneangle;
 

@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Playlist Controls renders properly 1`] = `
+<div
+  className="buttons"
+>
+  <a
+    className="button"
+    href="/playlists"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-list"
+    />
+  </a>
+  <div
+    className="button play"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-play"
+    />
+  </div>
+  <div
+    className="button"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-pause"
+    />
+  </div>
+  <div
+    className="button"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-stop"
+    />
+  </div>
+  <div
+    className="button"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-step-forward"
+    />
+  </div>
+  <div
+    className="button toggle"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-repeat"
+    />
+  </div>
+  <div
+    className="button toggle"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-random"
+    />
+  </div>
+  <div
+    className="button toggle on"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-headphones"
+    />
+  </div>
+  <div
+    className="button toggle on"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-youtube"
+    />
+  </div>
+</div>
+`;

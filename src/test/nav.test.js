@@ -1,16 +1,17 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { mount } from "enzyme";
 
-describe("Playlist Tracks", () => {
+import Nav from "../Components/Nav";
+
+describe("Navigation", () => {
   const onClick = jest.fn();
 
   it("renders properly", () => {
-    const tracks = renderer
+    const nav = renderer
       .create(
-        <PlaylistTracks />
+        <Nav />
       )
       .toJSON();
-    expect(tracks).toMatchSnapshot();
+    expect(nav).toMatchSnapshot();
   });
 });

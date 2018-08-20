@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { mount } from "enzyme";
+
+import PlaylistTitle from "../Components/PlaylistTitle";
 
 describe("Playlist Title", () => {
   const onClick = jest.fn();

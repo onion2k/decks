@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Record from "./Record";
+import Record from "./record.test";
 
 describe("Record", () => {
   it("renders properly", () => {

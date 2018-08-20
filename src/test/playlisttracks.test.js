@@ -1,16 +1,17 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { mount } from "enzyme";
 
-describe("Playlist Manager", () => {
+import PlaylistTracks from "../Components/PlaylistTracks";
+
+describe("Playlist Tracks", () => {
   const onClick = jest.fn();
 
   it("renders properly", () => {
-    const playlistManager = renderer
+    const tracks = renderer
       .create(
-        <PlaylistManager />
+        <PlaylistTracks />
       )
       .toJSON();
-    expect(playlistManager).toMatchSnapshot();
+    expect(tracks).toMatchSnapshot();
   });
 });
