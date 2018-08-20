@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { inject, observer } from "mobx-react";
 import "./Playlist.css";
 
 import PlaylistTitle from "../PlaylistTitle/";
@@ -17,4 +18,4 @@ class Playlist extends Component {
   }
 }
 
-export default Playlist;
+export default inject("playlistManager", "playlistControls")(observer(Playlist));

@@ -1,7 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import { MemoryRouter } from 'react-router-dom'
 
-import About from "../Components/About";
+import About from ".";
 
 describe("About", () => {
   const onClick = jest.fn();
@@ -9,7 +10,9 @@ describe("About", () => {
   it("renders properly", () => {
     const about = renderer
       .create(
-        <About />
+        <MemoryRouter>
+          <About />
+        </MemoryRouter>
       )
       .toJSON();
     expect(about).toMatchSnapshot();

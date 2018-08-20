@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Playlist Tracks renders properly 1`] = `
+<div
+  className="Playlist"
+>
+  <div
+    className="track"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-trash"
+      onClick={[Function]}
+    />
+     
+    <i
+      aria-hidden="true"
+      className="fa fa-music"
+    />
+     
+    BuVJEn9wk9Y
+     
+    <span>
+      
+    </span>
+  </div>
+  <div
+    className="track"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-trash"
+      onClick={[Function]}
+    />
+     
+    <i
+      aria-hidden="true"
+      className="fa fa-music"
+    />
+     
+    Rs38lKxmtI4
+     
+    <span>
+      
+    </span>
+  </div>
+  <div
+    className="track"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-trash"
+      onClick={[Function]}
+    />
+     
+    <i
+      aria-hidden="true"
+      className="fa fa-music"
+    />
+     
+    v_yTphvyiPU
+     
+    <span>
+      
+    </span>
+  </div>
+  <div
+    className="track"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-trash"
+      onClick={[Function]}
+    />
+     
+    <i
+      aria-hidden="true"
+      className="fa fa-music"
+    />
+     
+    e4Ao-iNPPUc
+     
+    <span>
+      
+    </span>
+  </div>
+  <div
+    className="track"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-trash"
+      onClick={[Function]}
+    />
+     
+    <i
+      aria-hidden="true"
+      className="fa fa-music"
+    />
+     
+    FALYmqt-7TQ
+     
+    <span>
+      
+    </span>
+  </div>
+  <div
+    className="track"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-trash"
+      onClick={[Function]}
+    />
+     
+    <i
+      aria-hidden="true"
+      className="fa fa-music"
+    />
+     
+    a3Z4RWZa9WA
+     
+    <span>
+      
+    </span>
+  </div>
+</div>
+`;

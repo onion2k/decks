@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Record renders properly 1`] = `
+<div
+  className="Deck"
+  onMouseDown={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+>
+  <div
+    className="Record"
+    style={
+      Object {
+        "backgroundImage": "url(record.png)",
+      }
+    }
+  >
+    <div
+      className="label"
+    >
+      <img
+        alt="Record"
+        src="https://img.youtube.com/vi//0.jpg"
+      />
+      <span
+        className="title"
+      />
+    </div>
+  </div>
+  <div
+    className="Tonearm"
+  >
+    <img
+      alt="Tonearm"
+      draggable="false"
+      src="tonearm.png"
+      style={
+        Object {
+          "transform": "rotate(-54deg)",
+        }
+      }
+    />
+  </div>
+</div>
+`;

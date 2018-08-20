@@ -27,6 +27,7 @@
     "@storybook/react": "^4.0.0-alpha.14",
     "babel-core": "^6.26.3",
     "babel-runtime": "^6.26.0",
+    "jest-localstorage-mock": "^2.2.0",
     "mobx-react-devtools": "^6.0.1",
     "react-scripts": "^1.1.4"
   },

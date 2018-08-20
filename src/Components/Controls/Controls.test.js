@@ -1,14 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import { Route, Link, MemoryRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 import Enzyme, { mount } from 'enzyme';
 
 import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() })
 
-import yt1210Controls from "../state/yt1210Controls.js"
-import Controls from "../Components/Controls";
+import Controls from ".";
 
+import yt1210Controls from "../../state/yt1210Controls"
 const controlState = new yt1210Controls();
 
 describe("Playlist Controls", () => {

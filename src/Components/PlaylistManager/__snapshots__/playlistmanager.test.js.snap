@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Playlist Manager renders properly 1`] = `
+<div
+  className="PlaylistManager"
+>
+  <div
+    className="PlaylistTitle"
+  >
+    <span>
+      Your playlists
+    </span>
+  </div>
+  <div
+    className="Playlist"
+  >
+    <div
+      className="track"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="fa fa-trash"
+        onClick={[Function]}
+      />
+       
+      <i
+        aria-hidden="true"
+        className="fa fa-list"
+      />
+       
+      Playlist 1
+       
+      <span>
+        6
+         tracks
+      </span>
+    </div>
+    <div
+      className="track"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="fa fa-trash"
+        onClick={[Function]}
+      />
+       
+      <i
+        aria-hidden="true"
+        className="fa fa-list"
+      />
+       
+      Playlist 2
+       
+      <span>
+        6
+         tracks
+      </span>
+    </div>
+  </div>
+  <form
+    className="NewTrack"
+  >
+    <label>
+      New List:
+      <input
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </label>
+    <button
+      onClick={[Function]}
+    >
+      Add List
+    </button>
+  </form>
+</div>
+`;

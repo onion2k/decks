@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Playlist renders properly 1`] = `
+<div
+  className="PlaylistWrapper"
+>
+  <div
+    className="PlaylistTitle"
+  >
+    <span>
+      Playlist 1
+    </span>
+  </div>
+  <div
+    className="Playlist"
+  >
+    <div
+      className="track"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="fa fa-trash"
+        onClick={[Function]}
+      />
+       
+      <i
+        aria-hidden="true"
+        className="fa fa-music"
+      />
+       
+      BuVJEn9wk9Y
+       
+      <span>
+        
+      </span>
+    </div>
+    <div
+      className="track"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="fa fa-trash"
+        onClick={[Function]}
+      />
+       
+      <i
+        aria-hidden="true"
+        className="fa fa-music"
+      />
+       
+      Rs38lKxmtI4
+       
+      <span>
+        
+      </span>
+    </div>
+    <div
+      className="track"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="fa fa-trash"
+        onClick={[Function]}
+      />
+       
+      <i
+        aria-hidden="true"
+        className="fa fa-music"
+      />
+       
+      v_yTphvyiPU
+       
+      <span>
+        
+      </span>
+    </div>
+    <div
+      className="track"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="fa fa-trash"
+        onClick={[Function]}
+      />
+       
+      <i
+        aria-hidden="true"
+        className="fa fa-music"
+      />
+       
+      e4Ao-iNPPUc
+       
+      <span>
+        
+      </span>
+    </div>
+    <div
+      className="track"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="fa fa-trash"
+        onClick={[Function]}
+      />
+       
+      <i
+        aria-hidden="true"
+        className="fa fa-music"
+      />
+       
+      FALYmqt-7TQ
+       
+      <span>
+        
+      </span>
+    </div>
+    <div
+      className="track"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="fa fa-trash"
+        onClick={[Function]}
+      />
+       
+      <i
+        aria-hidden="true"
+        className="fa fa-music"
+      />
+       
+      a3Z4RWZa9WA
+       
+      <span>
+        
+      </span>
+    </div>
+  </div>
+  <form
+    className="NewTrack"
+  >
+    <label>
+      YouTube Link:
+      <input
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </label>
+    <button
+      onClick={[Function]}
+    >
+      Add Track
+    </button>
+  </form>
+</div>
+`;

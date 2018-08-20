@@ -3,7 +3,7 @@ import queryString from "query-string";
 
 configure({ enforceActions: true });
 
-export default class yt12010PlaylistManager {
+export default class yt1210PlaylistManager {
 
     // Playlists
 
@@ -104,7 +104,7 @@ export default class yt12010PlaylistManager {
     };
 }
 
-decorate(yt12010PlaylistManager, {
+decorate(yt1210PlaylistManager, {
     currentTrack: observable,
     playlists: observable,
     playlist: observable,
