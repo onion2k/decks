@@ -35,6 +35,15 @@ export default class yt1210PlaylistManager {
         ]}
     ];
 
+
+    userdata = () => {
+        const userdata = localStorage.getItem('yt1210-userdata');
+        if (userdata) {
+            this.userdata = JSON.parse(userdata);
+        }
+    }
+
+
     get title() {
         return this.playlists.find((playlist) => playlist.id === this.playlist).title;
     };
@@ -68,6 +77,10 @@ export default class yt1210PlaylistManager {
 
     // add track
     playlistAddTrack = (link)=>{
+
+        // https://www.youtube.com/watch?v=-ZxPhDC-r3w
+
+
         const url = queryString.parse(link.substr(link.indexOf('?')));
         this.playlists.find((playlist) => playlist.id === this.playlist).tracks.push({ title: "", videoId: url.v, duration: "" });
     };

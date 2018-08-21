@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 
 import PlaylistTitle from ".";
 
-import yt1210PlaylistManager from "../../state/yt1210PlaylistManager.js"
+import yt1210PlaylistManager from "../../state/yt1210PlaylistManager"
 const playlistManagerState = new yt1210PlaylistManager();
 
 describe("Playlist Title", () => {
