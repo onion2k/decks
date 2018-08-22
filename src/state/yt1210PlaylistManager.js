@@ -5,15 +5,14 @@ configure({ enforceActions: true });
 
 export default class yt1210PlaylistManager {
 
-    // Playlists
-
-    // state
-    playlist = 1;
-    track = 0;
-    currentTrack = { videoId: "", label: "" };
-
-    // auth
-    user = 1;
+    constructor(){
+        console.log("init state store");
+        this.user();
+        this.playlist = "default-playlist";
+        this.track = 0;
+        this.currentTrack = { videoId: "", label: "" };
+        this.playlists = this.userdata.playlists;
+    }
 
     // user data
     playlists = [
@@ -24,22 +23,27 @@ export default class yt1210PlaylistManager {
             { title: "", videoId: "e4Ao-iNPPUc", duration: "" },
             { title: "", videoId: "FALYmqt-7TQ", duration: "" },
             { title: "", videoId: "a3Z4RWZa9WA", duration: "" }
-        ]},
-        { "id": 2, "title": "Playlist 2", tracks: [
-            { title: "", videoId: "a3Z4RWZa9WA", duration: "" },
-            { title: "", videoId: "BuVJEn9wk9Y", duration: "" },
-            { title: "", videoId: "Rs38lKxmtI4", duration: "" },
-            { title: "", videoId: "v_yTphvyiPU", duration: "" },
-            { title: "", videoId: "e4Ao-iNPPUc", duration: "" },
-            { title: "", videoId: "FALYmqt-7TQ", duration: "" }
         ]}
     ];
 
-
-    userdata = () => {
+    user = () => {
         const userdata = localStorage.getItem('yt1210-userdata');
         if (userdata) {
             this.userdata = JSON.parse(userdata);
+        } else {
+            this.userdata = {
+                session: null,
+                playlists: [{ "id": 'default-playlist', "title": "Welcome to Decks", tracks: [
+                    { title: "", videoId: "BuVJEn9wk9Y", duration: "" },
+                    { title: "", videoId: "Rs38lKxmtI4", duration: "" },
+                    { title: "", videoId: "v_yTphvyiPU", duration: "" },
+                    { title: "", videoId: "e4Ao-iNPPUc", duration: "" },
+                    { title: "", videoId: "FALYmqt-7TQ", duration: "" },
+                    { title: "", videoId: "a3Z4RWZa9WA", duration: "" }
+                    ]
+                }]
+            }
+            localStorage.setItem('yt1210-userdata', JSON.stringify(this.userdata));
         }
     }
 
@@ -79,7 +83,6 @@ export default class yt1210PlaylistManager {
     playlistAddTrack = (link)=>{
 
         // https://www.youtube.com/watch?v=-ZxPhDC-r3w
-
 
         const url = queryString.parse(link.substr(link.indexOf('?')));
         this.playlists.find((playlist) => playlist.id === this.playlist).tracks.push({ title: "", videoId: url.v, duration: "" });
