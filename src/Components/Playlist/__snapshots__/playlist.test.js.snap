@@ -8,33 +8,12 @@ exports[`Playlist renders properly 1`] = `
     className="PlaylistTitle"
   >
     <span>
-      Playlist 1
+      Welcome to Decks
     </span>
   </div>
   <div
     className="Playlist"
   >
-    <div
-      className="track"
-      onClick={[Function]}
-    >
-      <i
-        aria-hidden="true"
-        className="fa fa-trash"
-        onClick={[Function]}
-      />
-       
-      <i
-        aria-hidden="true"
-        className="fa fa-music"
-      />
-       
-      BuVJEn9wk9Y
-       
-      <span>
-        
-      </span>
-    </div>
     <div
       className="track"
       onClick={[Function]}
@@ -114,6 +93,27 @@ exports[`Playlist renders properly 1`] = `
       />
        
       FALYmqt-7TQ
+       
+      <span>
+        
+      </span>
+    </div>
+    <div
+      className="track"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="fa fa-trash"
+        onClick={[Function]}
+      />
+       
+      <i
+        aria-hidden="true"
+        className="fa fa-music"
+      />
+       
+      BuVJEn9wk9Y
        
       <span>
         

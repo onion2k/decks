@@ -19,27 +19,6 @@ exports[`Playlist Tracks renders properly 1`] = `
       className="fa fa-music"
     />
      
-    BuVJEn9wk9Y
-     
-    <span>
-      
-    </span>
-  </div>
-  <div
-    className="track"
-    onClick={[Function]}
-  >
-    <i
-      aria-hidden="true"
-      className="fa fa-trash"
-      onClick={[Function]}
-    />
-     
-    <i
-      aria-hidden="true"
-      className="fa fa-music"
-    />
-     
     Rs38lKxmtI4
      
     <span>
@@ -104,6 +83,27 @@ exports[`Playlist Tracks renders properly 1`] = `
     />
      
     FALYmqt-7TQ
+     
+    <span>
+      
+    </span>
+  </div>
+  <div
+    className="track"
+    onClick={[Function]}
+  >
+    <i
+      aria-hidden="true"
+      className="fa fa-trash"
+      onClick={[Function]}
+    />
+     
+    <i
+      aria-hidden="true"
+      className="fa fa-music"
+    />
+     
+    BuVJEn9wk9Y
      
     <span>
       

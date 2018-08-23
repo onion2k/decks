@@ -14,18 +14,6 @@ export default class yt1210PlaylistManager {
         this.playlists = this.userdata.playlists;
     }
 
-    // user data
-    playlists = [
-        { "id": 1, "title": "Playlist 1", tracks: [
-            { title: "", videoId: "BuVJEn9wk9Y", duration: "" },
-            { title: "", videoId: "Rs38lKxmtI4", duration: "" },
-            { title: "", videoId: "v_yTphvyiPU", duration: "" },
-            { title: "", videoId: "e4Ao-iNPPUc", duration: "" },
-            { title: "", videoId: "FALYmqt-7TQ", duration: "" },
-            { title: "", videoId: "a3Z4RWZa9WA", duration: "" }
-        ]}
-    ];
-
     user = () => {
         const userdata = localStorage.getItem('yt1210-userdata');
         if (userdata) {
@@ -34,11 +22,11 @@ export default class yt1210PlaylistManager {
             this.userdata = {
                 session: null,
                 playlists: [{ "id": 'default-playlist', "title": "Welcome to Decks", tracks: [
-                    { title: "", videoId: "BuVJEn9wk9Y", duration: "" },
                     { title: "", videoId: "Rs38lKxmtI4", duration: "" },
                     { title: "", videoId: "v_yTphvyiPU", duration: "" },
                     { title: "", videoId: "e4Ao-iNPPUc", duration: "" },
                     { title: "", videoId: "FALYmqt-7TQ", duration: "" },
+                    { title: "", videoId: "BuVJEn9wk9Y", duration: "" },
                     { title: "", videoId: "a3Z4RWZa9WA", duration: "" }
                     ]
                 }]
@@ -46,7 +34,6 @@ export default class yt1210PlaylistManager {
             localStorage.setItem('yt1210-userdata', JSON.stringify(this.userdata));
         }
     }
-
 
     get title() {
         return this.playlists.find((playlist) => playlist.id === this.playlist).title;
@@ -85,13 +72,20 @@ export default class yt1210PlaylistManager {
         // https://www.youtube.com/watch?v=-ZxPhDC-r3w
 
         const url = queryString.parse(link.substr(link.indexOf('?')));
-        this.playlists.find((playlist) => playlist.id === this.playlist).tracks.push({ title: "", videoId: url.v, duration: "" });
+        // const list = this.userdata.playlists.find((playlist) => playlist.id === this.playlist).tracks;
+        this.userdata.playlists.find((playlist) => playlist.id === this.playlist).tracks.push({ title: "", videoId: url.v, duration: "" });
+        localStorage.setItem('yt1210-userdata', JSON.stringify(this.userdata));
+
     };
 
     // delete track
-    playlistDeleteTrack = (id, index)=>{
-        this.playlist = this.playlists.find((playlist) => playlist.id === id);
-        this.playlist.tracks.splice(index, 1);
+    playlistDeleteTrack = (id)=>{
+
+        const list = this.userdata.playlists.find((playlist) => playlist.id === this.playlist).tracks;
+        const index = this.userdata.playlists.find((playlist) => playlist.id === this.playlist).tracks.findIndex((track) => track.videoId === id);
+        this.userdata.playlists.find((playlist) => playlist.id === this.playlist).tracks.splice(index, 1);
+        localStorage.setItem('yt1210-userdata', JSON.stringify(this.userdata));
+
     };
 
     updateTrackData = (data, duration) => {
