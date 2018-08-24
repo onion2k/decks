@@ -106,7 +106,7 @@ export default class yt1210PlaylistManager {
     };
 
     getNextTrack = () => {
-        return this.tracks[this.track++];
+        return this.tracks[++this.track];
     };
 
     getTrackById = (id) => {
