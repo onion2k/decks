@@ -115,6 +115,7 @@ export default class yt1210PlaylistManager {
 }
 
 decorate(yt1210PlaylistManager, {
+    userdata: observable,
     currentTrack: observable,
     playlists: observable,
     playlist: observable,
