@@ -72,7 +72,6 @@ export default class yt1210PlaylistManager {
         // https://www.youtube.com/watch?v=-ZxPhDC-r3w
 
         const url = queryString.parse(link.substr(link.indexOf('?')));
-        // const list = this.userdata.playlists.find((playlist) => playlist.id === this.playlist).tracks;
         this.userdata.playlists.find((playlist) => playlist.id === this.playlist).tracks.push({ title: "", videoId: url.v, duration: "" });
         localStorage.setItem('yt1210-userdata', JSON.stringify(this.userdata));
 
@@ -122,6 +121,7 @@ decorate(yt1210PlaylistManager, {
     track: observable,
     title: computed,
     tracks: computed,
+    user: action,
     load: action,
     playlistAdd: action,
     playlistDelete: action,
