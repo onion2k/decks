@@ -11,7 +11,6 @@ export default class yt1210PlaylistManager {
         this.playlist = "default-playlist";
         this.track = 0;
         this.currentTrack = { videoId: "", label: "" };
-        this.playlists = this.userdata.playlists;
     }
 
     user = () => {
@@ -36,11 +35,11 @@ export default class yt1210PlaylistManager {
     }
 
     get title() {
-        return this.playlists.find((playlist) => playlist.id === this.playlist).title;
+        return this.userdata.playlists.find((playlist) => playlist.id === this.playlist).title;
     };
 
     get tracks() {
-        return this.playlists.find((playlist) => playlist.id === this.playlist).tracks.map((track)=>{
+        return this.userdata.playlists.find((playlist) => playlist.id === this.playlist).tracks.map((track)=>{
             let t = { videoId: track.videoId };
             let lsTrackDetails = localStorage.getItem("yt1210-" + track.videoId);
             if (lsTrackDetails) {
@@ -52,18 +51,22 @@ export default class yt1210PlaylistManager {
         });
     };
 
+    get playlists() {
+        return this.userdata.playlists;
+    };
+
     load = (id) => {
         this.playlist = id;
     };
 
     // add playlist
     playlistAdd = (title)=>{
-        this.playlists.push({ id: this.playlists.length+1, title: title, tracks: [] });
+        this.userdata.playlists.push({ id: this.playlists.length+1, title: title, tracks: [] });
     };
 
     // delete playlist
     playlistDelete = (index)=>{
-        this.playlists.splice(index, 1);
+        this.userdata.playlists.splice(index, 1);
     };
 
     // add track
@@ -80,7 +83,6 @@ export default class yt1210PlaylistManager {
     // delete track
     playlistDeleteTrack = (id)=>{
 
-        const list = this.userdata.playlists.find((playlist) => playlist.id === this.playlist).tracks;
         const index = this.userdata.playlists.find((playlist) => playlist.id === this.playlist).tracks.findIndex((track) => track.videoId === id);
         this.userdata.playlists.find((playlist) => playlist.id === this.playlist).tracks.splice(index, 1);
         localStorage.setItem('yt1210-userdata', JSON.stringify(this.userdata));
@@ -116,11 +118,11 @@ export default class yt1210PlaylistManager {
 decorate(yt1210PlaylistManager, {
     userdata: observable,
     currentTrack: observable,
-    playlists: observable,
     playlist: observable,
     track: observable,
     title: computed,
     tracks: computed,
+    playlists: computed,
     user: action,
     load: action,
     playlistAdd: action,
