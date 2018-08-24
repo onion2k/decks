@@ -106,6 +106,8 @@ export default class yt1210PlaylistManager {
     };
 
     getNextTrack = () => {
+        // if shuffle
+        // if repeat
         return this.tracks[++this.track];
     };
 
