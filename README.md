@@ -11,7 +11,7 @@ Clone the repo in to a fresh directory and use `npm i && npm run start` to initi
 TODO:
 
 * Improve the UI. Make it easier to create playlists (music.youtube.com style?)
-* New track component with progress bar
+* New track component with progress bar (done)
 * Make it responsive.. tape on mobile?
-* Add tests using Jest + Enzyme
-* Add mobx state (done) and actions
+* Add tests using Jest + Enzyme (done)
+* Add mobx state (done) and actions (done)
