@@ -15,3 +15,5 @@ TODO:
 * Make it responsive.. tape on mobile?
 * Add tests using Jest + Enzyme (done)
 * Add mobx state (done) and actions (done)
+* Add default playlists
+* Add Google OAuth for Youtube integration
