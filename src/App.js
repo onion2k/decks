@@ -28,6 +28,7 @@ class App extends Component {
               <h1>YT1210</h1>
               <Nav />
             </div>
+            <Controls />
             <Switch>
               <Route path="/about" component={About} />
               <Route
@@ -46,7 +47,6 @@ class App extends Component {
                 }}
               />
             </Switch>
-            <Controls />
             <ReactiveYouTube />
           </div>
         </div>
