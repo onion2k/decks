@@ -1,4 +1,5 @@
 {
+  "preinstall": "node -e 'if(!/yarn\\.js$/.test(process.env.npm_execpath))throw new Error(\"Use yarn\")'",
   "name": "decks",
   "version": "0.1.0",
   "private": true,
