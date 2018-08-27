@@ -34,6 +34,10 @@ export default class yt1210PlaylistManager {
         }
     }
 
+    save = () => {
+        localStorage.setItem('yt1210-userdata', JSON.stringify(this.userdata));
+    }
+
     get title() {
         return this.userdata.playlists.find((playlist) => playlist.id === this.playlist).title;
     };
@@ -62,30 +66,32 @@ export default class yt1210PlaylistManager {
     // add playlist
     playlistAdd = (title)=>{
         this.userdata.playlists.push({ id: this.playlists.length+1, title: title, tracks: [] });
+        this.save();
     };
 
     // delete playlist
     playlistDelete = (index)=>{
         this.userdata.playlists.splice(index, 1);
+        this.save();
     };
 
     // add track
-    playlistAddTrack = (link)=>{
+    playlistAddTrack = (link) => {
 
         // https://www.youtube.com/watch?v=-ZxPhDC-r3w
 
         const url = queryString.parse(link.substr(link.indexOf('?')));
         this.userdata.playlists.find((playlist) => playlist.id === this.playlist).tracks.push({ title: "", videoId: url.v, duration: "" });
-        localStorage.setItem('yt1210-userdata', JSON.stringify(this.userdata));
+        this.save();
 
     };
 
     // delete track
-    playlistDeleteTrack = (id)=>{
+    playlistDeleteTrack = (id) => {
 
         const index = this.userdata.playlists.find((playlist) => playlist.id === this.playlist).tracks.findIndex((track) => track.videoId === id);
         this.userdata.playlists.find((playlist) => playlist.id === this.playlist).tracks.splice(index, 1);
-        localStorage.setItem('yt1210-userdata', JSON.stringify(this.userdata));
+        this.save();
 
     };
 
