@@ -11,6 +11,7 @@ export default class yt1210PlaylistManager {
         this.playlist = "default-playlist";
         this.track = 0;
         this.currentTrack = { videoId: "", label: "" };
+        this.shuffledTracks = [5,4,3,2,1,0];
     }
 
     user = () => {
@@ -111,15 +112,28 @@ export default class yt1210PlaylistManager {
         return this.tracks[this.track];
     };
 
-    getNextTrack = () => {
-        // if shuffle
+    getNextTrack = (repeat, shuffled) => {
         // if repeat
-        return this.tracks[++this.track];
+        if (this.track===this.tracks.length-1) {
+            if (!repeat) {
+                return false;
+            } else {
+                this.track = 0;
+            }
+            this.shuffledTracks = [5,4,3,2,1,0];
+        } else {
+            this.track += 1;
+        }
+        if (shuffled) {
+            return this.tracks[this.shuffledTracks[this.track]];
+        } else {
+            return this.tracks[this.track];
+        }
     };
 
     getTrackById = (id) => {
-        this.track = this.tracks.findIndex((track) => track.videoId === id);
-        return this.tracks[this.track];
+        const index = this.tracks.findIndex((track) => track.videoId === id);
+        return this.tracks[index];
     };
 }
 

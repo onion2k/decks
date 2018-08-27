@@ -55,13 +55,9 @@ export default class yt1210Controls {
   
     // next track
     next = () => {
-        if (this.shuffle) {
-            this.videoId = this.pm.getNextTrack().videoId;
-        } else {
-            this.videoId = this.pm.getNextTrack().videoId;
-        }
-        this.updatePlayState(true);
-      };
+      this.videoId = this.pm.getNextTrack(this.repeat, this.shuffle).videoId;
+      this.updatePlayState(true);
+    };
   
     toggle_repeat = () => {
       this.repeat = !this.repeat;
