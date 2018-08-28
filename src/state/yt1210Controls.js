@@ -38,7 +38,7 @@ export default class yt1210Controls {
       if (id!==null) {
         this.videoId = this.pm.getTrackById(id).videoId;
       } else {
-        this.videoId = this.pm.getCurrentTrack().videoId;
+        this.videoId = this.pm.getCurrentTrack(this.repeat, this.shuffle).videoId;
       }
       this.updatePlayState(this.videoId);
     };

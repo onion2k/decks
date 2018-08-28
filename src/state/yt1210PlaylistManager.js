@@ -11,7 +11,7 @@ export default class yt1210PlaylistManager {
         this.playlist = "default-playlist";
         this.track = 0;
         this.currentTrack = { videoId: "", label: "" };
-        this.shuffledTracks = [5,4,3,2,1,0];
+        this.shuffledTracks = this.reshuffle();
     }
 
     user = () => {
@@ -64,6 +64,10 @@ export default class yt1210PlaylistManager {
         this.playlist = id;
     };
 
+    reshuffle = () => {
+        return [5,4,3,2,1,0];
+    }
+
     // add playlist
     playlistAdd = (title)=>{
         this.userdata.playlists.push({ id: this.playlists.length+1, title: title, tracks: [] });
@@ -108,11 +112,15 @@ export default class yt1210PlaylistManager {
         return this.tracks;
     };
 
-    getCurrentTrack = () => {
-        return this.tracks[this.track];
+    getCurrentTrack = (repeat, shuffle) => {
+        if (shuffle) {
+            return this.tracks[this.shuffledTracks[this.track]];
+        } else {
+            return this.tracks[this.track];
+        }
     };
 
-    getNextTrack = (repeat, shuffled) => {
+    getNextTrack = (repeat, shuffle) => {
         // if repeat
 
         if (this.track===this.tracks.length-1) {
@@ -121,14 +129,14 @@ export default class yt1210PlaylistManager {
             } else {
                 this.track = 0;
             }
-            this.shuffledTracks = [5,4,3,2,1,0];
+            this.shuffledTracks = this.reshuffle();
         } else {
             this.track += 1;
         }
 
         console.log(this.track, this.tracks.length-1);
 
-        if (shuffled) {
+        if (shuffle) {
             return this.tracks[this.shuffledTracks[this.track]];
         } else {
             return this.tracks[this.track];
