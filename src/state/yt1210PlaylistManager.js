@@ -114,6 +114,7 @@ export default class yt1210PlaylistManager {
 
     getNextTrack = (repeat, shuffled) => {
         // if repeat
+
         if (this.track===this.tracks.length-1) {
             if (!repeat) {
                 return false;
@@ -124,6 +125,9 @@ export default class yt1210PlaylistManager {
         } else {
             this.track += 1;
         }
+
+        console.log(this.track, this.tracks.length-1);
+
         if (shuffled) {
             return this.tracks[this.shuffledTracks[this.track]];
         } else {

@@ -60,7 +60,7 @@ exports[`Playlist Controls renders properly 1`] = `
     />
   </div>
   <div
-    className="button toggle"
+    className="button toggle on"
     onClick={[Function]}
   >
     <i
