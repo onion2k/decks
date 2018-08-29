@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import { withRouter } from "react-router";
 
+import "./PlaylistManager.css";
+
 class PlaylistManager extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +34,7 @@ class PlaylistManager extends Component {
         return (
           <div
             key={playlist.id}
-            className={"track"}
+            className="playlist"
             onClick={e => {
               this.props.playlistManager.load(playlist.id);
               this.props.history.push('/');
@@ -48,8 +50,8 @@ class PlaylistManager extends Component {
               }}
             />{" "}
             <i className="fa fa-list" aria-hidden="true" /> {playlist.title}{" "}
-            <span>{playlist.tracks.length || "No"} tracks</span>
-            <span onClick={(e)=>{
+            <span className="tracks">{playlist.tracks.length || "No"} tracks</span>
+            <span className="share" onClick={(e)=>{
               e.stopPropagation();
               e.preventDefault();
               console.log("Share ", playlist.id)

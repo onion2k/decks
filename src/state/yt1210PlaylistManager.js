@@ -134,8 +134,6 @@ export default class yt1210PlaylistManager {
             this.track += 1;
         }
 
-        console.log(this.track, this.tracks.length-1);
-
         if (shuffle) {
             return this.tracks[this.shuffledTracks[this.track]];
         } else {

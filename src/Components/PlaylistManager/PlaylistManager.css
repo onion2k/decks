@@ -1,0 +1,53 @@
+
+.playlist {
+    position: relative;
+    cursor: pointer;
+    color: #666;
+    background-color: #eee;
+    border-bottom: 1px dotted #B0B0FB;
+    padding:  10px 10px;
+}
+
+.playlist .fa {
+    font-size: 14px;
+    margin-right: 8px;
+    color: #ccc;
+}
+
+.playlist .fa-trash {
+    display: none;
+}
+
+.playlist:hover .fa-trash {
+    display: inline;
+    padding: 0 0 0 0;
+    color: #F00;
+}
+
+.playlist:hover .fa-music, .playlist:hover .fa-list {
+    display: none;
+}
+
+.playlist > span {
+    float: right;
+}
+
+.playlist:hover {
+    color: #3E3EAF;
+}
+
+.playlist .tracks {
+    display: block;
+}
+
+.playlist .share {
+    display: none;
+}
+
+.playlist:hover .tracks {
+    display: none;
+}
+
+.playlist:hover .share {
+    display: block;
+}

@@ -1,0 +1,31 @@
+
+h1 {
+    font-size: 30px; 
+    font-size: 5vw;
+    margin: 0;
+    padding: 0;
+}
+
+.titleControls {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0;
+    align-items: center;
+}
+
+.yt1210Controls {
+    justify-self: flex-end;
+    text-align: right;
+    list-style: none;
+}
+
+.yt1210Controls li {
+    float: left;
+    margin-right: 15px;
+}
+
+.yt1210Controls label {
+    display: block;
+    margin-bottom: 8px;
+}
+

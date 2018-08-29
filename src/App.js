@@ -23,9 +23,9 @@ class App extends Component {
         <div className="App">
           <ReactiveCSSVar />
           <Record />
-          <div className="controls">
+          <div className="ui">
             <div className="titleControls">
-              <h1>YT1210</h1>
+              <h1>Decks</h1>
               <Nav />
             </div>
             <Controls />
