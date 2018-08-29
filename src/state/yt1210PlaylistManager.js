@@ -147,6 +147,14 @@ export default class yt1210PlaylistManager {
         const index = this.tracks.findIndex((track) => track.videoId === id);
         return this.tracks[index];
     };
+
+    share = (id) => {
+        const playlist = this.userdata.playlists.find((playlist) => playlist.id === id).tracks.reduce((playlist, track)=>{
+          playlist.push(track.videoId);
+          return playlist;
+        }, []);
+        window.history.replaceState({}, "page 3", "http://localhost:3000/?pl="+playlist.join(','));
+    };
 }
 
 decorate(yt1210PlaylistManager, {
@@ -165,5 +173,6 @@ decorate(yt1210PlaylistManager, {
     playlistDeleteTrack: action,
     updateTrackData: action,
     getCurrentTrack: action,
-    getNextTrack: action
+    getNextTrack: action,
+    share: action
 });

@@ -24,6 +24,7 @@ class Controls extends Component {
 
         <div
           className="button play"
+          title="Play"
           onClick={e => {
             this.props.playlistControls.play();
           }}
@@ -32,6 +33,7 @@ class Controls extends Component {
         </div>
         <div
           className="button"
+          title="Pause"
           onClick={e => {
             this.props.playlistControls.pause();
           }}
@@ -40,6 +42,7 @@ class Controls extends Component {
         </div>
         <div
           className="button"
+          title="Stop"
           onClick={e => {
             this.props.playlistControls.stop();
           }}
@@ -48,6 +51,7 @@ class Controls extends Component {
         </div>
         <div
           className="button"
+          title="Next"
           onClick={e => {
             this.props.playlistControls.next();
           }}
@@ -57,18 +61,21 @@ class Controls extends Component {
 
         <div
           className={"button toggle" + (this.props.playlistControls.repeat ? " on" : "")}
+          title="Toggle Repeat"
           onClick={this.props.playlistControls.toggle_repeat}
         >
           <i className="fa fa-repeat" aria-hidden="true" />
         </div>
         <div
           className={"button toggle" + (this.props.playlistControls.shuffle ? " on" : "")}
+          title="Toggle Shuffle"
           onClick={this.props.playlistControls.toggle_shuffle}
         >
           <i className="fa fa-random" aria-hidden="true" />
         </div>
         <div
           className={"button toggle" + (this.props.playlistControls.crackle ? " on" : "")}
+          title="Share"
           onClick={this.props.playlistControls.toggle_crackle}
         >
           <i className="fa fa-headphones" aria-hidden="true" />

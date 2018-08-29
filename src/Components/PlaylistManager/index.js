@@ -44,11 +44,17 @@ class PlaylistManager extends Component {
               onClick={e => {
                 e.stopPropagation();
                 e.preventDefault();
-                this.props.deleteList(playlist.playlistId);
+                // this.props.deleteList(playlist.playlistId);
               }}
             />{" "}
             <i className="fa fa-list" aria-hidden="true" /> {playlist.title}{" "}
             <span>{playlist.tracks.length || "No"} tracks</span>
+            <span onClick={(e)=>{
+              e.stopPropagation();
+              e.preventDefault();
+              console.log("Share ", playlist.id)
+              this.props.playlistManager.share(playlist.id)
+            }}>Share</span>
           </div>
         );
       });

@@ -17,6 +17,7 @@ exports[`Playlist Controls renders properly 1`] = `
   <div
     className="button play"
     onClick={[Function]}
+    title="Play"
   >
     <i
       aria-hidden="true"
@@ -26,6 +27,7 @@ exports[`Playlist Controls renders properly 1`] = `
   <div
     className="button"
     onClick={[Function]}
+    title="Pause"
   >
     <i
       aria-hidden="true"
@@ -35,6 +37,7 @@ exports[`Playlist Controls renders properly 1`] = `
   <div
     className="button"
     onClick={[Function]}
+    title="Stop"
   >
     <i
       aria-hidden="true"
@@ -44,6 +47,7 @@ exports[`Playlist Controls renders properly 1`] = `
   <div
     className="button"
     onClick={[Function]}
+    title="Next"
   >
     <i
       aria-hidden="true"
@@ -53,6 +57,7 @@ exports[`Playlist Controls renders properly 1`] = `
   <div
     className="button toggle"
     onClick={[Function]}
+    title="Toggle Repeat"
   >
     <i
       aria-hidden="true"
@@ -62,6 +67,7 @@ exports[`Playlist Controls renders properly 1`] = `
   <div
     className="button toggle on"
     onClick={[Function]}
+    title="Toggle Shuffle"
   >
     <i
       aria-hidden="true"
@@ -71,6 +77,7 @@ exports[`Playlist Controls renders properly 1`] = `
   <div
     className="button toggle on"
     onClick={[Function]}
+    title="Share"
   >
     <i
       aria-hidden="true"
