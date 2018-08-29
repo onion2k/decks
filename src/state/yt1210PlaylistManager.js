@@ -149,11 +149,13 @@ export default class yt1210PlaylistManager {
     };
 
     share = (id) => {
-        const playlist = this.userdata.playlists.find((playlist) => playlist.id === id).tracks.reduce((playlist, track)=>{
+        const playlist = this.userdata.playlists.find((playlist) => playlist.id === id);
+        const title = playlist.title;
+        const tracks = playlist.tracks.reduce((playlist, track)=>{
           playlist.push(track.videoId);
           return playlist;
         }, []);
-        window.history.replaceState({}, "page 3", "http://localhost:3000/?pl="+playlist.join(','));
+        window.history.replaceState({}, "Decks Shared Playlist", "http://localhost:3000/?t="+title+"&pl="+tracks.join(','));
     };
 }
 
