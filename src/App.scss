@@ -1,0 +1,20 @@
+@import "./Neon.scss";
+
+.App {
+    width: 50vw;
+    font-family: 'Audiowide', sans-serif;
+    padding: 30px 30px;
+    color: #DDD;
+}
+
+.ui {
+    position: relative;
+    padding: 30px;
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: 1fr;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 15px;
+    z-index: 99;
+    box-shadow: 0px 0px 10px 0px $neon-base-color;
+}
