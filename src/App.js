@@ -13,6 +13,8 @@ import PlaylistManager from "./Components/PlaylistManager";
 import ReactiveYouTube from "./Components/ReactiveYouTube";
 import ReactiveCSSVar from "./Components/ReactiveCSSVar";
 
+import Neon, { NeonColor } from "./Components/Neon";
+
 import yt1210State from "./state/";
 
 class App extends Component {
@@ -23,36 +25,40 @@ class App extends Component {
         <div className="App">
           <ReactiveCSSVar />
           <Record />
-          <div className="ui">
-            <div className="titleControls">
-              <h1>Decks</h1>
-              <Nav />
-            </div>
-            <Controls />
-            <Switch>
-              <Route path="/about" component={About} />
-              <Route
-                path="/playlists"
-                component={() => {
-                  return (
-                    <PlaylistManager />
-                  );
-                }}
-              />
-              <Route
-                component={() => {
-                  return (
-                    <Playlist />
-                  );
-                }}
-              />
-            </Switch>
-            <ReactiveYouTube />
-          </div>
+            <NeonColor>
+              {(value) => (
+              <div className="ui neon">
+                <div className="titleControls">
+                  <h1>Decks {value}</h1>
+                  <Nav />
+                </div>
+                <Controls />
+                <Switch>
+                  <Route path="/about" component={About} />
+                  <Route
+                    path="/playlists"
+                    component={() => {
+                      return (
+                        <PlaylistManager />
+                      );
+                    }}
+                  />
+                  <Route
+                    component={() => {
+                      return (
+                        <Playlist />
+                      );
+                    }}
+                  />
+                </Switch>
+                <ReactiveYouTube />
+              </div>
+              )}
+            </NeonColor>
         </div>
       </Provider>
     );
   }
 }
 
-export default App;
+export default Neon(App);
