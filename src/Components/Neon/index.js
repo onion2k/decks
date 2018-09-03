@@ -2,12 +2,15 @@ import React, { Component } from 'react'
 
 const NeonContext = React.createContext('light');
 
-const Neon = (WrappedComponent) => {
+const withNeon = (WrappedComponent) => {
     
     return class extends Component {
+        state = {
+            color: "cyan"
+        }
         render() {
             return (
-                <NeonContext.Provider value="cyan">
+                <NeonContext.Provider value={this.state.color}>
                     <WrappedComponent />
                 </NeonContext.Provider>
             )
@@ -16,6 +19,6 @@ const Neon = (WrappedComponent) => {
 
 }
 
-export const NeonColor = NeonContext.Consumer;
+export const Neon = NeonContext.Consumer;
 
-export default Neon;
+export default withNeon;
