@@ -7,8 +7,6 @@ import UI from "./Components/UI";
 import Record from "./Components/Record";
 import ReactiveCSSVar from "./Components/ReactiveCSSVar";
 
-import withNeon from "./Components/Neon";
-
 import yt1210State from "./state/";
 
 class App extends Component {
@@ -26,4 +24,4 @@ class App extends Component {
   }
 }
 
-export default withNeon(App);
+export default App;

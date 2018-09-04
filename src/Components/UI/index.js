@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Provider } from "mobx-react";
 import { Switch, Route } from "react-router-dom";
 import "./UI.css";
 
@@ -11,15 +10,13 @@ import Nav from "../Nav";
 import PlaylistManager from "../PlaylistManager";
 import ReactiveYouTube from "../ReactiveYouTube";
 
-import { Neon } from "../Neon";
+import withNeon from "../Neon";
 
 class UI extends Component {
 
   render() {
     return (
-      <Neon>
-        {(color) => (
-        <div className="ui neon {color}">
+        <div className="ui">
           <div className="titleControls">
             <h1>Decks</h1>
             <Nav />
@@ -45,10 +42,8 @@ class UI extends Component {
           </Switch>
           <ReactiveYouTube />
         </div>
-        )}
-      </Neon>
     );
   }
 }
 
-export default UI;
+export default withNeon(UI);
