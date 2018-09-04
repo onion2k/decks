@@ -8,12 +8,8 @@ const withNeon = (NeonComponent) => {
             super(props);
             this.ref = React.createRef();
             this.canvasref = React.createRef();
-            this.bufferEl = null;
-            this.buffer = null;
-            this.ctxEl = null;
             this.ctx = null;
-            this.prevMouse = [0,0];
-            this.mouse = [0,0];
+            this.mouse = [[0,0], [0,0]];
             this.bb = {};
             this.draw = this.draw.bind(this);
         }
@@ -23,7 +19,6 @@ const withNeon = (NeonComponent) => {
             if (this.ctx!==null) {
 
                 this.ctx.clearRect(0,0,this.bb.width,this.bb.height);
-                this.ctx.drawImage(this.bufferEl, 0, 0);
 
                 this.ctx.strokeStyle = 'hsla(64,100%,50%,1)';
                 this.ctx.beginPath();
@@ -35,17 +30,15 @@ const withNeon = (NeonComponent) => {
 
                 this.ctx.stroke();
 
-                this.ctx.strokeStyle = 'hsla(64,100%,100%,1)';
-                this.ctx.beginPath();
-                this.ctx.moveTo(this.prevMouse[0], this.prevMouse[1]);
-                this.ctx.lineTo(this.mouse[0], this.mouse[1]);
-                this.ctx.stroke();
+                this.mouse.forEach((m, i)=>{
+                    if (i===0) { return; }
+                    this.ctx.strokeStyle = 'hsla(64, 100%, 100%, '+(i/100)+')';
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(this.mouse[i-1][0], this.mouse[i-1][1]);
+                    this.ctx.lineTo(m[0], m[1]);
+                    this.ctx.stroke();
+                });
 
-                this.prevMouse = this.mouse;
-
-                this.buffer.clearRect(0,0,this.bb.width,this.bb.height);
-                this.buffer.globalAlpha = 0.925;
-                this.buffer.drawImage(this.ctxEl, 0, 0);
             }
 
             requestAnimationFrame(this.draw);
@@ -67,12 +60,6 @@ const withNeon = (NeonComponent) => {
                 });
                 this.bb = bb;
 
-                this.bufferEl = document.createElement('canvas');
-                this.buffer = this.bufferEl.getContext('2d');
-                this.bufferEl.width = bb.width;
-                this.bufferEl.height = bb.height;
-
-                this.ctxEl = this.canvasref.current;
                 this.ctx = this.canvasref.current.getContext('2d');
                 this.canvasref.current.width = bb.width;
                 this.canvasref.current.height = bb.height;
@@ -83,7 +70,8 @@ const withNeon = (NeonComponent) => {
             ro.observe(ReactDOM.findDOMNode(this.ref.current));
 
             ReactDOM.findDOMNode(this.ref.current).addEventListener('mousemove', (e) => {
-                this.mouse = [e.x - this.bb.left, e.y - this.bb.top];
+                this.mouse.push([e.x - this.bb.left, e.y - this.bb.top]);
+                if (this.mouse.length > 100) { this.mouse = this.mouse.slice(1); }
             })
 
         }
