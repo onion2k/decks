@@ -11,17 +11,20 @@ const withNeon = (NeonComponent) => {
         }
         componentDidMount(){
 
-            const bb = ReactDOM.findDOMNode(this.ref.current).getBoundingClientRect();
-
-            Object.assign(this.canvasref.current.style, {
-                position: 'absolute',
-                width: bb.width+'px',
-                height: bb.height+'px',
-                top: bb.top+'px',
-                left: bb.left+'px',
-                zIndex: 999,
-                pointerEvents: 'none'
+            const ro = new window.ResizeObserver((c) => {
+                const bb = c[0].target.getBoundingClientRect();
+                Object.assign(this.canvasref.current.style, {
+                    position: 'absolute',
+                    width: bb.width+'px',
+                    height: bb.height+'px',
+                    top: bb.top+'px',
+                    left: bb.left+'px',
+                    zIndex: 999,
+                    pointerEvents: 'none'
+                });
             });
+
+            ro.observe(ReactDOM.findDOMNode(this.ref.current));
 
         }
         render() {
