@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-const withNeon = (WrappedComponent) => {
+const withNeon = (NeonComponent) => {
     
     return class extends Component {
         constructor(props) {
@@ -13,18 +13,21 @@ const withNeon = (WrappedComponent) => {
 
             const bb = ReactDOM.findDOMNode(this.ref.current).getBoundingClientRect();
 
-            this.canvasref.current.style.position = 'absolute';
-            this.canvasref.current.style.width = bb.width+'px';
-            this.canvasref.current.style.height = bb.height+'px';
-            this.canvasref.current.style.top = bb.top+'px';
-            this.canvasref.current.style.left = bb.left+'px';
-            this.canvasref.current.style.zIndex = 999;
+            Object.assign(this.canvasref.current.style, {
+                position: 'absolute',
+                width: bb.width+'px',
+                height: bb.height+'px',
+                top: bb.top+'px',
+                left: bb.left+'px',
+                zIndex: 999,
+                pointerEvents: 'none'
+            });
 
         }
         render() {
             return (
                 <React.Fragment>
-                    <WrappedComponent ref={this.ref} />
+                    <NeonComponent ref={this.ref} />
                     <canvas ref={this.canvasref} />
                 </React.Fragment>
             )
