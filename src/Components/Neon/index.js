@@ -4,15 +4,14 @@ import ReactDOM from 'react-dom';
 const withNeon = (NeonComponent) => {
     
     return class extends Component {
-        constructor(props) {
-            super(props);
-            this.ref = React.createRef();
-            this.canvasref = React.createRef();
-            this.ctx = null;
-            this.mouse = [[0,0], [0,0]];
-            this.bb = {};
-            this.draw = this.draw.bind(this);
-        }
+
+        ref = React.createRef();
+        canvasref = React.createRef();
+        ctx = null;
+        mouse = [[0,0], [0,0]];
+        raf = null;
+        bb = {};
+        draw = this.draw.bind(this);
 
         draw() {
 
@@ -20,7 +19,7 @@ const withNeon = (NeonComponent) => {
 
                 this.ctx.clearRect(0,0,this.bb.width,this.bb.height);
 
-                this.ctx.strokeStyle = 'hsla(64,100%,50%,1)';
+                this.ctx.strokeStyle = 'hsla(64,100%,100%,1)';
                 this.ctx.beginPath();
                 this.ctx.moveTo(0, 1114.796875 / 2);
                 this.ctx.lineTo(20, 1114.796875 / 2);
@@ -41,7 +40,7 @@ const withNeon = (NeonComponent) => {
 
             }
 
-            requestAnimationFrame(this.draw);
+            this.raf = requestAnimationFrame(this.draw);
 
         }
 
