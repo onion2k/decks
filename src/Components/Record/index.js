@@ -162,6 +162,11 @@ class Record extends Component {
 
   render() {
 
+    let labelImage = null;
+    if (this.props.playlistManager.currentTrack.videoId) {
+      labelImage = <img src={"https://img.youtube.com/vi/" + this.props.playlistManager.currentTrack.videoId + "/0.jpg"} alt="Record" />;
+    }
+
     return (
       <div
         className="Deck"
@@ -182,7 +187,7 @@ class Record extends Component {
           style={{ backgroundImage: "url(" + record + ")" }}
         >
           <div className="label">
-            <img src={"https://img.youtube.com/vi/" + this.props.playlistManager.currentTrack.videoId + "/0.jpg"} alt="Record" />
+            { labelImage }
             <span className="title">{this.props.playlistManager.currentTrack.title}</span>
           </div>
         </div>

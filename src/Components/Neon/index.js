@@ -63,7 +63,7 @@ const withNeon = (NeonComponent) => {
                 this.canvasref.current.width = bb.width;
                 this.canvasref.current.height = bb.height;
 
-                requestAnimationFrame(this.draw);
+                this.raf = requestAnimationFrame(this.draw);
             });
 
             ro.observe(ReactDOM.findDOMNode(this.ref.current));
