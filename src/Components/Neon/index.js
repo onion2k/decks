@@ -8,7 +8,8 @@ const withNeon = (NeonComponent) => {
         ref = React.createRef();
         canvasref = React.createRef();
         ctx = null;
-        mouse = [[0,0], [0,0]];
+        mouse = [];
+        particles = [];
         raf = null;
         bb = {};
         draw = this.draw.bind(this);
@@ -29,14 +30,30 @@ const withNeon = (NeonComponent) => {
 
                 this.ctx.stroke();
 
-                this.mouse.forEach((m, i)=>{
-                    if (i===0) { return; }
-                    this.ctx.strokeStyle = 'hsla(64, 100%, 100%, '+(i/100)+')';
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(this.mouse[i-1][0], this.mouse[i-1][1]);
-                    this.ctx.lineTo(m[0], m[1]);
-                    this.ctx.stroke();
-                });
+                // if (this.mouse.length) {
+                //     this.mouse.forEach((m, i)=>{
+                //         if (i===0) { return; }
+                //         this.ctx.strokeStyle = 'hsla(64, 100%, 100%, '+(i/100)+')';
+                //         this.ctx.beginPath();
+                //         this.ctx.moveTo(this.mouse[i-1][0], this.mouse[i-1][1]);
+                //         this.ctx.lineTo(m[0], m[1]);
+                //         this.ctx.stroke();
+                //     });    
+                // }
+
+                if (this.particles.length) {
+                    this.ctx.fillStyle = 'hsla(64,100%,100%,1)';
+                    this.particles.forEach((m, i)=>{
+                        if (--m[4]<0){
+                            this.particles.splice(i, 1);
+                        }
+                        this.ctx.beginPath();
+                        this.ctx.arc(m[0], m[1], 3, 0, 2 * Math.PI);
+                        this.ctx.fill();
+                        m[0] +=  Math.sin( (Math.PI * 2) * m[2] );
+                        m[1] +=  Math.cos( (Math.PI * 2) * m[3] );
+                    });    
+                }
 
             }
 
@@ -71,6 +88,25 @@ const withNeon = (NeonComponent) => {
             ReactDOM.findDOMNode(this.ref.current).addEventListener('mousemove', (e) => {
                 this.mouse.push([e.x - this.bb.left, e.y - this.bb.top]);
                 if (this.mouse.length > 100) { this.mouse = this.mouse.slice(1); }
+            })
+
+            ReactDOM.findDOMNode(this.ref.current).addEventListener('click', (e) => {
+                this.particles.splice(
+                    this.particles.length,
+                    0,
+                    [e.x - this.bb.left, e.y - this.bb.top, Math.random(), Math.random(), 50 + Math.random() * 100],
+                    [e.x - this.bb.left, e.y - this.bb.top, Math.random(), Math.random(), 50 + Math.random() * 100],
+                    [e.x - this.bb.left, e.y - this.bb.top, Math.random(), Math.random(), 50 + Math.random() * 100],
+                    [e.x - this.bb.left, e.y - this.bb.top, Math.random(), Math.random(), 50 + Math.random() * 100],
+                    [e.x - this.bb.left, e.y - this.bb.top, Math.random(), Math.random(), 50 + Math.random() * 100],
+                    [e.x - this.bb.left, e.y - this.bb.top, Math.random(), Math.random(), 50 + Math.random() * 100],
+                    [e.x - this.bb.left, e.y - this.bb.top, Math.random(), Math.random(), 50 + Math.random() * 100],
+                    [e.x - this.bb.left, e.y - this.bb.top, Math.random(), Math.random(), 50 + Math.random() * 100],
+                    [e.x - this.bb.left, e.y - this.bb.top, Math.random(), Math.random(), 50 + Math.random() * 100],
+                    [e.x - this.bb.left, e.y - this.bb.top, Math.random(), Math.random(), 50 + Math.random() * 100],
+                    [e.x - this.bb.left, e.y - this.bb.top, Math.random(), Math.random(), 50 + Math.random() * 100],
+                    [e.x - this.bb.left, e.y - this.bb.top, Math.random(), Math.random(), 50 + Math.random() * 100]
+                );
             })
 
         }
