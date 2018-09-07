@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-const withNeon = (NeonComponent) => {
+const withNeon = (NeonComponent, particleCount) => {
     
     return class extends Component {
 
@@ -12,7 +12,12 @@ const withNeon = (NeonComponent) => {
         particles = [];
         raf = null;
         bb = {};
+
+        particleCount = particleCount;
+        gravity = 0.5;
+
         draw = this.draw.bind(this);
+        resize = this.resize.bind(this);
 
         draw() {
 
@@ -30,23 +35,12 @@ const withNeon = (NeonComponent) => {
 
                 this.ctx.stroke();
 
-                // if (this.mouse.length) {
-                //     this.mouse.forEach((m, i)=>{
-                //         if (i===0) { return; }
-                //         this.ctx.strokeStyle = 'hsla(64, 100%, 100%, '+(i/100)+')';
-                //         this.ctx.beginPath();
-                //         this.ctx.moveTo(this.mouse[i-1][0], this.mouse[i-1][1]);
-                //         this.ctx.lineTo(m[0], m[1]);
-                //         this.ctx.stroke();
-                //     });    
-                // }
-
                 if (this.particles.length) {
                     this.particles.forEach((m, i)=>{
                         if (--m[4]<0){
                             this.particles.splice(i, 1);
                         }
-                        this.ctx.fillStyle = 'hsla('+(64+m[4])+',100%,50%,'+(m[4] / 100)+')';
+                        this.ctx.fillStyle = 'hsla(0,100%,100%,'+(m[4] / 100)+')';
                         this.ctx.beginPath();
                         this.ctx.arc(m[0], m[1], 2, 0, 2 * Math.PI);
                         this.ctx.fill();
@@ -61,44 +55,47 @@ const withNeon = (NeonComponent) => {
 
         }
 
+        resize(c) {
+
+            if (this.raf) {
+                cancelAnimationFrame(this.raf);
+            }
+
+            const bb = c[0].target.getBoundingClientRect();
+            Object.assign(this.canvasref.current.style, {
+                position: 'absolute',
+                width: bb.width+'px',
+                height: bb.height+'px',
+                top: bb.top+'px',
+                left: bb.left+'px',
+                zIndex: 999,
+                pointerEvents: 'none'
+            });
+            this.bb = bb;
+
+            this.ctx = this.canvasref.current.getContext('2d');
+            this.canvasref.current.width = bb.width;
+            this.canvasref.current.height = bb.height;
+
+            this.raf = requestAnimationFrame(this.draw);
+        }
+
         componentDidMount(){
 
-            const ro = new window.ResizeObserver((c) => {
-                const bb = c[0].target.getBoundingClientRect();
-                Object.assign(this.canvasref.current.style, {
-                    position: 'absolute',
-                    width: bb.width+'px',
-                    height: bb.height+'px',
-                    top: bb.top+'px',
-                    left: bb.left+'px',
-                    zIndex: 999,
-                    pointerEvents: 'none'
-                });
-                this.bb = bb;
-
-                this.ctx = this.canvasref.current.getContext('2d');
-                this.canvasref.current.width = bb.width;
-                this.canvasref.current.height = bb.height;
-
-                this.raf = requestAnimationFrame(this.draw);
-            });
+            const ro = new window.ResizeObserver(this.resize);
 
             ro.observe(ReactDOM.findDOMNode(this.ref.current));
 
             ReactDOM.findDOMNode(this.ref.current).addEventListener('mousemove', (e) => {
-                // this.mouse.push([e.x - this.bb.left, e.y - this.bb.top]);
-                // if (this.mouse.length > 100) { this.mouse = this.mouse.slice(1); }
-
-                for (let x=0; x< 4; x++) {
+                for (let x=0; x< this.particleCount; x++) {
                     this.particles.push(
                         [e.x - this.bb.left, e.y - this.bb.top, Math.random(), Math.random(), 50 + Math.random() * 100]
                     );                    
                 }
-
             })
 
             ReactDOM.findDOMNode(this.ref.current).addEventListener('click', (e) => {
-                for (let x=0; x< 10; x++) {
+                for (let x=0; x< this.particleCount*4; x++) {
                     this.particles.push(
                         [e.x - this.bb.left, e.y - this.bb.top, Math.random(), Math.random(), 50 + Math.random() * 100]
                     );                    

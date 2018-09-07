@@ -46,4 +46,4 @@ class UI extends Component {
   }
 }
 
-export default withNeon(UI);
+export default withNeon(UI, 4);

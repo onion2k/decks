@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import { MemoryRouter } from 'react-router-dom'
 
-import UI from ".";
+import UI from "./index.js";
 
 describe("UI", () => {
   const onClick = jest.fn();
