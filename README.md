@@ -18,4 +18,4 @@ TODO:
 * Add default playlists (done)
 * Add Google OAuth for Youtube integration
 * Implement animations
-* Add neon effect
+* Add neon effect (done)
