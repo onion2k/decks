@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
+import withNeon from "react-neon";
 import "./UI.css";
 
 import About from "../About";
@@ -9,8 +10,6 @@ import Playlist from "../Playlist";
 import Nav from "../Nav";
 import PlaylistManager from "../PlaylistManager";
 import ReactiveYouTube from "../ReactiveYouTube";
-
-import withNeon from "../Neon";
 
 class UI extends Component {
 
