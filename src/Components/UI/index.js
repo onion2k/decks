@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import withNeon from "react-neon";
+import withNeon, { fx } from "react-neon";
 import "./UI.css";
 
 import About from "../About";
@@ -10,6 +10,8 @@ import Playlist from "../Playlist";
 import Nav from "../Nav";
 import PlaylistManager from "../PlaylistManager";
 import ReactiveYouTube from "../ReactiveYouTube";
+
+const particles = new fx.Particles();
 
 class UI extends Component {
 
@@ -45,4 +47,4 @@ class UI extends Component {
   }
 }
 
-export default withNeon(UI, 4);
+export default withNeon(UI, particles);

@@ -7772,9 +7772,9 @@ react-modal@^3.5.1:
     react-lifecycles-compat "^3.0.0"
     warning "^3.0.0"
 
-react-neon@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/react-neon/-/react-neon-0.1.0.tgz#5120b1fd340bc547bfcddac1c24d723865724953"
+react-neon@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/react-neon/-/react-neon-0.3.1.tgz#09a98b137a8b847aa303f7c7c570c3a7618f44ff"
 
 react-onclickoutside@^6.5.0:
   version "6.7.1"
