@@ -11,7 +11,8 @@ import Nav from "../Nav";
 import PlaylistManager from "../PlaylistManager";
 import ReactiveYouTube from "../ReactiveYouTube";
 
-const particles = new fx.Particles();
+const effect = new fx.Particles();
+effect.listenMouse();
 
 class UI extends Component {
 
@@ -47,4 +48,4 @@ class UI extends Component {
   }
 }
 
-export default withNeon(UI, particles);
+export default withNeon(UI, effect);
